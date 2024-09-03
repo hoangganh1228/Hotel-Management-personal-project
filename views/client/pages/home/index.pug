@@ -1,4 +1,256 @@
 extends ../../layouts/default.pug
 
 block main 
-  h1 #{pageTitle}
+
+  //- Carousel
+  .container-fluid.px-lg-4.mt-4
+    .swiper.swiper-container
+      .swiper-wrapper
+        .swiper-slide
+          img.w-100.d-block(src="images/carousel/1.png")
+        .swiper-slide
+          img.w-100.d-block(src="images/carousel/1.png")
+        .swiper-slide
+          img.w-100.d-block(src="images/carousel/2.png")
+        .swiper-slide
+          img.w-100.d-block(src="images/carousel/3.png")
+        .swiper-slide
+          img.w-100.d-block(src="images/carousel/4.png")
+        .swiper-slide
+          img.w-100.d-block(src="images/carousel/5.png")
+        .swiper-slide
+          img.w-100.d-block(src="images/carousel/6.png") 
+  
+  //- Rooms
+  h2.mt-5.pt-4.mb-4.text-center.fw-bold.h-font Phòng
+  .container
+    .row
+      .col-lg-4.col-md-6.my-3(style="")
+        .card.border-0.shadow(style="max-width:350px;margin:auto;min-height:651px")
+          .w-100.h-100(style="max-height:196px")
+            .swiper.swiper-container
+              .swiper-wrapper
+                .swiper-slide
+                  img.w-100.d-block(
+                    style="max-height:196px" 
+                    src="images/rooms/1.jpg"
+                    )
+                .swiper-slide
+                  img.w-100.d-block(
+                    style="max-height:196px" 
+                    src="images/rooms/2.png"
+                    )
+                .swiper-slide
+                  img.w-100.d-block(
+                    style="max-height:196px" 
+                    src="images/rooms/3.webp"
+                    )
+          .card-body
+            h5 Phòng thường
+            h6.mb-4 $199/ngày
+            .features.mb-4
+              h6.mb-1 Cấu hình
+              span.badge.bg-light.text-dark.text-wrap 2 phòng
+              span.badge.bg-light.text-dark.text-wrap 1 phòng tắm
+              span.badge.bg-light.text-dark.text-wrap 1 ban công
+              span.badge.bg-light.text-dark.text-wrap 1 Sofa
+            .facilities.mb-4
+              h6.mb-1 Tiện ích
+              span.badge.bg-light.text-dark.text-wrap Wifi
+              span.badge.bg-light.text-dark.text-wrap Tivi
+              span.badge.bg-light.text-dark.text-wrap Máy lọc không khí
+              span.badge.bg-light.text-dark.text-wrap Máy sưởi
+            .guests.mb-4
+              h6.mb-1 Số lượng
+              span.badge.bg-light.text-dark.text-wrap 2 người lớn
+              span.badge.bg-light.text-dark.text-wrap 1 trẻ con
+            .rating.mb-4
+              h6.mb-1 Đánh giá
+              span.badge.rounded-pill.bg-light
+                i.bi.bi-star-fill.text-warning
+                i.bi.bi-star-fill.text-warning
+                i.bi.bi-star-fill.text-warning
+                i.bi.bi-star-fill.text-warning
+                i.bi.bi-star-fill.text-warning
+            .d-flex.justify-content-evenly.mb-2
+              a.btn.btn-md.text-white.custom-bg.shadow-none(href="#") Đặt ngay
+      .col-lg-4.col-md-6.my-3
+        .card.border-0.shadow(style="max-width:350px;margin:auto;min-height:651px")
+          .w-100.h-100(style="max-height:196px")
+            .swiper.swiper-container
+              .swiper-wrapper
+                .swiper-slide
+                  img.w-100.d-block(
+                    style="max-height:196px" 
+                    src="images/rooms/1.jpg"
+                    )
+                .swiper-slide
+                  img.w-100.d-block(
+                    style="max-height:196px" 
+                    src="images/rooms/2.png"
+                    )
+                .swiper-slide
+                  img.w-100.d-block(
+                    style="max-height:196px" 
+                    src="images/rooms/3.webp"
+                    )
+          .card-body
+            h5 Phòng vip
+            h6.mb-4 $399/ngày
+            .features.mb-4
+              h6.mb-1 Cấu hình
+              span.badge.bg-light.text-dark.text-wrap 3 phòng
+              span.badge.text-bg-light.text-dark.text-wrap 1 phòng tắm
+              span.badge.text-bg-light.text-dark.text-wrap 1 ban công
+              span.badge.text-bg-light.text-dark.text-wrap 2 Sofa
+            .facilities.mb-4
+              h6.mb-1 Tiện ích
+              span.badge.text-bg-light.text-dark.text-wrap Wifi
+              span.badge.text-bg-light.text-dark.text-wrap Tivi
+              span.badge.text-bg-light.text-dark.text-wrap Máy lọc không khí
+              span.badge.text-bg-light.text-dark.text-wrap Máy sưởi
+            .guests.mb-4
+              h6.mb-1 Số lượng
+              span.badge.text-bg-light.text-dark.text-wrap 3 người lớn
+              span.badge.text-bg-light.text-dark.text-wrap 2 trẻ con
+            .rating.mb-4
+              h6.mb-1 Đánh giá
+              span.badge.rounded-pill.bg-light
+                i.bi.bi-star-fill.text-warning
+                i.bi.bi-star-fill.text-warning
+                i.bi.bi-star-fill.text-warning
+                i.bi.bi-star-fill.text-warning
+                i.bi.bi-star-fill.text-warning
+            .d-flex.justify-content-evenly.mb-2
+              a.btn.btn-md.text-white.custom-bg.shadow-none(href="#") Đặt ngay
+      .col-lg-4.col-md-6.my-3(style="min-height:651px")
+        .card.border-0.shadow(style="max-width:350px;margin:auto;min-height:651px")
+          .w-100.h-100(style="max-height:196px")
+            .swiper.swiper-container
+              .swiper-wrapper
+                .swiper-slide
+                  img.w-100.d-block(
+                    style="max-height:196px" 
+                    src="images/rooms/1.jpg"
+                    )
+                .swiper-slide
+                  img.w-100.d-block(
+                    style="max-height:196px" 
+                    src="images/rooms/2.png"
+                    )
+                .swiper-slide
+                  img.w-100.d-block(
+                    style="max-height:196px" 
+                    src="images/rooms/3.webp"
+                    )
+          .card-body
+            h5 Phòng tổng thống
+            h6.mb-4 $599/ngày
+            .features.mb-4
+              h6.mb-1 Cấu hình
+              span.badge.text-bg-light.text-dark.text-wrap 3 phòng
+              span.badge.text-bg-light.text-dark.text-wrap 2 phòng tắm
+              span.badge.text-bg-light.text-dark.text-wrap 2 ban công
+              span.badge.text-bg-light.text-dark.text-wrap 3 Sofa
+            .facilities.mb-4
+              h6.mb-1 Tiện ích
+              span.badge.text-bg-light.text-dark.text-wrap Wifi
+              span.badge.text-bg-light.text-dark.text-wrap Tivi
+              span.badge.bg-light.text-dark.text-wrap Máy lọc không khí
+              span.badge.bg-light.text-dark.text-wrap Máy sưởi
+            .guests.mb-4
+              h6.mb-1 Số lượng
+              span.badge.bg-light.text-dark.text-wrap 3 người lớn
+              span.badge.bg-light.text-dark.text-wrap 3 trẻ con
+            .rating.mb-4
+              h6.mb-1 Đánh giá
+              span.badge.rounded-pill.bg-light
+                i.bi.bi-star-fill.text-warning
+                i.bi.bi-star-fill.text-warning
+                i.bi.bi-star-fill.text-warning
+                i.bi.bi-star-fill.text-warning
+                i.bi.bi-star-fill.text-warning
+            .d-flex.justify-content-evenly.mb-2
+              a.btn.btn-md.text-white.custom-bg.shadow-none(href="#") Đặt ngay
+      .col-lg-12.text-center.mt-5
+        a.btn.btn-sm.btn-outline-dark.rounded-0.fw-bold.shadow-none(href="<?=_WEB_HOST?>/khach/rooms") Xem thêm phòng 
+
+  //- Facilitis
+  h2.mt-5.pt-4.mb-4.text-center.fw-bold.h-font Dịch vụ
+  .container
+    .row.justify-content-evenly.px-5.px-md-0.px-lg-0
+      .col-lg-2.col-md-2.text-center.bg-white.rounded.shadow.py-4.my-3
+        img(
+          width="80px" 
+          alt="" 
+          src="images/facilities/wifi.svg"
+          )
+        h5.mt-3 Wifi
+      .col-lg-2.col-md-2.text-center.bg-white.rounded.shadow.py-4.my-3
+        img(
+          width="80px" 
+          alt="" 
+          src="images/facilities/Television.svg"
+          )
+        h5.mt-3 Tivi
+      .col-lg-2.col-md-2.text-center.bg-white.rounded.shadow.py-4.my-3
+        img(
+          width="80px" 
+          alt="" 
+          src="images/facilities/Room-heater.svg"
+          )
+        h5.mt-3 Máy sưởi
+      .col-lg-2.col-md-2.text-center.bg-white.rounded.shadow.py-4.my-3
+        img(
+          width="80px" 
+          alt="" 
+          src="images/facilities/massage.svg"
+          )
+        h5.mt-3 Massage
+      .col-lg-2.col-md-2.text-center.bg-white.rounded.shadow.py-4.my-3
+        img(
+          width="80px" 
+          alt="" 
+          src="images/facilities/air-conditioning.svg"
+          )
+        h5.mt-3 Máy lọc không khí
+      .col-lg-12.text-center.mt-5
+        a.btn.btn-sm.btn-outline-dark.rounded-0.fw-bold.shadow-none(href="<?=_WEB_HOST?>/khach/facilities") Xem thêm chức năng
+  
+  //-  Gg map(Embed)
+  h2.mt-5.pt-4.mb-4.text-center.fw-bold.h-font Liên hệ
+  .container
+    .row
+      .col-lg-8.col-md-8.p-4.mb-lg-0.mb-3.bg-white.rounded
+        iframe.w-100.rounded(
+          referrerpolicy="no-referrer-when-downgrade" 
+          loading="lazy" 
+          height="360" 
+          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14898.565702963178!2d105.7831221!3d21.007006!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135acacbb621a31%3A0x6b9d241f84cd960!2sJW%20Marriott%20Hotel%20Hanoi!5e0!3m2!1svi!2s!4v1714406252436!5m2!1svi!2s"
+          )
+      .col-lg-4.col-md-4
+        .bg-white.p-4.rounded.mb-4
+          h5 Liên hệ với chúng tôi
+          a.d-inline-block.mb-2.text-decoration-none.text-dark(href="tel:+842438335588")
+            i.bi.bi-telephone-fill
+            | +842438335588
+          br
+          a.mb-2.text-decoration-none.text-dark(href="tel:+842438335588")
+            i.bi.bi-telephone-fill
+            | +842438335588
+        .bg-white.p-4.rounded.mb-4
+          h5 Theo dõi chúng tôi
+          a.d-inline-block.mb-3(href="#")
+            span.badge.bg-light.text-dark.fs-6.p-2
+              i.bi.bi-twitter.me-1
+              | Twitter
+          br
+          a.d-inline-block.mb-3(href="#")
+            span.badge.bg-light.text-dark.fs-6.p-2
+              i.bi.bi-facebook.me-1
+              | Facebook
+          br
+          a.d-inline-block(href="#")
+            span.badge.bg-light.text-dark.fs-6.p-2
+              i.bi.bi-instagram.me-1
+              | Instagram
