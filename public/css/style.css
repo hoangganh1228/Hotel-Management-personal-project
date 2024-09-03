@@ -1,0 +1,70 @@
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+-moz-appearance: textfield;
+}
+
+.custom-bg {
+    background-color: #279e8c;
+    border: 1px solid  #279e8c;
+}
+
+
+.custom-bg:hover {
+    background-color: #279e8c;
+    border: #279e8c;
+
+}
+
+.h-line {
+    width: 150px;
+    margin: 0 auto;
+    height: 1.7px;
+}
+
+
+.availability-form {
+    margin-top: -150px;
+    z-index: 2;
+    position: relative;
+}
+
+.pop:hover {
+    border-top-color: var(--teal) !important;
+    transform: scale(1.03);
+    transition: all 0.3s;
+}
+
+.h-line {
+    width: 150px;
+    margin: 0 auto;
+    height: 1.7px;
+}
+
+.custom-alert {
+    position: fixed;
+    top: 80px;
+    right: 25px; 
+    z-index: 1111;
+
+}
+
+.availability-form {
+    margin-top: -50px;
+    z-index: 2;
+    position: relative;
+}
+
+/* Responsive */
+@media screen and (max-width: 575px) {
+    .availability-form {
+        margin-top: 25px ;
+        padding: 0 25px;
+    }
+}

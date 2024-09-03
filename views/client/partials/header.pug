@@ -1,0 +1,40 @@
+nav(class="navbar navbar-expand-lg navbar-light bg-white px-lg-3 py-lg-2 shadow-sm sticky-top")
+  div(class="container-fluid")
+    a(class="navbar-brand me-5 fw-bold fs-3 h-font" href="<?=_WEB_HOST?>/khach/index") Khách sạn
+    button(
+      class="navbar-toggler shadow-none"
+      aria-label="Toggle navigation" 
+      aria-expanded="false" 
+      aria-controls="navbarSupportedContent" 
+      data-bs-target="#navbarSupportedContent" 
+      data-bs-toggle="collapse" 
+      type="button"
+    )
+      span(class="navbar-toggler-icon")
+    div(class="collapse navbar-collapse" id="navbarSupportedContent")
+    ul(class="navbar-nav me-auto mb-2 mb-lg-0")
+      li(class="nav-item")
+        a(
+          class="nav-link me-2"
+          href="<?=_WEB_HOST?>/khach/index" 
+          aria-current="page"
+        )| Trang chủ
+      li(class="nav-item")
+        a(class="nav-link me-2"  href="<?=_WEB_HOST?>/khach/rooms") Phòng
+      li(class="nav-item")
+        a(class="nav-link me-2" href="<?=_WEB_HOST?>/khach/facilities") Dịch vụ
+      li(class="nav-item")
+        a(class="nav-link me-2" href="<?=_WEB_HOST?>/khach/Contact") Liên hệ
+    div(class="d-flex")
+      button(
+        class="btn btn-outline-dark shadow-none me-lg-3 me-2"
+        data-bs-target="#loginModal" 
+        data-bs-toggle="modal" 
+        type="button"
+      ) Login
+      button(
+        class="btn btn-outline-dark shadow-none"
+        data-bs-target="#registerModal" 
+        data-bs-toggle="modal" 
+        type="button"
+      ) Register
