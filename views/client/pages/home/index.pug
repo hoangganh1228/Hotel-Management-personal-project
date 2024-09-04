@@ -20,6 +20,33 @@ block main
           img.w-100.d-block(src="images/carousel/5.png")
         .swiper-slide
           img.w-100.d-block(src="images/carousel/6.png") 
+  //- check availability form
+  .container.availability-form
+    .row
+      .col-lg-12.bg-white.shadow.p-4.rounded
+        h5.mb-4 Check Booking Availability
+        form
+          .row.align-items-end
+            .col-lg-3.mb-3
+              label.form-label(style="font-weight: 500;") Check-in
+              input.form-control.shadow-none(type="date")
+            .col-lg-3.mb-3
+              label.form-label(style="font-weight: 500;") Check-out
+              input.form-control.shadow-none(type="date")
+            .col-lg-3.mb-3
+              label.form-label(style="font-weight: 500;") Adult
+              select.form-select.shadow-none
+                option(value="1") One
+                option(value="2") Two
+                option(value="3") Three
+            .col-lg-2.mb-3
+              label.form-label(style="font-weight: 500;") Children
+              select.form-select.shadow-none
+                option(value="1") One
+                option(value="2") Two
+                option(value="3") Three
+            .col-lg-1.mb-lg-3.mt-2
+              button.btn.text-white.shadow-none.custom-bg(type="submit") Submit
   
   //- Rooms
   h2.mt-5.pt-4.mb-4.text-center.fw-bold.h-font Phòng
