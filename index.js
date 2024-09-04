@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 
 require("dotenv").config();
 
+const routeAdmin = require("./routes/admin/index.route");
 const route = require("./routes/client/index.route")
 
 const app = express();
@@ -19,6 +20,7 @@ app.set("view engine", "pug");
 
 // Routes
 route(app);
+routeAdmin(app);
 
 
 
