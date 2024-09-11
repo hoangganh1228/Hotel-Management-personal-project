@@ -14,4 +14,6 @@ const roomSchema = new mongoose.Schema({
   position: Number,
   deleted: Boolean
 });
-const Room = mongoose.model("Room", roomSchema, "room");
+const Room = mongoose.model("Room", roomSchema, "rooms");
+
+module.exports = Room;
