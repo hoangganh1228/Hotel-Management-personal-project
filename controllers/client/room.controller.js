@@ -1,4 +1,4 @@
-
+const Room = require("../../models/room.model")
 
 // [GET] products/index
 module.exports.index = async (req, res) => {
