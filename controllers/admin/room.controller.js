@@ -1,7 +1,8 @@
 const Room = require("../../models/room.model");
 
 const filterStatusHelper  = require("../../helpers/filterStatus");
-
+const searchHelper = require("../../helpers/search");
+const paginationHelper = require("../../helpers/pagination");
 // [GET] /admin/rooms
 module.exports.index = async (req, res) => {
   const filterStatus = filterStatusHelper(req.query);
@@ -14,23 +15,33 @@ module.exports.index = async (req, res) => {
     find.status = req.query.status
   }
 
-  let keyword = "";
-  if(req.query.keyword) {
-    keyword = req.query.keyword;
-
-    const regex = new RegExp(keyword, "i");
-    find.title = regex
+  // Tìm kiếm
+  const objectSearch = searchHelper(req.query);
+  if(objectSearch) {
+    find.title = objectSearch.regex
   }
 
-  const rooms = await Room.find(find);
+  const countRooms = await Room.countDocuments(find)
 
-  // console.log(rooms);
+  let objectPagination = paginationHelper(
+    {
+      currentPage: 1,
+      limitItems: 4
+    },
+    req.query,
+    countRooms
+  )
+
+  const rooms = await Room.find(find).limit(objectPagination.limitItems).skip(objectPagination.skip );
+  
+  // console.log(objectPagination);
   
 
   res.render("admin/pages/rooms/index", {
     pageTitle: "Trang phong",
     rooms: rooms,
     filterStatus: filterStatus,
-    keyword: keyword
+    keyword: objectSearch.keyword,
+    pagination: objectPagination
   })
 }
