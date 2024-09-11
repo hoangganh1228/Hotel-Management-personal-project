@@ -41,3 +41,5 @@ var swiper = new Swiper(".swiper-testimonials", {
 
   }
 });
+
+console.log("OK");

@@ -1,8 +1,12 @@
 extends ../../layouts/default.pug
+include ../../mixins/filter-status.pug
 
 block main
     h1 Trang danh sách phòng 
-
+    .card.mb-3
+        .card-header Bộ lọc và Tìm kiếm
+        .card-body
+          +filter-status()          
     table.table.table-hover.table-sm 
       thead 
         tr 
