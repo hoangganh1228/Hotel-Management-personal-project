@@ -9,9 +9,17 @@ module.exports.index = async (req, res) => {
   const find = {
     deleted: false
   }
-  
+
   if(req.query.status) {
     find.status = req.query.status
+  }
+
+  let keyword = "";
+  if(req.query.keyword) {
+    keyword = req.query.keyword;
+
+    const regex = new RegExp(keyword, "i");
+    find.title = regex
   }
 
   const rooms = await Room.find(find);
@@ -23,5 +31,6 @@ module.exports.index = async (req, res) => {
     pageTitle: "Trang phong",
     rooms: rooms,
     filterStatus: filterStatus,
+    keyword: keyword
   })
 }

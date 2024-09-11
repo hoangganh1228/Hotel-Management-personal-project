@@ -1,12 +1,17 @@
 extends ../../layouts/default.pug
 include ../../mixins/filter-status.pug
+include ../../mixins/search.pug
 
 block main
     h1 Trang danh sách phòng 
     .card.mb-3
-        .card-header Bộ lọc và Tìm kiếm
-        .card-body
-          +filter-status()          
+      .card-header Bộ lọc và Tìm kiếm
+      .card-body
+        .row 
+          .col-6
+            +filter-status    
+          .col-6     
+            +search(keyword)
     table.table.table-hover.table-sm 
       thead 
         tr 
@@ -32,7 +37,7 @@ block main
                   width="100px"
                   height="auto"
               )
-            td #{item.title}
+            td #{item.name}
             td #{item.price}
             td
               span(class="badge rounded-pill bg-light text-dark") Adult: #{item.adult}
