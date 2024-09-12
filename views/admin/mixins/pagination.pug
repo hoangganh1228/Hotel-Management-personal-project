@@ -9,12 +9,12 @@ mixin pagination(pagination)
                     ) Trang trước
             li(class="page-item")
                 button(class="page-link") 
-            -for (var i = 1; i <= pagination.totalPage; i++)
-                li(class=`page-item ${pagination.currentPage == i ? "active" : ""}`)
-                    button(
-                        class="page-link"
-                        button-pagination=i 
-                    ) #{i}
+                -for (var i = 1; i <= pagination.totalPage; i++)
+                    li(class=`page-item ${pagination.currentPage == i ? "active" : ""}`)
+                        button(
+                            class="page-link"
+                            button-pagination=i 
+                        ) #{i}
             if(pagination.currentPage < pagination.totalPage)
                 li(class="page-item")
                     button(

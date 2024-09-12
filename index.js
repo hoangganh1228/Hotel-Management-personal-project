@@ -1,4 +1,5 @@
 const express = require("express");
+const methodOverride = require('method-override')
 const database = require("./config/database");
 
 const systemConfig = require("./config/system");
@@ -15,6 +16,7 @@ database.connect();
 
 const port = process.env.PORT;
 
+app.use(methodOverride('_method'))
 app.use(express.static("public"));
 
 app.set("views", "./views");

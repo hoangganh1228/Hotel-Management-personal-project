@@ -45,3 +45,23 @@ module.exports.index = async (req, res) => {
     pagination: objectPagination
   })
 }
+
+// [GET] /admin/change-status/:status/:id
+module.exports.changeStatus = async (req, res) => {
+  const status = req.params.status;
+  
+  const id = req.params.id;
+
+  await Room.updateOne({
+    _id: id
+  }, {
+    status: status
+  })
+
+
+  res.json({
+    code: 200,
+    message: "Thanh cong!",
+    status: status
+  })
+}
