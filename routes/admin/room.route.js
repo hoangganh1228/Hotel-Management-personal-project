@@ -4,9 +4,9 @@ const router = express.Router();
 
 const controller = require("../../controllers/admin/room.controller");
 
-const storageMulter = require("../../helpers/storageMulter");
-const upload = multer({ storage: storageMulter() })
+const upload = multer();
 
+const uploadCloud = require("../../middlewares/admin/uploadCloud.middleware")
 
 router.get("/", controller.index);
 
@@ -21,6 +21,7 @@ router.get("/create", controller.create);
 router.post(
   "/create",
   upload.single('thumbnail'),
+  uploadCloud.upload,
   controller.createPost
 );
 
