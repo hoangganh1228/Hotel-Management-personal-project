@@ -140,8 +140,10 @@ module.exports.create = async (req, res) => {
 module.exports.createPost = async(req, res) => {
   req.body.price = parseInt(req.body.price)
   req.body.discountPercentage = parseInt(req.body.discountPercentage)
-  req.body.stock = parseInt(req.body.stock)
-  req.body.thumbnail = `/uploads/${req.file.filename}`
+  req.body.stock = parseInt(req.body.stock);
+  req.body.thumbnail = `/uploads/${req.file.filename}`;
+  req.body.adult = parseInt(req.body.adult);
+  req.body.children = parseInt(req.body.children);
   if(req.body.position == "") {
     const countRooms = await Room.countDocuments();
     req.body.position = countRooms + 1;

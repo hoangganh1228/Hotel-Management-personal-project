@@ -27,16 +27,16 @@ var swiper = new Swiper(".swiper-testimonials", {
   },
   breakpoints: {
       320: {
-          slidesPerView: 1,
+        slidesPerView: 1,
       },
       640: {
-          slidesPerView: 1,
+        slidesPerView: 1,
       },
       768: {
-          slidesPerView: 2,
+        slidesPerView: 2,
       },
       1024: {
-          slidesPerView: 3,
+        slidesPerView: 3,
       },
 
   }

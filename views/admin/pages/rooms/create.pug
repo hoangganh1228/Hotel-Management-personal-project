@@ -35,6 +35,28 @@ block main
         name="price"
         value="0"
         min="0"
+      )
+    div(class="form-group")
+    .row
+      .col-6 
+        label(for="price") Người lớn
+        input(
+          type="number"
+          class="form-control"
+          id="adult"
+          name="adult"
+          value="0"
+          min="0"
+        )
+      .col-6 
+        label(for="price") Trẻ em
+        input(
+          type="number"
+          class="form-control"
+          id="children"
+          name="children"
+          value="0"
+          min="0" 
         )
     div(class="form-group")
       label(for="discount") % Giảm giá
@@ -71,8 +93,9 @@ block main
         upload-image-input
       )
       img(
-          src=""
-          class="image-preview"
+        src=""
+        upload-image-preview
+        class="image-preview"
       )
 
     div(class="form-group")
@@ -110,4 +133,4 @@ block main
         class="btn btn-primary"
       ) Tạo mới
 
-    script(src="/admin/js/product.js")
+    //- script(src="/admin/js/product.js")
