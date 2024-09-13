@@ -1,5 +1,6 @@
 const Room = require("../../models/room.model");
 
+const systemConfig = require("../../config/system")
 const filterStatusHelper  = require("../../helpers/filterStatus");
 const searchHelper = require("../../helpers/search");
 const paginationHelper = require("../../helpers/pagination");
@@ -124,5 +125,34 @@ module.exports.deleteItem = async (req, res) => {
     message: "Thanh cong!",
 
   })
+
+}
+
+// [GET] /admin/rooms/create
+module.exports.create = async (req, res) => {
+
+  res.render("admin/pages/rooms/create", {
+    pageTitle: "Thêm mới phòng",
+  })
+}  
+
+// [POST] /admin/products/create
+module.exports.createPost = async(req, res) => {
+  req.body.price = parseInt(req.body.price)
+  req.body.discountPercentage = parseInt(req.body.discountPercentage)
+  req.body.stock = parseInt(req.body.stock)
+
+  if(req.body.position == "") {
+    const countRooms = await Room.countDocuments();
+    req.body.position = countRooms + 1;
+  } else {
+    req.body.position = parseInt(req.body.position)
+  }
+
+  const room = new Room(req.body);
+  await room.save();
+
+  res.redirect(`${systemConfig.prefixAdmin}/rooms`)
+  
 
 }

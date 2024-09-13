@@ -1,4 +1,5 @@
 const mongoose = require("mongoose")
+const slug = require('mongoose-slug-updater');
 
 const roomSchema = new mongoose.Schema({ 
   name: String,
@@ -12,8 +13,19 @@ const roomSchema = new mongoose.Schema({
   thumbnail: String,
   status: String,
   position: Number,
-  deleted: Boolean,
+  slug: { 
+    type: String, 
+    slug: "name",
+    unique: true 
+  },
+  deleted: {
+    type: Boolean,
+    default: false,
+    // unique: true
+  },
   deletedAt: Date
+}, {
+  timestamps: true
 });
 const Room = mongoose.model("Room", roomSchema, "rooms");
 
