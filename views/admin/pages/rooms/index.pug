@@ -32,7 +32,7 @@ block main
               th Tiêu đề
               th Giá
               th Loại khách
-              //- th Vị trí
+              th Vị trí
               th Trạng thái
               //- th Người tạo
               //- th Người cập nhật
@@ -57,10 +57,19 @@ block main
                   )
                 td #{item.name}
                 td #{item.price}
+                
                 td
                   span(class="badge rounded-pill bg-light text-dark") Adult: #{item.adult}
                   br
                   span(class="badge rounded-pill bg-light text-dark") Children: #{item.children}
+                td 
+                  input(
+                    type="number"
+                    value=item.position
+                    style="width: 60px"
+                    min="1"
+                    name="position" 
+                  )
                 td  
                   if(item.status == "active")
                     a(

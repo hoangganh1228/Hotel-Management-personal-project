@@ -32,7 +32,10 @@ module.exports.index = async (req, res) => {
     countRooms
   )
 
-  const rooms = await Room.find(find).limit(objectPagination.limitItems).skip(objectPagination.skip );
+  const rooms = await Room.find(find)
+  .sort({ position: "desc"})
+  .limit(objectPagination.limitItems)
+  .skip(objectPagination.skip);
   
   // console.log(objectPagination);
   
@@ -85,6 +88,15 @@ module.exports.changeMulti = async (req, res) => {
         deleted: true,
         deletedAt: new Date()
       })
+    case "change-position":
+      for(const item of ids) {
+        let [id, position] = item.split("-");
+        position = parseInt(position);
+        await Room.updateMany({ _id: id }, { 
+          position: position
+        })
+      }
+      
     default:
       break;
   }
