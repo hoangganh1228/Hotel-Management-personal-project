@@ -17,6 +17,9 @@ database.connect();
 const port = process.env.PORT;
 
 app.use(methodOverride('_method'))
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static("public"));
 
 app.set("views", "./views");
