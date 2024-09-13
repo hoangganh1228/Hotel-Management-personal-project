@@ -60,7 +60,7 @@ module.exports.changeStatus = async (req, res) => {
   }, {
     status: status
   })
-
+  req.flash('success', `Cập nhật trạng thái thành công sản phẩm!`);
 
   res.json({
     code: 200,
@@ -78,16 +78,20 @@ module.exports.changeMulti = async (req, res) => {
     case "active":
       await Room.updateMany({ _id: { $in: ids } }, 
         { status: "active" })
+      req.flash('success', `Cập nhật trạng thái thành công ${ids.length} sản phẩm!`);
       break;
     case "inactive":
       await Room.updateMany({ _id: { $in: ids } }, 
         { status: "inactive" })
+      req.flash('success', `Cập nhật trạng thái thành công ${ids.length} sản phẩm!`);
+      
       break;
     case "delete-all":
       await Room.updateMany({ _id: { $in: ids } }, {
         deleted: true,
         deletedAt: new Date()
       })
+      
     case "change-position":
       for(const item of ids) {
         let [id, position] = item.split("-");
@@ -95,6 +99,7 @@ module.exports.changeMulti = async (req, res) => {
         await Room.updateMany({ _id: id }, { 
           position: position
         })
+        req.flash('success', `Đã thay đổi thành công vị trí của ${ids.length} sản phẩm!`);
       }
       
     default:

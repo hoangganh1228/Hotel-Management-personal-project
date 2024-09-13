@@ -5,7 +5,9 @@ const database = require("./config/database");
 const systemConfig = require("./config/system");
 
 const bodyParser = require("body-parser");
-
+const cookieParser = require('cookie-parser')
+const session = require('express-session')
+const flash = require('express-flash');
 require("dotenv").config();
 
 const routeAdmin = require("./routes/admin/index.route");
@@ -24,6 +26,13 @@ app.use(express.static("public"));
 
 app.set("views", "./views");
 app.set("view engine", "pug");
+// Flash
+
+app.use(cookieParser('JHFJSBFJKSE'));
+app.use(session({ cookie: { maxAge: 60000 }}));
+app.use(flash());
+
+// End Flash
 
 
 //App locals variables

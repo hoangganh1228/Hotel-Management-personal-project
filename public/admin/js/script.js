@@ -202,18 +202,18 @@ if(buttonDelete) {
           .then(res => res.json())
           .then(data => {
             if(data && data.code === 200) {
-              alert('Xóa sản phẩm thành công!');
+              // alert('Xóa sản phẩm thành công!');
               const row = button.closest('tr');
               if(row) {
                 row.remove();
               } else {
-                alert('Xóa sản phẩm thất bại!');
+                // alert('Xóa sản phẩm thất bại!');
               }
             }
           })
           .catch(error => {
             console.error('Error:', error);
-            alert('Có lỗi xảy ra khi xóa sản phẩm!');
+            // alert('Có lỗi xảy ra khi xóa sản phẩm!');
           });
       }
 
@@ -222,3 +222,20 @@ if(buttonDelete) {
 }
 // End Delete Button
 
+// Show Alert
+
+const showAlert = document.querySelector("[show-alert]");
+if(showAlert) {
+    const time = parseInt(showAlert.getAttribute("data-time"));
+    const closeAlert = showAlert.querySelector("[close-alert]")
+
+    setTimeout(() => {
+        showAlert.classList.add("alert-hidden")
+    }, time);
+
+    closeAlert.addEventListener("click", () => {
+        showAlert.classList.add("alert-hidden")
+    })
+}
+
+//End Show Alert
