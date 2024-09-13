@@ -170,3 +170,42 @@ if(formChangeMulti) {
 
 // End Form Change Multi
 
+// Delete Button
+
+const buttonDelete = document.querySelectorAll("[button-delete]");
+if(buttonDelete) {
+  buttonDelete.forEach(button => {
+    button.addEventListener("click", () => {
+      const isConfirm = confirm("Bạn có chắc muốn xóa sản phẩm này?");
+      if(isConfirm) {
+        const id = button.getAttribute("data-id");
+        const link = `rooms/delete/${id}`;
+        const options = {
+          method : "DELETE"
+        }
+
+        fetch(link, options) 
+          .then(res => res.json())
+          .then(data => {
+            if(data && data.code === 200) {
+              alert('Xóa sản phẩm thành công!');
+              const row = button.closest('tr');
+              if(row) {
+                row.remove();
+              } else {
+                alert('Xóa sản phẩm thất bại!');
+              }
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            alert('Có lỗi xảy ra khi xóa sản phẩm!');
+          });
+      }
+
+    })
+  })
+}
+
+// End Delete Button
+

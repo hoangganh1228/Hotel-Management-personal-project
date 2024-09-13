@@ -85,3 +85,22 @@ module.exports.changeMulti = async (req, res) => {
   }
   res.redirect("back")
 }
+
+// [DELETE] /admin/rooms/delete/:id
+module.exports.deleteItem = async (req, res) => {
+  const id = req.params.id;
+
+  await Room.updateOne({
+    _id: id
+  }, {
+    deleted: true,
+    deletedAt: new Date()
+  })
+
+  res.json({
+    code: 200,
+    message: "Thanh cong!",
+    
+  })
+
+}
