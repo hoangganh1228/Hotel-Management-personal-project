@@ -136,9 +136,7 @@ if(checkboxMulti) {
 }
 // End Checkbox Multi
 
-
 // Form Change Multi
-
 const formChangeMulti = document.querySelector("[form-change-multi]");
 if(formChangeMulti) {
   formChangeMulti.addEventListener("submit", (e) => {
@@ -148,14 +146,24 @@ if(formChangeMulti) {
     const inputChecked = checkboxMulti.querySelectorAll(
         "input[name='id']:checked"
     );
-    // console.log(inputChecked);
+    
+    const typeChange = e.target.elements.type.value;
+
+    if(typeChange == "delete-all") {
+      const isConfirm = confirm("Bạn có chắc muốn xóa những sản phẩm này?");
+
+      if(!isConfirm)  {
+        return;
+      }
+    }
+
     if(inputChecked.length > 0) {
       let ids = [];
       const inputIds = formChangeMulti.querySelector("input[name='ids']")
 
       inputChecked.forEach(input => {
-          const id = input.value;
-          ids.push(id)
+        const id = input.value;
+        ids.push(id);
       })
 
       inputIds.value = ids.join(", ")
@@ -165,13 +173,11 @@ if(formChangeMulti) {
     else {
       alert("Vui lòng chọn ít nhất một bản ghi!")
     }
-    })
+  })
 }
-
 // End Form Change Multi
 
 // Delete Button
-
 const buttonDelete = document.querySelectorAll("[button-delete]");
 if(buttonDelete) {
   buttonDelete.forEach(button => {
@@ -206,6 +212,5 @@ if(buttonDelete) {
     })
   })
 }
-
 // End Delete Button
 

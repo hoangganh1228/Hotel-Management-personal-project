@@ -80,6 +80,11 @@ module.exports.changeMulti = async (req, res) => {
       await Room.updateMany({ _id: { $in: ids } }, 
         { status: "inactive" })
       break;
+    case "delete-all":
+      await Room.updateMany({ _id: { $in: ids } }, {
+        deleted: true,
+        deletedAt: new Date()
+      })
     default:
       break;
   }
@@ -100,7 +105,7 @@ module.exports.deleteItem = async (req, res) => {
   res.json({
     code: 200,
     message: "Thanh cong!",
-    
+
   })
 
 }
