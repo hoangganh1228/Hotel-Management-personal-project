@@ -5,31 +5,35 @@ block main
   +alert-error(5000)
   +alert-success(5000)
 
-  h1(class="mb-4") Thêm mới sản phẩm
+
+  h1(class="mb-4") Chỉnh sửa sản phẩm
 
   form(
-    action=`${prefixAdmin}/rooms/create`
-    id="form-create-product"
+    action=`${prefixAdmin}/rooms/edit/${room.id}?_method=PATCH`
+    id="form-create-room"
     method="POST"
     enctype="multipart/form-data"
   )
     div(class="form-group")
-      label(for="title") Tên 
-      input(
-        type="text"
-        class="form-control"
-        id="name"
-        name="name"
-        required
-      )
+        label(for="title") Tên
+        input(
+            type="text"
+            class="form-control"
+            id="title"
+            name="title"
+            required
+            value=room.name
+        )
     div(class="form-group")
         label(for="desc") Mô tả
         textarea(
-          class="form-control textarea-mce"
-          id="desc"
-          name="description"
-          rows="5"
-        )
+            class="form-control textarea-mce"
+            id="desc"
+            name="description"
+            rows="5"
+            value=room.description
+        ) #{room.description}
+
     div(class="form-group")
       label(for="price") Giá
       input(
@@ -37,7 +41,7 @@ block main
         class="form-control"
         id="price"
         name="price"
-        value="0"
+        value=room.price
         min="0"
       )
     div(class="form-group")
@@ -49,7 +53,7 @@ block main
             class="form-control"
             id="adult"
             name="adult"
-            value="0"
+            value=room.adult
             min="0"
           )
         .col-6 
@@ -59,7 +63,7 @@ block main
             class="form-control"
             id="children"
             name="children"
-            value="0"
+            value=room.children
             min="0" 
           )
     div(class="form-group")
@@ -69,7 +73,7 @@ block main
         class="form-control"
         id="discount"
         name="discountPercentage"
-        value="0"
+        value=room.discountPercentage
         min="0"
       )
     div(class="form-group")
@@ -79,7 +83,7 @@ block main
         class="form-control"
         id="stock"
         name="stock"
-        value="0"
+        value=room.stock
         min="0"
       )
 
@@ -97,7 +101,7 @@ block main
         upload-image-input
       )
       img(
-        src=""
+        src=room.thumbnail
         upload-image-preview
         class="image-preview"
       )
@@ -111,6 +115,7 @@ block main
         name="position"
         placeholder="Tự động tăng"
         min="1"
+        value=room.position
       )
     div(class="form-group form-check form-check-inline")
       input(
@@ -119,22 +124,23 @@ block main
         id="statusActive"
         name="status"
         value="active"
-        checked
+        checked=(room.status == "active" ? true : false)
       )
       label(for="statusActive" class="form-check-label") Hoạt động
     div(class="form-group form-check form-check-inline")
-      input(
-        type="radio"
-        class="form-check-input"
-        id="statusInActive"
-        name="status"
-        value="inactive"
-      )
-      label(for="statusInActive" class="form-check-label") Dừng hoạt động
+        input(
+          type="radio"
+          class="form-check-input"
+          id="statusInActive"
+          name="status"
+          value="inactive"
+          checked=(room.status == "inactive" ? true : false)
+        )
+        label(for="statusInActive" class="form-check-label") Dừng hoạt động
     div(class="form-group")
       button(
         type="submit"
         class="btn btn-primary"
-      ) Tạo mới
+      ) Cập nhật
 
-    //- script(src="/admin/js/product.js")
+  script(src="/admin/js/room.js")

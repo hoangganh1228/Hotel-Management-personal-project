@@ -89,12 +89,12 @@ module.exports.changeMulti = async (req, res) => {
     case "active":
       await Room.updateMany({ _id: { $in: ids } }, 
         { status: "active" })
-      req.flash('success', `Cập nhật trạng thái thành công ${ids.length} sản phẩm!`);
+      req.flash('success', `Cập nhật trạng thái thành công ${ids.length} phòng!`);
       break;
     case "inactive":
       await Room.updateMany({ _id: { $in: ids } }, 
         { status: "inactive" })
-      req.flash('success', `Cập nhật trạng thái thành công ${ids.length} sản phẩm!`);
+      req.flash('success', `Cập nhật trạng thái thành công ${ids.length} phòng!`);
       
       break;
     case "delete-all":
@@ -110,7 +110,7 @@ module.exports.changeMulti = async (req, res) => {
         await Room.updateMany({ _id: id }, { 
           position: position
         })
-        req.flash('success', `Đã thay đổi thành công vị trí của ${ids.length} sản phẩm!`);
+        req.flash('success', `Đã thay đổi thành công vị trí của ${ids.length} phòng!`);
       }
       
     default:
@@ -146,7 +146,7 @@ module.exports.create = async (req, res) => {
   })
 }  
 
-// [POST] /admin/products/create
+// [POST] /admin/rooms/create
 module.exports.createPost = async(req, res) => {
   req.body.price = parseInt(req.body.price)
   req.body.discountPercentage = parseInt(req.body.discountPercentage)
@@ -165,5 +165,49 @@ module.exports.createPost = async(req, res) => {
 
   res.redirect(`${systemConfig.prefixAdmin}/rooms`)
   
+
+}
+
+// [GET] /admin/rooms/edit/:id
+module.exports.edit = async (req, res) => {
+  try {
+    const find = {
+      deleted: false,
+      _id: req.params.id
+    };
+
+    const room = await Room.findOne(find);
+
+    res.render("admin/pages/rooms/edit", {
+      pageTitle: "Chỉnh sửa phòng",
+      room: room  
+    });
+  } catch (error) {
+    req.flash("error", `Không tồn tại phòng này!`);
+
+    res.redirect(`${systemConfig.prefixAdmin}/rooms`)
+  }
+
+}
+
+// [PATCH] /admin/rooms/editPatch/:id
+module.exports.editPatch = async (req, res) => {
+  const id = req.params.id;
+  req.body.price = parseInt(req.body.price);
+  req.body.discountPercentage = parseInt(req.body.discountPercentage);
+  req.body.stock = parseInt(req.body.stock);
+  req.body.position = parseInt(req.body.position);
+  req.body.adult = parseInt(req.body.adult);
+  req.body.children = parseInt(req.body.children);
+
+  try {
+    await Room.updateOne({_id: id}, req.body)
+    req.flash("success", `Cập nhật thành công sản phẩm!`);
+
+  } catch (error) {
+    req.flash("error", `Cập nhật thất bại!`);
+
+  } 
+  res.redirect("back")
 
 }
