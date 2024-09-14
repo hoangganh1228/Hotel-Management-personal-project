@@ -1,0 +1,42 @@
+extends ../../layouts/default.pug
+
+block main
+  if (room.title)
+    h1(class="mb-4") #{room.title}
+
+  if (room.price)
+    div(class="mb-4") Giá: <b>#{room.price}$</b>
+
+  if (room.discountPercentage)
+    div(class="mb-4") Giảm giá: <b>#{room.discountPercentage}%</b>
+
+  if (room.stock)
+    div(class="mb-4") Còn lại: <b>#{room.stock}</b>
+
+  if (room.thumbnail)
+    div(class="mb-4")
+      img(
+        src=room.thumbnail
+        style="width: 100px"
+      )
+
+  if (room.status)
+    div(class="mb-4")
+      span Trạng thái:
+      if (room.status === "active")
+        span(class="badge badge-success") Hoạt động
+      else
+        span(class="badge badge-danger") Dừng hoạt động
+
+  if (room.position)
+    div(class="mb-4") Vị trí: <b>#{room.position}</b>
+
+  if (room.description)
+    div(class="mb-4") !{room.description}
+
+  a(
+    href=`${prefixAdmin}/rooms/edit/${room.id}`
+    class="btn btn-warning"
+  ) Chỉnh sửa
+
+  script(src="/admin/js/room.js")

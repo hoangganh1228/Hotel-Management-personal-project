@@ -206,8 +206,28 @@ module.exports.editPatch = async (req, res) => {
 
   } catch (error) {
     req.flash("error", `Cập nhật thất bại!`);
-
   } 
   res.redirect("back")
+
+}
+
+// [GET] /admin/rooms/detail/:id
+module.exports.detail = async (req, res) => {
+  try {
+    const find = {
+      deleted: false,
+      _id: req.params.id
+    };
+
+    const room = await Room.findOne(find);
+
+    res.render("admin/pages/rooms/detail", {
+      pageTitle: room.title,
+      room: room  
+    });
+  } catch (error) {
+
+    res.redirect(`${systemConfig.prefixAdmin}/rooms`)
+  }
 
 }
