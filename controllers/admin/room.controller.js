@@ -24,6 +24,7 @@ module.exports.index = async (req, res) => {
 
   const countRooms = await Room.countDocuments(find)
 
+  // Pagination
   let objectPagination = paginationHelper(
     {
       currentPage: 1,
@@ -33,8 +34,17 @@ module.exports.index = async (req, res) => {
     countRooms
   )
 
+  // Sort
+  let sort = {};
+  if(req.query.sortKey && req.query.sortValue) {
+    sort[req.query.sortKey] = req.query.sortValue;
+  } else{
+    sort.position = "desc"
+  }
+
+
   const rooms = await Room.find(find)
-  .sort({ position: "desc"})
+  .sort(sort)
   .limit(objectPagination.limitItems)
   .skip(objectPagination.skip);
   

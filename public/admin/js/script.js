@@ -103,7 +103,6 @@ const checkboxMulti = document.querySelector("[checkbox-multi]");
 if(checkboxMulti) {
   // console.log(checkboxMulti);
   const inputCheckAll = checkboxMulti.querySelector("input[name='checkall']");
-  console.log(inputCheckAll);
   const inputsId = checkboxMulti.querySelectorAll("input[name='id']")
   // console.log(inputsId);
   inputCheckAll.addEventListener("click", () => {
@@ -259,3 +258,45 @@ if(uploadImage) {
 }
 
 // End Upload Image
+
+// Sort
+
+const sort = document.querySelector("[sort]");
+
+if(sort) {
+  let url = new URL(window.location.href);
+
+  const sortSelect = sort.querySelector("[sort-select]");
+  const sortClear = sort.querySelector("[sort-clear]");
+
+  sortSelect.addEventListener("change", (e) => {
+    const value = e.target.value;
+
+    const [sortKey, sortValue] = value.split("-");
+
+    url.searchParams.set("sortKey", sortKey);
+    url.searchParams.set("sortValue", sortValue);
+
+    window.location.href = url.href;
+  })
+
+  sortClear.addEventListener("click", () => {
+    url.searchParams.remove("sortKey");
+    url.searchParams.remove("sortValue");
+
+    window.location.href = url.href;
+  })
+
+  const sortKey = url.searchParams.get("sortKey");
+  const sortValue = url.searchParams.get("sortValue");
+
+  if(sortKey && sortValue) {
+    const stringSort = `${sortKey}-${sortValue}`;
+    const optionSelected = sort.querySelector(`option[value='${stringSort}']`);
+    optionSelected.selected = true;
+  }
+}
+
+// End Sort
+
+
