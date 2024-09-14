@@ -213,6 +213,7 @@ module.exports.editPatch = async (req, res) => {
 
 // [GET] /admin/rooms/detail/:id
 module.exports.detail = async (req, res) => {
+
   try {
     const find = {
       deleted: false,
