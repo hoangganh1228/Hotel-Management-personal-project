@@ -23,11 +23,12 @@ app.use(methodOverride('_method'))
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
-app.use(express.static("public"));
+app.use(express.static(`${__dirname}/public`));
 
-app.set("views", "./views");
+app.set("views", `${__dirname}//views`);
 app.set("view engine", "pug");
 // Flash
+console.log(__dirname);
 
 app.use(cookieParser('JHFJSBFJKSE'));
 app.use(session({ cookie: { maxAge: 60000 }}));
