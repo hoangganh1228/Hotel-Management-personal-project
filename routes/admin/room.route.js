@@ -6,7 +6,8 @@ const controller = require("../../controllers/admin/room.controller");
 
 const upload = multer();
 
-const uploadCloud = require("../../middlewares/admin/uploadCloud.middleware")
+const uploadCloud = require("../../middlewares/admin/uploadCloud.middleware");
+const validate = require("../../validates/admin/room.validate");
 
 router.get("/", controller.index);
 
@@ -21,6 +22,7 @@ router.get("/create", controller.create);
 router.post(
   "/create",
   upload.single('thumbnail'),
+  validate.creatPost,
   uploadCloud.upload,
   controller.createPost
 );
