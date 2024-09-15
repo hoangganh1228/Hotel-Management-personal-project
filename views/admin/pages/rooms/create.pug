@@ -9,7 +9,7 @@ block main
 
   form(
     action=`${prefixAdmin}/rooms/create`
-    id="form-create-product"
+    id="form-create-room"
     method="POST"
     enctype="multipart/form-data"
   )
@@ -91,16 +91,18 @@ block main
       input(
         type="file" 
         class="form-control-file"
-        id="thumbnail"
-        name="thumbnail"
+        id="images"
+        name="images"
         accept="image/*"
         upload-image-input
+        multiple
       )
-      img(
-        src=""
-        upload-image-preview
-        class="image-preview"
-      )
+      div(upload-image-preview-container) 
+      //- img(
+      //-   src=""
+      //-   upload-image-preview
+      //-   class="image-preview"
+      //- )
 
     div(class="form-group")
       label(for="position") Vị trí

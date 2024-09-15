@@ -12,6 +12,22 @@ cloudinary.config({
 
 // End Cloudinary
 
+const streamUpload = (file) => {
+  return new Promise((resolve, reject) => {
+    const stream = cloudinary.uploader.upload_stream(
+      (error, result) => {
+        if (result) {
+          resolve(result);
+        } else {
+          reject(error);
+        }
+      }
+    );
+
+    streamifier.createReadStream(file.buffer).pipe(stream);
+  });
+};
+
 module.exports.upload = (req, res, next) => {
   if(req.file) {
     let streamUpload = (req) => {
@@ -42,4 +58,24 @@ module.exports.upload = (req, res, next) => {
     next();
 
   }
+}
+
+module.exports.uploadMultiple = async (req, res, next) => {
+  if (req.files && req.files.length > 0) { // Kiểm tra xem có tệp nào không
+    try {
+      const uploadPromises = req.files.map(file => streamUpload(file));
+
+      const results = await Promise.all(uploadPromises);
+
+      req.body.images = results.map(result => result.secure_url);
+
+      next(); // Chuyển đến middleware hoặc route handler tiếp theo
+    } catch (error) {
+      console.error('Lỗi khi tải lên nhiều ảnh:', error);
+      res.status(500).json({ error: 'Tải lên ảnh thất bại' });
+    }
+  } else {
+    next(); // Không có tệp nào, tiếp tục xử lý tiếp theo
+  }
+
 }

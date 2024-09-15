@@ -153,7 +153,12 @@ module.exports.createPost = async(req, res) => {
   req.body.stock = parseInt(req.body.stock);
   req.body.adult = parseInt(req.body.adult);
   req.body.children = parseInt(req.body.children);
-  if(req.body.position == "") {
+  if(req.body.images && req.body.images.length > 0) {
+    req.body.thumbnail = req.body.images[0];  
+  } 
+  // console.log(req.body);
+  
+  if( req.body.position == "") {
     const countRooms = await Room.countDocuments();
     req.body.position = countRooms + 1;
   } else {

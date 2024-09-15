@@ -11,6 +11,11 @@ const roomSchema = new mongoose.Schema({
   adult: String,
   children: String,
   thumbnail: String,
+  images: [
+    {
+      type: String
+    }
+  ],
   status: String,
   position: Number,
   slug: { 

@@ -93,9 +93,33 @@
   border: 1px solid #ddd;
   padding: 15px;
   border-radius: 5px;
+  display: inline-block; /* Hiển thị các ảnh trên cùng một hàng */
+  position: relative; /* Để có thể căn chỉnh nút "x" */
 }
 
 .image-preview[src=""] {
   display: none;
+}
+
+.image-container {
+  display: inline-block;
+  position: relative;
+  margin-right: 10px; /* Khoảng cách giữa các ảnh */
+}
+
+.remove-image {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: #ff0000;
+  color: #ffffff;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  cursor: pointer;
+  line-height: 20px;
+  font-weight: bold;
+  z-index: 10; /* Hiển thị trên ảnh */
 }
 /* End Image Preview */

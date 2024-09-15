@@ -243,21 +243,57 @@ if(showAlert) {
 
 const uploadImage = document.querySelector("[upload-image]");
 
-if(uploadImage) {
-  const uploadImageInput = document.querySelector("[upload-image-input]")
-  const uploadImagePreview = document.querySelector("[upload-image-preview]")
-
+if (uploadImage) {
+  const uploadImageInput = document.querySelector("[upload-image-input]");
+  const uploadImagePreviewContainer = document.querySelector("[upload-image-preview-container]");
 
   uploadImageInput.addEventListener("change", (e) => {
-    const file = e.target.files[0];
-    if(file) {
-      uploadImagePreview.src = URL.createObjectURL(file)
-    }
-  })
+    uploadImagePreviewContainer.innerHTML = '';
+    console.log(e.target.files);
+    
+    const files = Array.from(e.target.files); // Chuyển tệp thành mảng để xử lý
+    console.log(files);
+    
+    if (files.length > 0) {
+      files.forEach((file, index) => {
+        // Tạo container cho mỗi ảnh và nút "x"
+        const imgContainer = document.createElement("div");
+        imgContainer.classList.add("image-container");
 
+        // Tạo phần tử img để xem trước ảnh
+        const imgElement = document.createElement("img");
+        imgElement.src = URL.createObjectURL(file);
+        imgElement.classList.add("image-preview");
+
+        // Tạo nút "x" để xóa ảnh
+        const removeButton = document.createElement("span");
+        removeButton.textContent = "x";
+        removeButton.classList.add("remove-image");
+        removeButton.onclick = () => {
+          imgContainer.remove(); // Xóa ảnh khỏi phần xem trước
+          files.splice(index, 1); // Xóa tệp khỏi mảng `files`
+
+          // Tạo lại danh sách tệp mới mà không có ảnh bị xóa
+          const dataTransfer = new DataTransfer();
+          files.forEach((remainingFile) => {
+            dataTransfer.items.add(remainingFile);
+          });
+          uploadImageInput.files = dataTransfer.files; // Cập nhật lại input files
+        };
+
+        // Thêm ảnh và nút "x" vào container
+        imgContainer.appendChild(imgElement);
+        imgContainer.appendChild(removeButton);
+
+        // Thêm container vào phần preview container
+        uploadImagePreviewContainer.appendChild(imgContainer);
+      });
+    }
+  });
 }
 
 // End Upload Image
+
 
 // Sort
 
