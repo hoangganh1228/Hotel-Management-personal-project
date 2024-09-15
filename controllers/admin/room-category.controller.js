@@ -1,24 +1,37 @@
 const RoomCategory = require("../../models/room-category.model")
 const systemConfig = require("../../config/system")
-
+const createTreeHelper = require("../../helpers/createTree")
 // [GET] /admin/rooms-category/index
 module.exports.index = async (req, res) => {
   let find = {
     deleted: false
-}
+  }
+  
+  const records = await RoomCategory.find(find);
 
-  const records = await RoomCategory.find(find)
+  const newRecords = createTreeHelper.tree(records);
+
 
   res.render("admin/pages/rooms-category/index", {
     pageTitle: "Trang danh mục sản phẩm",
-    records: records
+    records: newRecords
   })
 }
 
 // [GET] /admin/rooms-category/create
 module.exports.create = async (req, res) => {
+  let find = {
+    deleted: false
+  }
+
+
+  const records = await RoomCategory.find(find);
+
+  const newRecords = createTreeHelper.tree(records);
+
   res.render("admin/pages/rooms-category/create", {
-      pageTitle: "Tạo danh mục phòng",
+    pageTitle: "Tạo danh mục phòng",
+    records: newRecords
   })
 }   
 

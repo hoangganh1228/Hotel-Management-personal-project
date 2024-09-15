@@ -18,8 +18,6 @@ const roomCategorySchema = new mongoose.Schema({
   slug: { 
     type: String, 
     slug: "name",
-    unique: true
-
   },
   deleted: {
     type: Boolean,
@@ -30,6 +28,6 @@ const roomCategorySchema = new mongoose.Schema({
   timestamps: true
 })
 
-const RoomsCategory = mongoose.model("RoomCategory", roomCategorySchema, "products-category");
+const RoomsCategory = mongoose.model("RoomCategory", roomCategorySchema, "rooms-category");
 
 module.exports = RoomsCategory;   
