@@ -11,6 +11,7 @@ const roomSchema = new mongoose.Schema({
   adult: String,
   children: String,
   thumbnail: String,
+  stock: Number,
   images: [
     {
       type: String

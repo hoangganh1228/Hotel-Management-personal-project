@@ -123,3 +123,46 @@
   z-index: 10; /* Hiển thị trên ảnh */
 }
 /* End Image Preview */
+
+/* Định dạng nút "x" để xóa ảnh */
+.remove-image {
+  position: absolute; /* Đặt vị trí tuyệt đối để căn chỉnh nút "x" lên ảnh */
+  top: 5px; /* Đặt khoảng cách từ phía trên */
+  right: 5px; /* Đặt khoảng cách từ bên phải */
+  background-color: #ff4d4d; /* Màu nền đỏ để nổi bật */
+  color: #ffffff; /* Màu chữ trắng */
+  border: none; /* Không viền */
+  border-radius: 50%; /* Hình tròn */
+  width: 24px; /* Chiều rộng */
+  height: 24px; /* Chiều cao */
+  text-align: center; /* Căn giữa văn bản */
+  cursor: pointer; /* Đổi con trỏ chuột thành biểu tượng bàn tay */
+  line-height: 24px; /* Căn giữa chữ theo chiều dọc */
+  font-weight: bold; /* Chữ đậm */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); /* Tạo hiệu ứng đổ bóng */
+  z-index: 10; /* Đảm bảo nút nằm trên ảnh */
+  transition: background-color 0.2s ease; /* Hiệu ứng chuyển màu khi hover */
+}
+
+.remove-image:hover {
+  background-color: #ff1a1a; /* Màu nền khi hover */
+}
+
+/* Căn chỉnh lại nút và ảnh trong cùng một container */
+.image-container {
+  position: relative; /* Đặt vị trí tương đối để căn chỉnh nút "x" tuyệt đối */
+  display: inline-block; /* Hiển thị các ảnh và nút trên cùng một dòng */
+  margin-right: 10px; /* Khoảng cách giữa các ảnh */
+  margin-bottom: 10px; /* Khoảng cách dưới ảnh */
+}
+
+/* Định dạng cho ảnh xem trước */
+.image-preview {
+  width: 150px; /* Chiều rộng của ảnh */
+  height: auto; /* Tự động điều chỉnh chiều cao dựa trên chiều rộng */
+  border: 1px solid #ddd; /* Viền ảnh */
+  border-radius: 5px; /* Bo góc ảnh */
+  padding: 5px; /* Khoảng cách nội dung với viền */
+  display: block; /* Hiển thị ảnh dưới dạng khối */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng cho ảnh */
+}

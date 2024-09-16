@@ -204,6 +204,11 @@ module.exports.editPatch = async (req, res) => {
   req.body.position = parseInt(req.body.position);
   req.body.adult = parseInt(req.body.adult);
   req.body.children = parseInt(req.body.children);
+  // console.log(req.body);
+  
+  if(req.body.images && req.body.images.length > 0) {
+    req.body.thumbnail = req.body.images[0];  
+  } 
 
   try {
     await Room.updateOne({_id: id}, req.body)

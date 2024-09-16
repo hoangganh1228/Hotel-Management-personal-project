@@ -290,7 +290,21 @@ if (uploadImage) {
       });
     }
   });
+
+  const removeButton =  document.querySelectorAll(".remove-image");
+  removeButton.forEach(button => {
+    button.addEventListener("click", (e) => {
+      const imageUrl = e.target.getAttribute("data-image-url");
+      console.log(imageUrl);
+      console.log(files);
+      
+      e.target.parentElement.remove();
+    })
+  })
+
 }
+
+
 
 // End Upload Image
 

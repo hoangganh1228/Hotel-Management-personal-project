@@ -5,7 +5,6 @@ block main
   +alert-error(5000)
   +alert-success(5000)
 
-
   h1(class="mb-4") Chỉnh sửa sản phẩm
 
   form(
@@ -19,8 +18,8 @@ block main
         input(
             type="text"
             class="form-control"
-            id="title"
-            name="title"
+            id="name"
+            name="name"
             required
             value=room.name
         )
@@ -86,7 +85,6 @@ block main
         value=room.stock
         min="0"
       )
-
     div(
       class="form-group"
       upload-image
@@ -100,11 +98,18 @@ block main
         accept="image/*"
         upload-image-input
       )
-      img(
-        src=room.thumbnail
-        upload-image-preview
-        class="image-preview"
-      )
+      div(upload-image-preview-container)
+        each image in room.images
+          div.image-container
+            img(
+              src=image, 
+              class="image-preview"
+            )
+            button(
+              class="remove-image"
+              type="button"
+              data-image-url=image
+            ) x 
 
     div(class="form-group")
       label(for="position") Vị trí
