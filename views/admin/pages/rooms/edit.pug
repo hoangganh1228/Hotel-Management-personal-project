@@ -5,7 +5,7 @@ block main
   +alert-error(5000)
   +alert-success(5000)
 
-  h1(class="mb-4") Chỉnh sửa sản phẩm
+  h1(class="mb-4") Chỉnh sửa phòng
 
   form(
     action=`${prefixAdmin}/rooms/edit/${room.id}?_method=PATCH`
@@ -32,7 +32,6 @@ block main
             rows="5"
             value=room.description
         ) #{room.description}
-
     div(class="form-group")
       label(for="price") Giá
       input(

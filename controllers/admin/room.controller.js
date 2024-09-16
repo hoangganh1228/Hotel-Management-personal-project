@@ -18,7 +18,7 @@ module.exports.index = async (req, res) => {
 
   // Tìm kiếm
   const objectSearch = searchHelper(req.query);
-  if(objectSearch) {
+  if(objectSearch.regex) {
     find.title = objectSearch.regex
   }
 

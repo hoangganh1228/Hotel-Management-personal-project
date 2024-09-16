@@ -1,20 +1,56 @@
 const RoomCategory = require("../../models/room-category.model")
 const systemConfig = require("../../config/system")
+const filterStatusHelper  = require("../../helpers/filterStatus");
 const createTreeHelper = require("../../helpers/createTree")
+const searchHelper = require("../../helpers/search");
+const paginationHelper = require("../../helpers/pagination");
 // [GET] /admin/rooms-category/index
 module.exports.index = async (req, res) => {
   let find = {
     deleted: false
   }
   
-  const records = await RoomCategory.find(find);
+  const filterStatus = filterStatusHelper(req.query);
+  if(req.query.status) {
+    find.status = req.query.status
+  }
+  
+  // Tìm kiếm
+  const objectSearch = searchHelper(req.query);
+  
+  if(objectSearch.regex) {
+    find.title = objectSearch.regex
+  }
 
+  // console.log(find);
+  
+
+  const countRoomsCategory = await RoomCategory.countDocuments(find);
+  
+  let objectPagination = paginationHelper(
+    {
+      currentPage: 1,
+      limitItems: 4
+    },
+    req.query,
+    countRoomsCategory
+  )
+  // console.log(find);
+  
+
+  const records = await RoomCategory.find(find).limit(objectPagination.limitItems).skip(objectPagination.skip);
+  // console.log(records);
+  
   const newRecords = createTreeHelper.tree(records);
+
 
 
   res.render("admin/pages/rooms-category/index", {
     pageTitle: "Trang danh mục sản phẩm",
-    records: newRecords
+    records: newRecords,
+    keyword: objectSearch.keyword,
+    filterStatus: filterStatus,
+    pagination: objectPagination
   })
 }
 
@@ -31,7 +67,7 @@ module.exports.create = async (req, res) => {
 
   res.render("admin/pages/rooms-category/create", {
     pageTitle: "Tạo danh mục phòng",
-    records: newRecords
+    records: newRecords,
   })
 }   
 
