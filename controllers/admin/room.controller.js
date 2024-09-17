@@ -1,9 +1,11 @@
 const Room = require("../../models/room.model");
-
+const RoomCategory = require("../../models/room-category.model");
 const systemConfig = require("../../config/system")
 const filterStatusHelper  = require("../../helpers/filterStatus");
 const searchHelper = require("../../helpers/search");
 const paginationHelper = require("../../helpers/pagination");
+
+const createTreeHelper = require("../../helpers/createTree");   
 // [GET] /admin/rooms
 module.exports.index = async (req, res) => {
   const filterStatus = filterStatusHelper(req.query);
@@ -140,9 +142,16 @@ module.exports.deleteItem = async (req, res) => {
 
 // [GET] /admin/rooms/create
 module.exports.create = async (req, res) => {
+  let find = {
+    deleted: false
+  };
+  const category = await RoomCategory.find(find);
+
+  const newCategory = createTreeHelper.tree(category);
 
   res.render("admin/pages/rooms/create", {
     pageTitle: "Thêm mới phòng",
+    category: newCategory
   })
 }  
 
