@@ -190,11 +190,18 @@ module.exports.edit = async (req, res) => {
       _id: req.params.id
     };
 
+    const category = await RoomCategory.find({
+      deleted: false
+    });
+
+    const newCategory = createTreeHelper.tree(category);
+
     const room = await Room.findOne(find);
 
     res.render("admin/pages/rooms/edit", {
       pageTitle: "Chỉnh sửa phòng",
-      room: room  
+      room: room,
+      category: newCategory  
     });
   } catch (error) {
     req.flash("error", `Không tồn tại phòng này!`);
@@ -206,6 +213,8 @@ module.exports.edit = async (req, res) => {
 
 // [PATCH] /admin/rooms/editPatch/:id
 module.exports.editPatch = async (req, res) => {
+  // console.log(req.body);
+  
   const id = req.params.id;
   req.body.price = parseInt(req.body.price);
   req.body.discountPercentage = parseInt(req.body.discountPercentage);
@@ -213,7 +222,7 @@ module.exports.editPatch = async (req, res) => {
   req.body.position = parseInt(req.body.position);
   req.body.adult = parseInt(req.body.adult);
   req.body.children = parseInt(req.body.children);
-  // console.log(req.body);
+  console.log(req.body);
   
   if(req.body.images && req.body.images.length > 0) {
     req.body.thumbnail = req.body.images[0];  

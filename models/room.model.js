@@ -3,10 +3,10 @@ const slug = require('mongoose-slug-updater');
 
 const roomSchema = new mongoose.Schema({ 
   name: String,
-  product_category_id: {
+  room_category_id: {
     type: String,
     default: ""
-},
+  },
   roomNumber: Number,
   description: String,
   price: Number,
