@@ -6,6 +6,8 @@ const roomRoute = require("./room.route");
 
 const roomCategoryRoute = require("./room-category.route");
 
+const roomFacilityRoute = require("./room-facility.route");
+
 module.exports = (app) => {
   const PATH_ADMIN = systemConfig.prefixAdmin;
 
@@ -14,5 +16,7 @@ module.exports = (app) => {
   app.use(PATH_ADMIN + "/rooms", roomRoute);
   
   app.use(PATH_ADMIN + "/rooms-category", roomCategoryRoute);
+
+  app.use(PATH_ADMIN + "/rooms-facility", roomFacilityRoute);
 
 }
