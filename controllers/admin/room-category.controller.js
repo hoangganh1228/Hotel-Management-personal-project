@@ -132,7 +132,23 @@ module.exports.delete = async (req, res) => {
   }, {
     deleted: true
   })
-  
+
   res.redirect("back")
 }
 
+// [GET] /admin/rooms-category/detail/:id
+module.exports.detail = async (req, res) => {
+  try {
+    const find = {
+      deleted: false,
+      _id: req.params.id
+    };
+    const category = await RoomCategory.findOne(find);
+    res.render("admin/pages/rooms-category/detail", {
+      pageTitle: category.title,
+      category: category  
+    });
+  } catch (error) {
+    res.redirect(`${systemConfig.prefixAdmin}/rooms-category`)
+  }
+}
