@@ -35,14 +35,11 @@ module.exports.index = async (req, res) => {
     req.query,
     countRoomsCategory
   )
-  // console.log(find);
-  
   
   const records = await RoomCategory.find(find).limit(objectPagination.limitItems).skip(objectPagination.skip);
-  console.log(records);
   
   const newRecords = createTreeHelper.tree(records);
-  console.log(newRecords);
+  // console.log(newRecords);
   
   
 
@@ -81,7 +78,6 @@ module.exports.createPost = async (req, res) => {
   } else {
     req.body.position = parseInt(req.body.position)
   } 
-  console.log(req.body);
   const record = new RoomCategory(req.body);
   await record.save();
   res.redirect(`${systemConfig.prefixAdmin}/rooms-category`)
@@ -104,7 +100,7 @@ module.exports.edit = async (req, res) => {
     });
 
     const newRecords = createTreeHelper.tree(records);
-
+    
     res.render("admin/pages/rooms-category/edit", {
       pageTitle: "Chỉnh sửa danh mục sản phẩm",
       data: data,
@@ -118,7 +114,6 @@ module.exports.edit = async (req, res) => {
 // [PATCH] /admin/rooms-category/edit/:id
 module.exports.editPatch = async (req, res) => {
   const id = req.params.id;
-  console.log(req.body);
   
 
   req.body.position = parseInt(req.body.position)

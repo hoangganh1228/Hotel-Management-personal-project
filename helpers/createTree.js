@@ -10,6 +10,7 @@ const createTree = (arr, parentId = "") => {
       if(children.length > 0) {
         newItem.children = children
       }
+      
       tree.push(newItem);
     }
   })
