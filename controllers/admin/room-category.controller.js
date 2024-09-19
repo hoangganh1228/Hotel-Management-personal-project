@@ -123,3 +123,16 @@ module.exports.editPatch = async (req, res) => {
   res.redirect("back")
 }
 
+// [DELETE] /admin/rooms-category/edit/:id
+module.exports.delete = async (req, res) => {
+  const id = req.params.id;
+
+  await RoomCategory.updateOne({
+    _id: id
+  }, {
+    deleted: true
+  })
+  
+  res.redirect("back")
+}
+

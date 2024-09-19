@@ -42,5 +42,12 @@ block main
 
           tbody
             +table-tree(records)
-
+  
   +pagination(pagination)
+
+  form(
+    action=""
+    method="POST"
+    id="form-delete-item"
+    data-path=`${prefixAdmin}/rooms-category/delete`
+  )
