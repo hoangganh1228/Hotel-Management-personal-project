@@ -1,19 +1,46 @@
 const RoomFacility = require("../../models/room-facility.model");
-const systemConfig = require("../../config/system")
+const systemConfig = require("../../config/system");
 
+const filterStatusHelper  = require("../../helpers/filterStatus");
+const searchHelper = require("../../helpers/search");
+const paginationHelper = require("../../helpers/pagination");
 // [GET] /admin/rooms-facility/index
 module.exports.index = async (req, res) => {
   let find = {
     deleted: false
   }
 
-  const records = await RoomFacility.find(find);
+  const filterStatus = filterStatusHelper(req.query);
+  if(req.query.status) {
+    find.status = req.query.status
+  }
+  
+  // Tìm kiếm
+  const objectSearch = searchHelper(req.query);
+  
+  if(objectSearch.regex) {
+    find.title = objectSearch.regex
+  }
+  // console.log(find);
+  
+  const countRoomsCategory = await RoomFacility.countDocuments(find);
+  
+  let objectPagination = paginationHelper(
+    {
+      currentPage: 1,
+      limitItems: 4
+    },
+    req.query,
+    countRoomsCategory
+  )
+
+  const records = await RoomFacility.find(find).limit(objectPagination.limitItems).skip(objectPagination.skip);
   res.render("admin/pages/rooms-facility/index", {
     pageTitle: "Trang danh mục sản phẩm",
     records: records,
-    // keyword: objectSearch.keyword,
-    // filterStatus: filterStatus,
-    // pagination: objectPagination
+    keyword: objectSearch.keyword,
+    filterStatus: filterStatus,
+    pagination: objectPagination
   })
 }
 
