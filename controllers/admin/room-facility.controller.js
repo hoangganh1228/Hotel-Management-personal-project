@@ -79,3 +79,34 @@ module.exports.editPatch = async (req, res) => {
 
   
 }
+
+// [DELETE] /admin/rooms-facility/delete/:id
+module.exports.delete = async (req, res) => {
+  const id = req.params.id;
+  await RoomFacility.updateOne({
+    _id: id
+  }, {
+    deleted: true
+  })
+  
+  res.redirect(`${systemConfig.prefixAdmin}/rooms-facility`); 
+
+  
+}
+
+// [GET] /admin/rooms-category/detail/:id
+module.exports.detail = async (req, res) => {
+  try {
+    const find = {
+      deleted: false,
+      _id: req.params.id
+    };
+    const category = await RoomCategory.findOne(find);
+    res.render("admin/pages/rooms-category/detail", {
+      pageTitle: category.title,
+      category: category  
+    });
+  } catch (error) {
+    res.redirect(`${systemConfig.prefixAdmin}/rooms-category`)
+  }
+}
