@@ -1,0 +1,26 @@
+extends ../../layouts/default.pug
+block main
+  if (facility.title)
+    h1(class="mb-4") #{facility.title}
+  if (facility.icon)
+    div(class="mb-4")
+      img(
+        src=facility.icon
+        style="width: 100px"
+      )
+  if (facility.status)
+    div(class="mb-4")
+      span Trạng thái:
+      if (facility.status === "active")
+        span(class="badge badge-success") Hoạt động
+      else
+        span(class="badge badge-danger") Dừng hoạt động
+  if (facility.position)
+    div(class="mb-4") Vị trí: <b>#{facility.position}</b>
+  if (facility.description)
+    div(class="mb-4") !{facility.description}
+  a(
+    href=`${prefixAdmin}/rooms-facility/edit/${facility.id}`
+    class="btn btn-warning"
+  ) Chỉnh sửa
+  script(src="/admin/js/room.js")

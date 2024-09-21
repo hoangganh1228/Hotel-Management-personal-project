@@ -94,19 +94,19 @@ module.exports.delete = async (req, res) => {
   
 }
 
-// [GET] /admin/rooms-category/detail/:id
+// [GET] /admin/rooms-facility/detail/:id
 module.exports.detail = async (req, res) => {
   try {
     const find = {
       deleted: false,
       _id: req.params.id
     };
-    const category = await RoomCategory.findOne(find);
-    res.render("admin/pages/rooms-category/detail", {
-      pageTitle: category.title,
-      category: category  
+    const facility = await RoomFacility.findOne(find);
+    res.render("admin/pages/rooms-facility/detail", {
+      pageTitle: facility.title,
+      facility: facility  
     });
   } catch (error) {
-    res.redirect(`${systemConfig.prefixAdmin}/rooms-category`)
+    res.redirect(`${systemConfig.prefixAdmin}/rooms-facility`)
   }
 }
