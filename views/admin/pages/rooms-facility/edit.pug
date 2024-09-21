@@ -3,46 +3,52 @@ include ../../mixins/alert.pug
 
 
 block main 
-  h1(class="mb-4") Thêm mới cơ sở vật chất
   +alert-error(5000)
+  +alert-success(5000)
+
+  h1(class="mb-4") Chỉnh sửa cơ sở vật chất
+
   form(
-    action=`${prefixAdmin}/rooms-facility/create`
-    id="form-create-room-facility"
+    action=`${prefixAdmin}/rooms-facility/edit/${facility.id}?_method=PATCH`
+    id="form-edit-facility"
     method="POST"
     enctype="multipart/form-data"
   )
     div(class="form-group")
-      label(for="title") Tên 
+      label(for="title") Tên
       input(
         type="text"
         class="form-control"
         id="title"
         name="title"
         required
+        value=facility.title
       )
     div(class="form-group")
       label(for="desc") Mô tả
       textarea(
-        class="form-control textarea-mce"
-        id="desc"
-        name="description"
-        rows="5"
-      )
+          class="form-control textarea-mce"
+          id="desc"
+          name="description"
+          rows="5"
+          value=facility.description
+      ) #{facility.description}
+    
     div(
       class="form-group"
       upload-image
     )
-      label(for="icon") Ảnh
+      label(for="thumbnail") Ảnh
       input(
         type="file"
         class="form-control-file"
-        id="icon"
-        name="icon"
+        id="thumbnail"
+        name="thumbnail"
         accept="image/*"
         upload-image-input
       )
       img(
-        src=""
+        src=facility.icon
         upload-image-preview
         class="image-preview"
       )
@@ -55,6 +61,7 @@ block main
         name="position"
         placeholder="Tự động tăng"
         min="1"
+        value=facility.position
       )
     div(class="form-group form-check form-check-inline")
       input(
@@ -63,7 +70,7 @@ block main
         id="statusActive"
         name="status"
         value="active"
-        checked
+        checked=(facility.status == "active" ? true : false)
       )
       label(for="statusActive" class="form-check-label") Hoạt động
     div(class="form-group form-check form-check-inline")
@@ -73,13 +80,13 @@ block main
         id="statusInActive"
         name="status"
         value="inactive"
+        checked=(facility.status == "inactive" ? true : false)
       )
       label(for="statusInActive" class="form-check-label") Dừng hoạt động
     div(class="form-group")
       button(
         type="submit"
         class="btn btn-primary"
-      ) Tạo mới
-
-    script(src="/admin/js/room-facility.js")
+      ) Cập nhật   
     
+  script(src="/admin/js/room.js")
