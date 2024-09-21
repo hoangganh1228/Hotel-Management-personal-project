@@ -1,5 +1,6 @@
 const Room = require("../../models/room.model");
 const RoomCategory = require("../../models/room-category.model");
+const RoomFacility = require("../../models/room-facility.model")
 const systemConfig = require("../../config/system")
 const filterStatusHelper  = require("../../helpers/filterStatus");
 const searchHelper = require("../../helpers/search");
@@ -142,21 +143,25 @@ module.exports.deleteItem = async (req, res) => {
 
 // [GET] /admin/rooms/create
 module.exports.create = async (req, res) => {
+  
   let find = {
     deleted: false
   };
   const category = await RoomCategory.find(find);
+  const facilities = await RoomFacility.find(find);
 
   const newCategory = createTreeHelper.tree(category);
 
   res.render("admin/pages/rooms/create", {
     pageTitle: "Thêm mới phòng",
-    category: newCategory
+    category: newCategory,
+    facilities: facilities
   })
 }  
 
 // [POST] /admin/rooms/create
 module.exports.createPost = async(req, res) => {
+
   req.body.price = parseInt(req.body.price)
   req.body.discountPercentage = parseInt(req.body.discountPercentage)
   req.body.stock = parseInt(req.body.stock);
