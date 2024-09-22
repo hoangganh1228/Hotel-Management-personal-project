@@ -194,6 +194,10 @@ module.exports.edit = async (req, res) => {
       deleted: false,
       _id: req.params.id
     };
+    
+    const facilities = await RoomFacility.find({
+      deleted: false
+    })
 
     const category = await RoomCategory.find({
       deleted: false
@@ -206,7 +210,8 @@ module.exports.edit = async (req, res) => {
     res.render("admin/pages/rooms/edit", {
       pageTitle: "Chỉnh sửa phòng",
       room: room,
-      category: newCategory  
+      category: newCategory,
+      facilities: facilities
     });
   } catch (error) {
     req.flash("error", `Không tồn tại phòng này!`);
@@ -227,6 +232,9 @@ module.exports.editPatch = async (req, res) => {
   req.body.position = parseInt(req.body.position);
   req.body.adult = parseInt(req.body.adult);
   req.body.children = parseInt(req.body.children);
+  if (!req.body.room_facilities_id) {
+    req.body.room_facilities_id = [];
+  }
   console.log(req.body);
   
   if(req.body.images && req.body.images.length > 0) {
@@ -240,7 +248,7 @@ module.exports.editPatch = async (req, res) => {
   } catch (error) {
     req.flash("error", `Cập nhật thất bại!`);
   } 
-  res.redirect("back")
+  res.redirect(`${systemConfig.prefixAdmin}/rooms`)
 
 }
 

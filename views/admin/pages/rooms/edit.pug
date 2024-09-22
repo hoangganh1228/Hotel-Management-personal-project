@@ -54,6 +54,20 @@ block main
         min="0"
       )
     div(class="form-group")
+      label(for="price") Cơ sở vật chất:
+      .row 
+        each facility, index in facilities 
+          
+          .col-3
+            label
+              input(
+                value=facility.id 
+                name="room_facilities_id" 
+                type="checkbox"
+                checked=(room.room_facilities_id.includes(facility.id) ? true : false)
+                )
+              |  #{facility.title}
+    div(class="form-group")
       .row
         .col-6 
           label(for="price") Người lớn
