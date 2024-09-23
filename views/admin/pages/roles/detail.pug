@@ -1,0 +1,10 @@
+extends ../../layouts/default.pug
+
+block main
+  if (role.title)
+    h1(class="mb-4") #{role.title}
+
+  a(
+    href=`${prefixAdmin}/roles/edit/${role.id}`
+    class="btn btn-warning"
+  ) Chỉnh sửa

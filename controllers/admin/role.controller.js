@@ -45,6 +45,7 @@ module.exports.edit = async (req, res) => {
     res.redirect(`${systemConfig.prefixAdmin}/roles`);
   }
 };
+
 // [PATCH] /admin/roles/edit/:id
 module.exports.editPatch = async (req, res) => {
   try {
@@ -59,3 +60,18 @@ module.exports.editPatch = async (req, res) => {
 
   res.redirect("back");
 };
+
+// [GET] /admin/roles/detail/:id
+module.exports.detail = async (req, res) => {
+  const id = req.params.id;
+
+  const role = await Role.findOne({
+    _id: id,
+    deleted: false
+  })
+  res.render("admin/pages/roles/detail", {
+    pageTitle: role.title,
+    role: role  
+  });
+
+}
