@@ -14,16 +14,34 @@ const accountRoutes = require("./account.route");
 
 const authRoutes = require("./auth.route");
 
+const authMiddleware = require("../../middlewares/admin/auth.middleware");
+
 module.exports = (app) => {
   const PATH_ADMIN = systemConfig.prefixAdmin;
 
-  app.use(PATH_ADMIN + "/dashboard", dashboardRoute);
+  app.use(
+    PATH_ADMIN + "/dashboard",
+    authMiddleware.requireAuth, 
+    dashboardRoute
+  );
   
-  app.use(PATH_ADMIN + "/rooms", roomRoute);
+  app.use(
+    PATH_ADMIN + "/rooms", 
+    authMiddleware.requireAuth, 
+    roomRoute
+  );
   
-  app.use(PATH_ADMIN + "/rooms-category", roomCategoryRoute);
+  app.use(
+    PATH_ADMIN + "/rooms-category", 
+    authMiddleware.requireAuth, 
+    roomCategoryRoute
+  );
 
-  app.use(PATH_ADMIN + "/rooms-facility", roomFacilityRoute);
+  app.use(
+    PATH_ADMIN + "/rooms-facility", 
+    authMiddleware.requireAuth, 
+    roomFacilityRoute
+  );
 
   app.use(PATH_ADMIN + "/roles", roleRoutes);
 
