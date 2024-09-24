@@ -3,173 +3,174 @@ include ../../mixins/alert.pug
 include ../../mixins/select-tree.pug
 
 block main 
-  +alert-error(5000)
-  +alert-success(5000)
+  if(role.permissions.includes("rooms_edit"))
+    +alert-error(5000)
+    +alert-success(5000)
 
-  h1(class="mb-4") Chỉnh sửa phòng
+    h1(class="mb-4") Chỉnh sửa phòng
 
-  form(
-    action=`${prefixAdmin}/rooms/edit/${room.id}?_method=PATCH`
-    id="form-create-room"
-    method="POST"
-    enctype="multipart/form-data"
-  )
-    div(class="form-group")
-      label(for="title") Tên
-      input(
-        type="text"
-        class="form-control"
-        id="name"
-        name="name"
-        required
-        value=room.name
-      )
-    div(class="form-group")
-      label(for="room_category_id") Danh mục
-      select(
-        name="room_category_id"
-        id="room_category_id"
-        class="form-control"
-      )
-        option(value="") -- Chọn danh mục --
-        if(category)
-          +select-tree(category, 1, room.room_category_id)
-    div(class="form-group")
-      label(for="desc") Mô tả
-      textarea(
-          class="form-control textarea-mce"
-          id="desc"
-          name="description"
-          rows="5"
-          value=room.description
-      ) #{room.description}
-    div(class="form-group")
-      label(for="price") Giá
-      input(
-        type="number"
-        class="form-control"
-        id="price"
-        name="price"
-        value=room.price
-        min="0"
-      )
-    div(class="form-group")
-      label(for="price") Cơ sở vật chất:
-      .row 
-        each facility, index in facilities 
-          
-          .col-3
-            label
-              input(
-                value=facility.id 
-                name="room_facilities_id" 
-                type="checkbox"
-                checked=(room.room_facilities_id.includes(facility.id) ? true : false)
-                )
-              |  #{facility.title}
-    div(class="form-group")
-      .row
-        .col-6 
-          label(for="price") Người lớn
-          input(
-            type="number"
-            class="form-control"
-            id="adult"
-            name="adult"
-            value=room.adult
-            min="0"
-          )
-        .col-6 
-          label(for="price") Trẻ em
-          input(
-            type="number"
-            class="form-control"
-            id="children"
-            name="children"
-            value=room.children
-            min="0" 
-          )
-    div(class="form-group")
-      label(for="discount") % Giảm giá
-      input(
-        type="number"
-        class="form-control"
-        id="discount"
-        name="discountPercentage"
-        value=room.discountPercentage
-        min="0"
-      )
-    div(class="form-group")
-      label(for="stock") Số lượng
-      input(
-        type="number"
-        class="form-control"
-        id="stock"
-        name="stock"
-        value=room.stock
-        min="0"
-      )
-    div(
-      class="form-group"
-      upload-image
+    form(
+      action=`${prefixAdmin}/rooms/edit/${room.id}?_method=PATCH`
+      id="form-create-room"
+      method="POST"
+      enctype="multipart/form-data"
     )
-      label(for="thumbnail") Ảnh
-      input(
-        type="file" 
-        class="form-control-file"
-        id="thumbnail"
-        name="thumbnail"
-        accept="image/*"
-        upload-image-input
-      )
-      div(upload-image-preview-container)
-        each image in room.images
-          div.image-container
-            img(
-              src=image, 
-              class="image-preview"
+      div(class="form-group")
+        label(for="title") Tên
+        input(
+          type="text"
+          class="form-control"
+          id="name"
+          name="name"
+          required
+          value=room.name
+        )
+      div(class="form-group")
+        label(for="room_category_id") Danh mục
+        select(
+          name="room_category_id"
+          id="room_category_id"
+          class="form-control"
+        )
+          option(value="") -- Chọn danh mục --
+          if(category)
+            +select-tree(category, 1, room.room_category_id)
+      div(class="form-group")
+        label(for="desc") Mô tả
+        textarea(
+            class="form-control textarea-mce"
+            id="desc"
+            name="description"
+            rows="5"
+            value=room.description
+        ) #{room.description}
+      div(class="form-group")
+        label(for="price") Giá
+        input(
+          type="number"
+          class="form-control"
+          id="price"
+          name="price"
+          value=room.price
+          min="0"
+        )
+      div(class="form-group")
+        label(for="price") Cơ sở vật chất:
+        .row 
+          each facility, index in facilities 
+            
+            .col-3
+              label
+                input(
+                  value=facility.id 
+                  name="room_facilities_id" 
+                  type="checkbox"
+                  checked=(room.room_facilities_id.includes(facility.id) ? true : false)
+                  )
+                |  #{facility.title}
+      div(class="form-group")
+        .row
+          .col-6 
+            label(for="price") Người lớn
+            input(
+              type="number"
+              class="form-control"
+              id="adult"
+              name="adult"
+              value=room.adult
+              min="0"
             )
-            button(
-              class="remove-image"
-              type="button"
-              data-image-url=image
-            ) x 
+          .col-6 
+            label(for="price") Trẻ em
+            input(
+              type="number"
+              class="form-control"
+              id="children"
+              name="children"
+              value=room.children
+              min="0" 
+            )
+      div(class="form-group")
+        label(for="discount") % Giảm giá
+        input(
+          type="number"
+          class="form-control"
+          id="discount"
+          name="discountPercentage"
+          value=room.discountPercentage
+          min="0"
+        )
+      div(class="form-group")
+        label(for="stock") Số lượng
+        input(
+          type="number"
+          class="form-control"
+          id="stock"
+          name="stock"
+          value=room.stock
+          min="0"
+        )
+      div(
+        class="form-group"
+        upload-image
+      )
+        label(for="thumbnail") Ảnh
+        input(
+          type="file" 
+          class="form-control-file"
+          id="thumbnail"
+          name="thumbnail"
+          accept="image/*"
+          upload-image-input
+        )
+        div(upload-image-preview-container)
+          each image in room.images
+            div.image-container
+              img(
+                src=image, 
+                class="image-preview"
+              )
+              button(
+                class="remove-image"
+                type="button"
+                data-image-url=image
+              ) x 
 
-    div(class="form-group")
-      label(for="position") Vị trí
-      input(
-        type="number"
-        class="form-control"
-        id="position"
-        name="position"
-        placeholder="Tự động tăng"
-        min="1"
-        value=room.position
-      )
-    div(class="form-group form-check form-check-inline")
-      input(
-        type="radio"
-        class="form-check-input"
-        id="statusActive"
-        name="status"
-        value="active"
-        checked=(room.status == "active" ? true : false)
-      )
-      label(for="statusActive" class="form-check-label") Hoạt động
-    div(class="form-group form-check form-check-inline")
+      div(class="form-group")
+        label(for="position") Vị trí
+        input(
+          type="number"
+          class="form-control"
+          id="position"
+          name="position"
+          placeholder="Tự động tăng"
+          min="1"
+          value=room.position
+        )
+      div(class="form-group form-check form-check-inline")
         input(
           type="radio"
           class="form-check-input"
-          id="statusInActive"
+          id="statusActive"
           name="status"
-          value="inactive"
-          checked=(room.status == "inactive" ? true : false)
+          value="active"
+          checked=(room.status == "active" ? true : false)
         )
-        label(for="statusInActive" class="form-check-label") Dừng hoạt động
-    div(class="form-group")
-      button(
-        type="submit"
-        class="btn btn-primary"
-      ) Cập nhật
+        label(for="statusActive" class="form-check-label") Hoạt động
+      div(class="form-group form-check form-check-inline")
+          input(
+            type="radio"
+            class="form-check-input"
+            id="statusInActive"
+            name="status"
+            value="inactive"
+            checked=(room.status == "inactive" ? true : false)
+          )
+          label(for="statusInActive" class="form-check-label") Dừng hoạt động
+      div(class="form-group")
+        button(
+          type="submit"
+          class="btn btn-primary"
+        ) Cập nhật
 
-  script(src="/admin/js/room.js")
+    script(src="/admin/js/room.js")

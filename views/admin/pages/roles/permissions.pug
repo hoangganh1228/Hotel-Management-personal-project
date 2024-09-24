@@ -26,10 +26,10 @@ block main
           each item in records
             td(class="text-center")
               input(type="text" value=item.id)
-        //- Danh mục sản phẩm
+        //- Danh mục phòng
         tr
           td(colspan="4")
-            b Danh mục sản phẩm
+            b Danh mục phòng
         tr(data-name="rooms-category_view")
           td Xem
           each item in records
@@ -50,26 +50,26 @@ block main
           each item in records
             td(class="text-center")
               input(type="checkbox")
-        //- Sản phẩm
+        //- phòng
         tr
           td(colspan="4")
-            b Sản phẩm
-        tr(data-name="products_view")
+            b Phòng
+        tr(data-name="rooms_view")
           td Xem
           each item in records
             td(class="text-center")
               input(type="checkbox")
-        tr(data-name="products_create")
+        tr(data-name="rooms_create")
           td Thêm mới
           each item in records
             td(class="text-center")
               input(type="checkbox")
-        tr(data-name="products_edit")
+        tr(data-name="rooms_edit")
           td Chỉnh sửa
           each item in records
             td(class="text-center")
               input(type="checkbox")
-        tr(data-name="products_delete")
+        tr(data-name="rooms_delete")
           td Xóa
           each item in records
             td(class="text-center")
