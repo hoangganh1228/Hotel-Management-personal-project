@@ -115,8 +115,12 @@ module.exports.changeMulti = async (req, res) => {
     case "delete-all":
       await Room.updateMany({ _id: { $in: ids } }, {
         deleted: true,
-        deletedAt: new Date()
+        deletedBy: {
+          account_id: res.locals.user.id,
+          deletedAt: new Date()
+        }
       })
+      break
       
     case "change-position":
       for(const item of ids) {
@@ -142,7 +146,10 @@ module.exports.deleteItem = async (req, res) => {
     _id: id
   }, {
     deleted: true,
-    deletedAt: new Date()
+    deletedBy: {
+      account_id: res.locals.user.id,
+      deletedAt: new Date()
+    }
   })
 
   res.json({
