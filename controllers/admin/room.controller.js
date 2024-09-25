@@ -1,6 +1,8 @@
 const Room = require("../../models/room.model");
 const RoomCategory = require("../../models/room-category.model");
 const RoomFacility = require("../../models/room-facility.model")
+const Account = require("../../models/account.model");
+
 const systemConfig = require("../../config/system")
 const filterStatusHelper  = require("../../helpers/filterStatus");
 const searchHelper = require("../../helpers/search");
@@ -50,6 +52,16 @@ module.exports.index = async (req, res) => {
   .sort(sort)
   .limit(objectPagination.limitItems)
   .skip(objectPagination.skip);
+
+  for(const room of rooms) {
+    const user = await Account.findOne({
+      _id: room.createdBy.account_id
+    })
+
+    if(user) {
+      room.accountFullName = user.fullName
+    }
+  }
   
   // console.log(objectPagination);
   
@@ -178,13 +190,18 @@ module.exports.createPost = async(req, res) => {
   } else {
     req.body.position = parseInt(req.body.position)
   }
+  
+
+  req.body.createdBy = {
+    account_id: res.locals.user.id
+  }
 
   const room = new Room(req.body);
   await room.save();
 
   res.redirect(`${systemConfig.prefixAdmin}/rooms`)
   
-
+  // res.send("OK");
 }
 
 // [GET] /admin/rooms/edit/:id
