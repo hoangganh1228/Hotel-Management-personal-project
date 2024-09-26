@@ -61,9 +61,18 @@ module.exports.index = async (req, res) => {
     if(user) {
       room.accountFullName = user.fullName
     }
+
+    // Lấy ra thông tin người cập nhật gần nhất
+    const updatedBy = room.updatedBy.slice(-1)[0];
+    if(updatedBy) {
+      const user = await Account.findOne({
+        _id: updatedBy.account_id
+      })
+      
+      updatedBy.accountFullName = user.fullName
+    }
   }
   
-  // console.log(objectPagination);
   
 
   res.render("admin/pages/rooms/index", {
@@ -81,10 +90,16 @@ module.exports.changeStatus = async (req, res) => {
   
   const id = req.params.id;
 
+  const updatedBy = {
+    account_id: res.locals.user.id,
+    updatedAt: new Date()
+  }
+
   await Room.updateOne({
     _id: id
   }, {
-    status: status
+    status: status,
+    $push: { updatedBy: updatedBy }
   })
   req.flash('success', `Cập nhật trạng thái thành công sản phẩm!`);
 
@@ -100,15 +115,26 @@ module.exports.changeMulti = async (req, res) => {
   const type = req.body.type;
   const ids = req.body.ids.split(", ");
 
+  const updatedBy = {
+    account_id: res.locals.user.id,
+    updatedAt: new Date()
+  }
+
   switch (type) {
     case "active":
       await Room.updateMany({ _id: { $in: ids } }, 
-        { status: "active" })
+        { 
+          status: "active",
+          $push: { updatedBy: updatedBy } 
+        })
       req.flash('success', `Cập nhật trạng thái thành công ${ids.length} phòng!`);
       break;
     case "inactive":
       await Room.updateMany({ _id: { $in: ids } }, 
-        { status: "inactive" })
+        { 
+          status: "inactive", 
+          $push: { updatedBy: updatedBy }
+        })
       req.flash('success', `Cập nhật trạng thái thành công ${ids.length} phòng!`);
       
       break;
@@ -127,7 +153,8 @@ module.exports.changeMulti = async (req, res) => {
         let [id, position] = item.split("-");
         position = parseInt(position);
         await Room.updateMany({ _id: id }, { 
-          position: position
+          position: position,
+          $push: { updatedBy: updatedBy }
         })
         req.flash('success', `Đã thay đổi thành công vị trí của ${ids.length} phòng!`);
       }
@@ -259,14 +286,24 @@ module.exports.editPatch = async (req, res) => {
   if (!req.body.room_facilities_id) {
     req.body.room_facilities_id = [];
   }
-  console.log(req.body);
   
   if(req.body.images && req.body.images.length > 0) {
     req.body.thumbnail = req.body.images[0];  
   } 
 
   try {
-    await Room.updateOne({_id: id}, req.body)
+    const updatedBy = {
+      account_id: res.locals.user.id,
+      updatedAt: new Date()
+    }
+
+    await Room.updateOne({_id: id}, {
+        ...req.body,
+        $push: {
+          updatedBy: updatedBy
+        }
+      } 
+    )
     req.flash("success", `Cập nhật thành công sản phẩm!`);
 
   } catch (error) {
