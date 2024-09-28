@@ -72,7 +72,8 @@ module.exports.create = async (req, res) => {
 // [POST] /admin/products-category/create
 module.exports.createPost = async (req, res) => {
   const permissions = res.locals.role.permissions
-  if(permissions.includes("products-category_create")) {
+  
+  if(permissions.includes("rooms-category_create")) {
     if(req.body.position == "") {
       const count = await RoomCategory.countDocuments();
       req.body.position = count + 1;
