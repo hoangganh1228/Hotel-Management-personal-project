@@ -54,25 +54,11 @@ block main
     .row
       each item, index in rooms
         .col-lg-4.col-md-6.my-3(style="")
-          .card.border-0.shadow(style="max-width:350px;margin:auto;min-height:651px")
-            .w-100.h-100(style="max-height:196px")
-              .swiper.swiper-container
-                .swiper-wrapper
-                  .swiper-slide
-                    img.w-100.d-block(
-                      style="max-height:196px" 
-                      src="images/rooms/1.jpg"
-                      )
-                  .swiper-slide
-                    img.w-100.d-block(
-                      style="max-height:196px" 
-                      src="images/rooms/2.png"
-                      )
-                  .swiper-slide
-                    img.w-100.d-block(
-                      style="max-height:196px" 
-                      src="images/rooms/3.webp"
-                      )
+          .card.border-0.shadow(style="max-width: 350px; margin: auto;")
+            img.card-img-top(
+              alt="..." 
+              src=item.thumbnail
+              )
             .card-body
               h5 #{item.name}
               h6.mb-4 #{item.price}/ngày
@@ -90,8 +76,8 @@ block main
                   
               .guests.mb-4
                 h6.mb-1 Số lượng
-                span.badge.bg-light.text-dark.text-wrap 2 người lớn
-                span.badge.bg-light.text-dark.text-wrap 1 trẻ con
+                span.badge.bg-light.text-dark.text-wrap #{item.adult} người lớn
+                span.badge.bg-light.text-dark.text-wrap #{item.children} trẻ con
               .rating.mb-4
                 h6.mb-1 Đánh giá
                 span.badge.rounded-pill.bg-light
@@ -101,7 +87,8 @@ block main
                   i.bi.bi-star-fill.text-warning
                   i.bi.bi-star-fill.text-warning
               .d-flex.justify-content-evenly.mb-2
-                a.btn.btn-md.text-white.custom-bg.shadow-none(href="#") Đặt ngay
+                a.btn.btn-sm.text-white.custom-bg.shadow-none(href="#") Đặt ngay
+                a.btn.btn-sm.btn-outline-dark(href="#") Chi tiết
       .col-lg-12.text-center.mt-5
         a.btn.btn-sm.btn-outline-dark.rounded-0.fw-bold.shadow-none(href="<?=_WEB_HOST?>/khach/rooms") Xem thêm phòng 
 
