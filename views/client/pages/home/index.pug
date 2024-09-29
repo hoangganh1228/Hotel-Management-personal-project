@@ -109,41 +109,15 @@ block main
   h2.mt-5.pt-4.mb-4.text-center.fw-bold.h-font Dịch vụ
   .container
     .row.justify-content-evenly.px-5.px-md-0.px-lg-0
-      .col-lg-2.col-md-2.text-center.bg-white.rounded.shadow.py-4.my-3
-        img(
-          width="80px" 
-          alt="" 
-          src="images/facilities/wifi.svg"
-          )
-        h5.mt-3 Wifi
-      .col-lg-2.col-md-2.text-center.bg-white.rounded.shadow.py-4.my-3
-        img(
-          width="80px" 
-          alt="" 
-          src="images/facilities/Television.svg"
-          )
-        h5.mt-3 Tivi
-      .col-lg-2.col-md-2.text-center.bg-white.rounded.shadow.py-4.my-3
-        img(
-          width="80px" 
-          alt="" 
-          src="images/facilities/Room-heater.svg"
-          )
-        h5.mt-3 Máy sưởi
-      .col-lg-2.col-md-2.text-center.bg-white.rounded.shadow.py-4.my-3
-        img(
-          width="80px" 
-          alt="" 
-          src="images/facilities/massage.svg"
-          )
-        h5.mt-3 Massage
-      .col-lg-2.col-md-2.text-center.bg-white.rounded.shadow.py-4.my-3
-        img(
-          width="80px" 
-          alt="" 
-          src="images/facilities/air-conditioning.svg"
-          )
-        h5.mt-3 Máy lọc không khí
+      each facility in facilities
+        .col-lg-2.col-md-2.text-center.bg-white.rounded.shadow.py-4.my-3
+          img(
+            width="80px" 
+            alt="" 
+            src=facility.icon 
+            )
+          h5.mt-3 #{facility.title}
+      
       .col-lg-12.text-center.mt-5
         a.btn.btn-sm.btn-outline-dark.rounded-0.fw-bold.shadow-none(href="<?=_WEB_HOST?>/khach/facilities") Xem thêm chức năng
   

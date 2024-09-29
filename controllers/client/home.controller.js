@@ -14,7 +14,7 @@ module.exports.index = async (req, res) => {
 
   const rooms = await Room.find(find).limit(3).sort({ position: -1 });
   
-  const facilities = await RoomFacility.find(find)
+  const facilities = await RoomFacility.find(find).limit(6);
 
   for(const room of rooms) {
     room.facilities = [];

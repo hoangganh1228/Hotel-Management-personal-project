@@ -64,7 +64,6 @@ module.exports.createPost = async (req, res) => {
   } else {
     req.body.position = parseInt(req.body.position);
   }
-  console.log(req.body);
   
   const facility = new RoomFacility(req.body);
   await facility.save();
