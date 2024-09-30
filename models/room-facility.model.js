@@ -21,4 +21,4 @@ const roomFacilitySchema = new mongoose.Schema({
 })
 
 const RoomsFacility = mongoose.model("RoomFacility", roomFacilitySchema, "rooms-facility");
-module.exports = RoomsFacility  ;   
+module.exports = RoomsFacility;   

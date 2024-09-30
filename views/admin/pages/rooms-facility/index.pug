@@ -2,6 +2,7 @@ extends ../../layouts/default.pug
 include ../../mixins/filter-status.pug
 include ../../mixins/search.pug
 include ../../mixins/pagination.pug
+include ../../mixins/features.pug
 
 block main
   if(role.permissions.includes("rooms-facility_view"))
@@ -109,5 +110,10 @@ block main
       data-path=`${prefixAdmin}/rooms-facility/delete`
     )  
     +pagination(pagination)
+
+
+    +features(features)
+
+ 
 
     script(src="/admin/js/script.js")

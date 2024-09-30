@@ -1,4 +1,6 @@
 const RoomFacility = require("../../models/room-facility.model");
+const RoomsFeatures = require("../../models/room-features");
+
 const systemConfig = require("../../config/system");
 
 const filterStatusHelper  = require("../../helpers/filterStatus");
@@ -9,6 +11,9 @@ module.exports.index = async (req, res) => {
   let find = {
     deleted: false
   }
+
+  const features = await RoomsFeatures.find(find);
+  
 
   const filterStatus = filterStatusHelper(req.query);
   if(req.query.status) {
@@ -40,6 +45,7 @@ module.exports.index = async (req, res) => {
     records: records,
     keyword: objectSearch.keyword,
     filterStatus: filterStatus,
+    features: features,
     pagination: objectPagination
   })
 }

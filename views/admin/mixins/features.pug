@@ -1,0 +1,56 @@
+mixin features(features)
+  .card.mt-3
+    .card-header Danh sách đặc điểm phòng
+      
+    .card-body
+      .row 
+        .col-8
+          //- +form-change-multi(`${prefixAdmin}/rooms/change-multi?_method=PATCH`)
+        if(role.permissions.includes("rooms-facility_create"))
+          .col-4 
+            a(
+              href=`${prefixAdmin}/rooms-features/create`
+              class="btn btn-outline-success mb-3"
+            ) + Thêm mới
+
+      table(
+        class="table table-hover table-sm "
+        checkbox-multi 
+      )
+        thead 
+          tr 
+            th 
+              input(type="checkbox" name="checkall")
+            th STT
+            th Tiêu đề
+            th Hành động
+
+        tbody 
+          each item, index in features
+            tr 
+              td 
+                input(
+                  type="checkbox"
+                  name="id"
+                  value=item.id  
+                )
+              td #{index + 1}
+              td #{item.title}
+              
+              td 
+                
+                if(role.permissions.includes("rooms-facility_delete"))
+                  button(
+                    class="btn btn-danger btn-sm ml-1"
+                    button-delete-features
+                    href=`${prefixAdmin}/rooms-facility/delete/${item.id}`
+                    data-id=item.id
+                  ) Xóa
+  form(
+    action=""
+    method="POST"
+    id="form-delete-features"
+    data-path=`${prefixAdmin}/rooms-features/delete`
+  ) 
+
+  script(src="/admin/js/features.js")

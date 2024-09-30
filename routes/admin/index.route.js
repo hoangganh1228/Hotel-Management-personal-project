@@ -8,6 +8,8 @@ const roomCategoryRoute = require("./room-category.route");
 
 const roomFacilityRoute = require("./room-facility.route");
 
+const roomFeaturesRoute = require("./room-features.route");
+
 const roleRoutes = require("./role.route");
 
 const accountRoutes = require("./account.route");
@@ -43,6 +45,12 @@ module.exports = (app) => {
     PATH_ADMIN + "/rooms-facility", 
     authMiddleware.requireAuth, 
     roomFacilityRoute
+  );
+
+  app.use(
+    PATH_ADMIN + "/rooms-features", 
+    authMiddleware.requireAuth, 
+    roomFeaturesRoute
   );
 
   app.use(
