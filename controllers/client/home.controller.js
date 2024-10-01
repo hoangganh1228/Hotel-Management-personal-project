@@ -1,6 +1,8 @@
 const Room = require("../../models/room.model");
 const RoomCategory = require("../../models/room-category.model");
 const RoomFacility = require("../../models/room-facility.model")
+const RoomFeatures = require("../../models/room-features.model")
+
 const Account = require("../../models/account.model");
 
 
@@ -16,8 +18,11 @@ module.exports.index = async (req, res) => {
   
   const facilities = await RoomFacility.find(find).limit(6);
 
+  const features = await RoomFeatures.find();
+
   for(const room of rooms) {
     room.facilities = [];
+    room.features = [];
     // console.log(room.room_facilities_id);
     
     for(let i = 0; i < room.room_facilities_id.length; i++) {
@@ -31,7 +36,17 @@ module.exports.index = async (req, res) => {
       room.facilities.push(facility);
       
     }
-    
+
+    for(let i = 0; i < room.room_features_id.length; i++) {
+      const id = room.room_features_id[i];
+      
+      const feature = await RoomFeatures.findOne({
+        _id: id
+      }).select("title")
+      
+      room.features.push(feature);
+      
+    }
   }
 
   

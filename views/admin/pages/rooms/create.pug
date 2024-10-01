@@ -51,6 +51,7 @@ block main
           value="0"
           min="0"
         )
+
       div(class="form-group")
         label(for="price") Cơ sở vật chất:
         .row 
@@ -63,7 +64,18 @@ block main
                   type="checkbox"
                   )
                 |  #{facility.title}
-              
+      div(class="form-group mt-1")
+        label(for="price") Tiện nghi:
+        .row 
+          each feature in features 
+            .col-3
+              label
+                input(
+                  value=feature.id 
+                  name="room_features_id" 
+                  type="checkbox"
+                  )
+                |  #{feature.title}
       div(class="form-group")
         .row
           .col-6 

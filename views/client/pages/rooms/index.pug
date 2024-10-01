@@ -58,11 +58,10 @@ block main
               .col-md-5.px-lg-3.px-md-3.px-0
                 h5.mb-1 #{room.title}
                 .features.mb-3
-                  h6.mb-3 Đặc điểm
-                  span.badge.bg-light.text-dark.text-wrap.mx-1 2 phòng
-                  span.badge.bg-light.text-dark.text-wrap.mx-1 1 phòng tắm
-                  span.badge.bg-light.text-dark.text-wrap.mx-1 1 ban công
-                  span.badge.bg-light.text-dark.text-wrap.mx-1 1 Sofa
+                  h6.mb-3 Tiện nghi
+                  each feature in room.features
+                    span.badge.bg-light.text-dark.text-wrap.mx-1 #{feature.title}
+                 
                 .facilities.mb-3
                   h6.mb-1 Tính năng
                   each facility in room.facilities

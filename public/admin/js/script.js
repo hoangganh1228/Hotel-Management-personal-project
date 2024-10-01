@@ -114,7 +114,6 @@ if(buttonDelete.length > 0) {
       
       if(isConfirm) {
         const id = button.getAttribute("data-id");
-        console.log(id);
 
         const action = `${path}/${id}?_method=DELETE`;
         formDelete.action = action;

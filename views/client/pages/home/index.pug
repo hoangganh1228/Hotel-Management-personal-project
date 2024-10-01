@@ -63,21 +63,19 @@ block main
               h5 #{item.name}
               h6.mb-4 #{item.price}/ngày
               .features.mb-4
-                h6.mb-1 Cấu hình
-                  
-                span.badge.bg-light.text-dark.text-wrap 2 phòng
-                span.badge.bg-light.text-dark.text-wrap 1 phòng tắm
-                span.badge.bg-light.text-dark.text-wrap 1 ban công
-                span.badge.bg-light.text-dark.text-wrap 1 Sofa
+                h6.mb-1 Tiện nghi
+                each feature in item.features
+                  span.badge.bg-light.text-dark.text-wrap.mx-1 #{feature.title}
+               
               .facilities.mb-4
-                h6.mb-1 Tiện ích
+                h6.mb-1 Cơ sở vật chất
                 each facility in item.facilities
                   span.badge.bg-light.text-dark.text-wrap.mx-1 #{facility.title}
                   
               .guests.mb-4
                 h6.mb-1 Số lượng
-                span.badge.bg-light.text-dark.text-wrap #{item.adult} người lớn
-                span.badge.bg-light.text-dark.text-wrap #{item.children} trẻ con
+                span.badge.bg-light.text-dark.text-wrap.mx-1 #{item.adult} người lớn
+                span.badge.bg-light.text-dark.text-wrap.mx-1 #{item.children} trẻ con
               .rating.mb-4
                 h6.mb-1 Đánh giá
                 span.badge.rounded-pill.bg-light

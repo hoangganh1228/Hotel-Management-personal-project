@@ -1,5 +1,5 @@
 const RoomFacility = require("../../models/room-facility.model");
-const RoomsFeatures = require("../../models/room-features");
+const RoomsFeatures = require("../../models/room-features.model");
 
 const systemConfig = require("../../config/system");
 

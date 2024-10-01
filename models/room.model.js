@@ -26,6 +26,11 @@ const roomSchema = new mongoose.Schema({
       type: String
     }
   ],
+  room_features_id: [
+    {
+      type: String
+    }
+  ],
   status: String,
   position: Number,
   slug: { 

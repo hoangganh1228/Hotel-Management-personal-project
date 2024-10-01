@@ -55,10 +55,9 @@ block main
           min="0"
         )
       div(class="form-group")
-        label(for="price") Cơ sở vật chất:
+        label(for="") Cơ sở vật chất:
         .row 
           each facility, index in facilities 
-            
             .col-3
               label
                 input(
@@ -68,6 +67,19 @@ block main
                   checked=(room.room_facilities_id.includes(facility.id) ? true : false)
                   )
                 |  #{facility.title}
+      div(class="form-group")
+        label(for="") Tính năng:
+        .row 
+          each feature, index in features 
+            .col-3
+              label
+                input(
+                  value=feature.id 
+                  name="room_features_id" 
+                  type="checkbox"
+                  checked=(room.room_features_id.includes(feature.id) ? true : false)
+                  )
+                |  #{feature.title}
       div(class="form-group")
         .row
           .col-6 

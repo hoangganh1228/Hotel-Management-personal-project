@@ -1,4 +1,4 @@
-const RoomsFeatures = require("../../models/room-features");
+const RoomsFeatures = require("../../models/room-features.model");
 const systemConfig = require("../../config/system");
 // [GET] /admin/rooms-features/create
 
@@ -25,6 +25,9 @@ module.exports.delete = async (req, res) => {
     _id: id
   })
 
-  res.redirect(`${systemConfig.prefixAdmin}/rooms-facility`);
+  res.json({
+    code: 200,
+    message: "Thanh cong!",
+  })
 
 }

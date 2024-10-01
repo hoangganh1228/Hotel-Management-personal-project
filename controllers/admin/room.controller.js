@@ -1,6 +1,7 @@
 const Room = require("../../models/room.model");
 const RoomCategory = require("../../models/room-category.model");
 const RoomFacility = require("../../models/room-facility.model")
+const RoomFeatures = require("../../models/room-features.model")
 const Account = require("../../models/account.model");
 
 const systemConfig = require("../../config/system")
@@ -195,13 +196,15 @@ module.exports.create = async (req, res) => {
   };
   const category = await RoomCategory.find(find);
   const facilities = await RoomFacility.find(find);
+  const features = await RoomFeatures.find(find);
 
   const newCategory = createTreeHelper.tree(category);
 
   res.render("admin/pages/rooms/create", {
     pageTitle: "Thêm mới phòng",
     category: newCategory,
-    facilities: facilities
+    facilities: facilities,
+    features: features
   })
 }  
 
@@ -254,6 +257,8 @@ module.exports.edit = async (req, res) => {
       deleted: false
     });
 
+    const features = await RoomFeatures.find({});
+
     const newCategory = createTreeHelper.tree(category);
 
     const room = await Room.findOne(find);
@@ -262,7 +267,8 @@ module.exports.edit = async (req, res) => {
       pageTitle: "Chỉnh sửa phòng",
       room: room,
       category: newCategory,
-      facilities: facilities
+      facilities: facilities,
+      features: features
     });
   } catch (error) {
     req.flash("error", `Không tồn tại phòng này!`);
