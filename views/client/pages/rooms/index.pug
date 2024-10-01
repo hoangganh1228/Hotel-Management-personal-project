@@ -56,7 +56,7 @@ block main
               .col-md-5
                 img.img-fluid.rounded(src=room.thumbnail)
               .col-md-5.px-lg-3.px-md-3.px-0
-                h5.mb-1 #{room.title}
+                h5.mb-1 #{room.name}
                 .features.mb-3
                   h6.mb-3 Tiện nghi
                   each feature in room.features
@@ -74,53 +74,6 @@ block main
               .col-md-2.text-center.mt-lg-0.mt-md-0.mt-4
                 h6.mb-4 #{room.price}/ngày
                 a.btn.btn-md.w-100.text-white.custom-bg.shadow-none.mb-2(href="") Đặt ngay
-        .card.mb-4.border-0.shadow
-          .row.g-0.p-3.align-items-center
-            .col-md-5
-              img.img-fluid.rounded(src="images/rooms/2.png")
-            .col-md-5.px-lg-3.px-md-3.px-0
-              h5.mb-1 Phòng vip
-              .features.mb-3
-                h6.mb-3 Cấu hình
-                span.badge.bg-light.text-dark.text-wrap 2 phòng
-                span.badge.bg-light.text-dark.text-wrap 1 phòng tắm
-                span.badge.bg-light.text-dark.text-wrap 1 ban công
-                span.badge.bg-light.text-dark.text-wrap 1 Sofa
-              .facilities.mb-3
-                h6.mb-1 Tính năng
-                span.badge.bg-light.text-dark.text-wrap Wifi
-                span.badge.bg-light.text-dark.text-wrap Tivi
-                span.badge.bg-light.text-dark.text-wrap Máy lọc không khí
-                span.badge.bg-light.text-dark.text-wrap Máy sưởi
-              .guests
-                h6.mb-1 Số lượng
-                span.badge.bg-light.text-dark.text-wrap 2 người lớn
-                span.badge.bg-light.text-dark.text-wrap 1 trẻ con
-            .col-md-2.text-center.mt-lg-0.mt-md-0.mt-4
-              h6.mb-4 $399/ngày
-              a.btn.btn-md.w-100.text-white.custom-bg.shadow-none.mb-2(href="#") Bặt ngay
-        .card.mb-4.border-0.shadow
-          .row.g-0.p-3.align-items-center
-            .col-md-5
-              img.img-fluid.rounded(src="images/rooms/4.jpg")
-            .col-md-5.px-lg-3.px-md-3.px-0
-              h5.mb-1 Phòng tổng thống
-              .features.mb-3
-                h6.mb-3 Cấu hình
-                span.badge.bg-light.text-dark.text-wrap 2 phòng
-                span.badge.bg-light.text-dark.text-wrap 1 phòng tắm
-                span.badge.bg-light.text-dark.text-wrap 1 ban công
-                span.badge.bg-light.text-dark.text-wrap 1 Sofa
-              .facilities.mb-3
-                h6.mb-1 Tiện ích
-                span.badge.bg-light.text-dark.text-wrap Wifi
-                span.badge.bg-light.text-dark.text-wrap Tivi
-                span.badge.bg-light.text-dark.text-wrap Máy lọc không khí
-                span.badge.bg-light.text-dark.text-wrap Máy sưởi
-              .guests
-                h6.mb-1 Guests
-                span.badge.bg-light.text-dark.text-wrap 2 người lớn
-                span.badge.bg-light.text-dark.text-wrap 1 trẻ con
-            .col-md-2.text-center.mt-lg-0.mt-md-0.mt-4
-              h6.mb-4 $199/ngày
-              a.btn.btn-md.w-100.text-white.custom-bg.shadow-none.mb-2(href="#") Đặt ngay
+                a.btn.btn-sm.w-100.mt-2.btn-outline-dark(href=`rooms/detail/${room.id}`) Chi tiết
+        
+          

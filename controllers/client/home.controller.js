@@ -2,7 +2,6 @@ const Room = require("../../models/room.model");
 const RoomCategory = require("../../models/room-category.model");
 const RoomFacility = require("../../models/room-facility.model")
 const RoomFeatures = require("../../models/room-features.model")
-
 const Account = require("../../models/account.model");
 
 
@@ -48,8 +47,6 @@ module.exports.index = async (req, res) => {
       
     }
   }
-
-  
 
   res.render("client/pages/home/index", {
     pageTitle: "Trang chủ",

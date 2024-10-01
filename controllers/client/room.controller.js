@@ -2,6 +2,7 @@ const Room = require("../../models/room.model")
 const RoomFacility = require("../../models/room-facility.model")
 const RoomFeatures = require("../../models/room-features.model")
 const RoomCategory = require("../../models/room-category.model");
+
 // [GET] products/index
 module.exports.index = async (req, res) => {
   const find = {
@@ -16,7 +17,6 @@ module.exports.index = async (req, res) => {
   const rooms = await Room.find(find).sort(sort);
   const facilities = await RoomFacility.find(find);
   const features = await RoomFeatures.find();
-
   
   for(const room of rooms) {
     room.facilities = [];
