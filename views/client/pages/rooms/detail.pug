@@ -1,0 +1,63 @@
+extends ../../layouts/default.pug
+
+block main 
+  .container
+    .row 
+      .div(class="col-12 my-5 mb-4 px-4")
+        h2.fw-bold #{room.name}
+        div(style="font-size: 14px;")
+        a.text-secondary.text-decoration-none.mx-2(href="/") HOME
+        span.text-secondary >
+        a.text-secondary.text-decoration-none.mx-2(href="/rooms") ROOMS
+      .div(class="col-lg-5 col-md-12 px-4")
+        .card.mb-4.border-0.shadow-sm.rounded-3
+          .card-body  
+            h4 #{room.price}$ ngày
+            .mb-3
+              i.bi.bi-star-fill.text-warning
+              i.bi.bi-star-fill.text-warning
+              i.bi.bi-star-fill.text-warning
+              i.bi.bi-star-fill.text-warning
+              i.bi.bi-star-fill.text-warning
+            .mb-3
+              h6.mb-1 Tiện nghi
+              each feature in room.features
+                span.badge.rounded-pill.bg-light.text-dark.text-wrap.me-1.mb-1 #{feature.title}
+            .mb-3
+              h6.mb-1 Tiện nghi
+              each facility in room.facilities
+                span.badge.rounded-pill.bg-light.text-dark.text-wrap.me-1.mb-1 #{facility.title}
+            .mb-3
+              h6.mb-1 Đủ rộng
+              span.badge.bg-light.text-dark.text-wrap #{room.adult} người lớn
+              span.badge.bg-light.text-dark.text-wrap #{room.children} trẻ em
+            a(
+              class="btn w-100 text-white custom-bg shadow-none mb-1"
+              href=`rooms/book_now/${room.id}`
+            ) Đặt ngay
+      
+      .div(class="col-lg-7 col-md-12 px-4")
+        .inner-images 
+          div(class="swiper imagesMain")
+            div(class="swiper-wrapper")
+              each image in room.images
+                div(class="swiper-slide")
+                  .inner-image
+                    img(src=image class="d-block w-100 rounded")
+            div(class="swiper-button-next")
+            div(class="swiper-button-prev")
+          
+          div(class="swiper imagesThumb")
+            div(class="swiper-wrapper")
+              each image in room.images
+                div(class="swiper-slide")
+                  .inner-image
+                    img(src=image class="d-block w-100 rounded")
+
+          
+      .col-12.mt-4.px4
+        .mb-5
+          h5 Description
+          p #{room.description}
+
+  script(src="/js/room.js")
