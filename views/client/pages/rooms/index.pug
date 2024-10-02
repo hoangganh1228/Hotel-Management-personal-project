@@ -37,17 +37,31 @@ block main
                 //- Facilities
               .border.bg-light.p-3.rounded.mb-3
                 h5.d-flex.align-items-center.justify-content-between.mb-3(style="font-size: 18px;") Cấu hình
-                div(class="mb-2")
-                  input(id="f1" class="form-check-input shadow-none me-1" type="checkbox")
-                  label.form-check-label(for="f1") Ti vi
+                each facility in facilities
+                  div(class="mb-2")
+                    input(
+                      id="f1" 
+                      class="shadow-none me-1" 
+                      type="checkbox"
+                    )
+                    label.form-check-label(for="f1") #{facility.title}
+                h5.d-flex.align-items-center.justify-content-between.mb-3(style="font-size: 18px;") Tiện nghi
+                each feature in features
+                  div(class="mb-2")
+                    input(
+                      id="f1" 
+                      class="shadow-none me-1" 
+                      type="checkbox"
+                      )
+                    label.form-check-label(for="f1") #{feature.title}
               .border.bg-light.p-3.rounded.mb-3
                 h5.mb-3(style="font-size: 18px;") Số lượng
                 .d-flex
                   .me-4
-                    label.form-label người lớn
+                    label.form-label Người lớn
                     input.form-control.shadow-none(type="number")
                   div
-                    label.form-label trẻ em
+                    label.form-label Trẻ em
                     input.form-control.shadow-none(type="number")
       .col-lg-9.col-md-12.px-4.mb-lg-0.mb-md-0.mb-3
         each room, index in rooms

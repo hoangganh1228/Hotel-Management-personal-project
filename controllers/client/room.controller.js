@@ -48,6 +48,7 @@ module.exports.index = async (req, res) => {
   res.render("client/pages/rooms/index", {
     pageTitle: "Trang phòng",
     rooms: rooms,
-    facilities: facilities
+    facilities: facilities,
+    features: features
   })
 }
