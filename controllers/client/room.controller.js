@@ -3,6 +3,8 @@ const RoomFacility = require("../../models/room-facility.model")
 const RoomFeatures = require("../../models/room-features.model")
 const RoomCategory = require("../../models/room-category.model");
 
+const { featureFacilityHelper } = require("../../helpers/featureFacility")
+
 // [GET] rooms/
 module.exports.index = async (req, res) => {
   const find = {
@@ -19,38 +21,16 @@ module.exports.index = async (req, res) => {
   const features = await RoomFeatures.find();
   
   for(const room of rooms) {
-    room.facilities = [];
-    room.features = [];
-    
-    for(let i = 0; i < room.room_facilities_id.length; i++) {
-      const id = room.room_facilities_id[i];
-      // console.log(id);
-      
-      const facility = await RoomFacility.findOne({
-        _id: id
-      }).select("title")
-      
-      room.facilities.push(facility);
-      
-    }
-    
-    for(let i = 0; i < room.room_features_id.length; i++) {
-      const id = room.room_features_id[i];
-      
-      const feature = await RoomFeatures.findOne({
-        _id: id
-      }).select("title")
-      
-      room.features.push(feature);
-      
-    }
+    await featureFacilityHelper(room)
   }
+
   res.render("client/pages/rooms/index", {
     pageTitle: "Trang phòng",
     rooms: rooms,
     facilities: facilities,
     features: features
   })
+    
 }
 
 // [GET] rooms/detail/:id
@@ -63,38 +43,12 @@ module.exports.detail = async (req, res) => {
   
   // console.log(room)
 
-  room.facilities = [];
-    room.features = [];
-    
-    for(let i = 0; i < room.room_facilities_id.length; i++) {
-      const id = room.room_facilities_id[i];
-      // console.log(id);
-      
-      const facility = await RoomFacility.findOne({
-        _id: id
-      }).select("title")
-      
-      room.facilities.push(facility);
-      
-    }
-    
-    for(let i = 0; i < room.room_features_id.length; i++) {
-      const id = room.room_features_id[i];
-      
-      const feature = await RoomFeatures.findOne({
-        _id: id
-      }).select("title")
-      
-      room.features.push(feature);
-      
-    }
+  await featureFacilityHelper(room)
 
-  // const images = [];
+  const images = [];
   res.render("client/pages/rooms/detail", {
     pageTitle: "Chi tiết phòng",
     room: room
   })
   
-  
-  // res.send("OK")
 }

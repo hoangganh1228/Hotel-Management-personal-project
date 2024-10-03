@@ -44,8 +44,9 @@ block main
                       class="shadow-none me-1" 
                       type="checkbox"
                       facility-id=facility.id
+                      filter-rooms
                     )
-                    label.form-check-label(for="f1") #{facility.title}
+                    label.form-check-label(for=`facility-${facility.id}`) #{facility.title}
                 h5.d-flex.align-items-center.justify-content-between.mb-3(style="font-size: 18px;") Tiện nghi
                 each feature in features
                   div(class="mb-2")
@@ -53,8 +54,9 @@ block main
                       id="f1" 
                       class="shadow-none me-1" 
                       type="checkbox"
+                      filter-rooms
                       )
-                    label.form-check-label(for="f1") #{feature.title}
+                    label.form-check-label(for=`feature-${feature.id}`) #{feature.title}
               .border.bg-light.p-3.rounded.mb-3
                 h5.mb-3(style="font-size: 18px;") Số lượng
                 .d-flex
@@ -90,5 +92,7 @@ block main
                 h6.mb-4 #{room.price}/ngày
                 a.btn.btn-md.w-100.text-white.custom-bg.shadow-none.mb-2(href="") Đặt ngay
                 a.btn.btn-sm.w-100.mt-2.btn-outline-dark(href=`rooms/detail/${room.id}`) Chi tiết
+  
+  script(src="/js/room.js")
         
           
