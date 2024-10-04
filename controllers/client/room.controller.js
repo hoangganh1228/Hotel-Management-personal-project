@@ -11,13 +11,28 @@ module.exports.index = async (req, res) => {
     deleted: false,
     status: 'active'
   }
+  const selectedFacilities = req.query.facility || []; 
+  const selectedFeatures = req.query.feature || [];    
+
+  // Đảm bảo selectedFacilities và selectedFeatures luôn là mảng
+  const facilitiesArray = Array.isArray(selectedFacilities) ? selectedFacilities : [selectedFacilities];
+  const featuresArray = Array.isArray(selectedFeatures) ? selectedFeatures : [selectedFeatures];
+
+  if(facilitiesArray.length > 0) {
+    find.room_facilities_id = { $in: facilitiesArray }
+  }
+
+  if(featuresArray.length > 0) {
+    find.room_features_id = { $in: featuresArray }
+  }
+
 
   const sort = {
     position: -1
   }
 
   const rooms = await Room.find(find).sort(sort);
-  const facilities = await RoomFacility.find(find);
+  const facilities = await RoomFacility.find();
   const features = await RoomFeatures.find();
   
   for(const room of rooms) {
@@ -28,7 +43,9 @@ module.exports.index = async (req, res) => {
     pageTitle: "Trang phòng",
     rooms: rooms,
     facilities: facilities,
-    features: features
+    features: features,
+    facilitiesArray: facilitiesArray,
+    featuresArray: featuresArray
   })
     
 }
@@ -52,3 +69,15 @@ module.exports.detail = async (req, res) => {
   })
   
 }
+
+
+// module.exports.filter = async (req, res) => {
+
+
+//   console.log(rooms);
+  
+
+//   // Giả sử bạn thực hiện một số xử lý logic để lấy kết quả lọc
+//   // const rooms = getFilteredRooms(facilitiesArray, featuresArray);
+//   res.send("OK")
+// };

@@ -140,7 +140,7 @@ if(showAlert) {
     }, time);
 
     closeAlert.addEventListener("click", () => {
-        showAlert.classList.add("alert-hidden")
+      showAlert.classList.add("alert-hidden")
     })
 }
 

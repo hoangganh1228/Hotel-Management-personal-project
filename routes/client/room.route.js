@@ -7,6 +7,8 @@ router.get("/", controller.index);
 
 router.get("/detail/:id", controller.detail);
 
+// router.get("/filter", controller.filter);
+
 
 
 module.exports = router

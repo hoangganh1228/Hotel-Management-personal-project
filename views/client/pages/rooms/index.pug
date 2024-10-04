@@ -36,27 +36,36 @@ block main
                 )
                 //- Facilities
               .border.bg-light.p-3.rounded.mb-3
-                h5.d-flex.align-items-center.justify-content-between.mb-3(style="font-size: 18px;") Cấu hình
-                each facility in facilities
-                  div(class="mb-2")
-                    input(
-                      id="f1" 
-                      class="shadow-none me-1" 
-                      type="checkbox"
-                      facility-id=facility.id
-                      filter-rooms
-                    )
-                    label.form-check-label(for=`facility-${facility.id}`) #{facility.title}
-                h5.d-flex.align-items-center.justify-content-between.mb-3(style="font-size: 18px;") Tiện nghi
-                each feature in features
-                  div(class="mb-2")
-                    input(
-                      id="f1" 
-                      class="shadow-none me-1" 
-                      type="checkbox"
-                      filter-rooms
+                form(
+                  id="form-filter-room" 
+                  action=`/rooms` 
+                  method="GET" 
+                )
+                  h5.d-flex.align-items-center.justify-content-between.mb-3(style="font-size: 18px;") Cấu hình
+                  each facility in facilities
+                    div(class="mb-2")
+                      input(
+                        id=facility.id
+                        name="facility"
+                        class="shadow-none me-1" 
+                        type="checkbox"
+                        onchange="filterRooms()"
+                        checked=(facilitiesArray.includes(facility.id) ? true : false)
                       )
-                    label.form-check-label(for=`feature-${feature.id}`) #{feature.title}
+                      label.form-check-label(for=facility.id) #{facility.title}
+                  h5.d-flex.align-items-center.justify-content-between.mb-3(style="font-size: 18px;") Tiện nghi
+                  each feature in features
+                    div(class="mb-2")
+                      input(
+                        id=feature.id 
+                        name="feature" 
+                        class="shadow-none me-1" 
+                        type="checkbox"
+                        onchange="filterRooms()"
+                        checked=(featuresArray.includes(feature.id) ? true : false)
+                        )
+                      label.form-check-label(for=feature.id) #{feature.title}
+                 
               .border.bg-light.p-3.rounded.mb-3
                 h5.mb-3(style="font-size: 18px;") Số lượng
                 .d-flex
