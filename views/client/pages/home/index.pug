@@ -52,30 +52,30 @@ block main
   h2.mt-5.pt-4.mb-4.text-center.fw-bold.h-font Phòng
   .container
     .row
-      each item, index in rooms
+      each room, index in rooms
         .col-lg-4.col-md-6.my-3(style="")
           .card.border-0.shadow(style="max-width: 350px; margin: auto;")
             img.card-img-top(
               alt="..." 
-              src=item.thumbnail
+              src=room.thumbnail
               )
             .card-body
-              h5 #{item.name}
-              h6.mb-4 #{item.price}/ngày
+              h5 #{room.name}
+              h6.mb-4 #{room.price}/ngày
               .features.mb-4
                 h6.mb-1 Tiện nghi
-                each feature in item.features
+                each feature in room.features
                   span.badge.bg-light.text-dark.text-wrap.mx-1 #{feature.title}
                
               .facilities.mb-4
                 h6.mb-1 Cơ sở vật chất
-                each facility in item.facilities
+                each facility in room.facilities
                   span.badge.bg-light.text-dark.text-wrap.mx-1 #{facility.title}
                   
               .guests.mb-4
                 h6.mb-1 Số lượng
-                span.badge.bg-light.text-dark.text-wrap.mx-1 #{item.adult} người lớn
-                span.badge.bg-light.text-dark.text-wrap.mx-1 #{item.children} trẻ con
+                span.badge.bg-light.text-dark.text-wrap.mx-1 #{room.adult} người lớn
+                span.badge.bg-light.text-dark.text-wrap.mx-1 #{room.children} trẻ con
               .rating.mb-4
                 h6.mb-1 Đánh giá
                 span.badge.rounded-pill.bg-light
@@ -86,9 +86,9 @@ block main
                   i.bi.bi-star-fill.text-warning
               .d-flex.justify-content-evenly.mb-2
                 a.btn.btn-sm.text-white.custom-bg.shadow-none(href="#") Đặt ngay
-                a.btn.btn-sm.btn-outline-dark(href="#") Chi tiết
+                a.btn.btn-sm.btn-outline-dark(href=`rooms/detail/${room.id}`) Chi tiết
       .col-lg-12.text-center.mt-5
-        a.btn.btn-sm.btn-outline-dark.rounded-0.fw-bold.shadow-none(href="<?=_WEB_HOST?>/khach/rooms") Xem thêm phòng 
+        a.btn.btn-sm.btn-outline-dark.rounded-0.fw-bold.shadow-none(href="/rooms") Xem thêm phòng 
 
   //- Facilitis
   h2.mt-5.pt-4.mb-4.text-center.fw-bold.h-font Dịch vụ
