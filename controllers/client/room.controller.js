@@ -11,6 +11,27 @@ module.exports.index = async (req, res) => {
     deleted: false,
     status: 'active'
   }
+
+  const adult = parseInt(req.query.adult);
+  const children = parseInt(req.query.children);
+
+  
+
+  if(adult || children) {
+    find.$or = [];
+    if(adult) {
+      find.$or.push({ adult: { $gte: adult } })
+    }
+    
+    if(children) {
+      find.$or.push({ children: { $gte: children } })
+    }
+
+    if (find.$or.length === 0) {
+      delete find.$or;
+    }
+  }
+
   const selectedFacilities = req.query.facility || []; 
   const selectedFeatures = req.query.feature || [];    
 

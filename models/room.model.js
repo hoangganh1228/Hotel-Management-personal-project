@@ -12,8 +12,8 @@ const roomSchema = new mongoose.Schema({
   price: Number,
   discountPercentage: Number,
   quantity: Number,
-  adult: String,
-  children: String,
+  adult: Number,
+  children: Number,
   thumbnail: String,
   stock: Number,
   images: [

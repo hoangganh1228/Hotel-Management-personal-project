@@ -1,4 +1,5 @@
 extends ../../layouts/default.pug
+include ../../mixins/filter.pug
 
 block main 
 
@@ -7,74 +8,8 @@ block main
     .h-line.bg-dark
   .container-fluid
     .row
-      .col-lg-3.col-md-12.mb-lg-0.mb-4.ps-4
-        nav.navbar.navbar-expand-lg.navbar-light.bg-white.rounded.shadow
-          .container-fluid.flex-lg-column.align-items-stretch
-            h4.mt-2 BỘ LỌC
-            button.navbar-toggler.shadow-none(
-              aria-label="Toggle navigation" 
-              aria-expanded="false" 
-              aria-controls="navbarNav" 
-              data-bs-target="#filterDropdown" 
-              data-bs-toggle="collapse" 
-              type="button"
-            )
-              span.navbar-toggler-icon
-            #filterDropdown.collapse.navbar-collapse.flex-column.align-items-stretch.mt-2
-              //- Check availability
-              .border.bg-light.p-3.rounded.mb-3
-                h5.d-flex.align-items-center.justify-content-between.mb-3(style="font-size: 18px;")
-                label.form-label Ngày đặt phòng
-                input#checkin.form-control.shadow-none.mb-3(
-                  onchange="chk_avail_filter()" 
-                  type="date"
-                )
-                label.form-label Ngày trả phòng
-                input#checkout.form-control.shadow-none(
-                  onchange="chk_avail_filter()" 
-                  type="date"
-                )
-                //- Facilities
-              .border.bg-light.p-3.rounded.mb-3
-                form(
-                  id="form-filter-room" 
-                  action=`/rooms` 
-                  method="GET" 
-                )
-                  h5.d-flex.align-items-center.justify-content-between.mb-3(style="font-size: 18px;") Cấu hình
-                  each facility in facilities
-                    div(class="mb-2")
-                      input(
-                        id=facility.id
-                        name="facility"
-                        class="shadow-none me-1" 
-                        type="checkbox"
-                        onchange="filterRooms()"
-                        checked=(facilitiesArray.includes(facility.id) ? true : false)
-                      )
-                      label.form-check-label(for=facility.id) #{facility.title}
-                  h5.d-flex.align-items-center.justify-content-between.mb-3(style="font-size: 18px;") Tiện nghi
-                  each feature in features
-                    div(class="mb-2")
-                      input(
-                        id=feature.id 
-                        name="feature" 
-                        class="shadow-none me-1" 
-                        type="checkbox"
-                        onchange="filterRooms()"
-                        checked=(featuresArray.includes(feature.id) ? true : false)
-                        )
-                      label.form-check-label(for=feature.id) #{feature.title}
-                 
-              .border.bg-light.p-3.rounded.mb-3
-                h5.mb-3(style="font-size: 18px;") Số lượng
-                .d-flex
-                  .me-4
-                    label.form-label Người lớn
-                    input.form-control.shadow-none(type="number")
-                  div
-                    label.form-label Trẻ em
-                    input.form-control.shadow-none(type="number")
+      +filter(facilities, features, facilitiesArray, featuresArray)
+      
       .col-lg-9.col-md-12.px-4.mb-lg-0.mb-md-0.mb-3
         each room, index in rooms
           .card.mb-4.border-0.shadow
