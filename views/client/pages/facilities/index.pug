@@ -1,0 +1,24 @@
+extends ../../layouts/default.pug
+
+
+block main  
+
+  .my-5.px-4
+    h2.fw-bold.h-font.text-center Cơ sở vật chất của chúng tôi
+    .h-line.bg-dark
+    p.text-center.mt-3
+      | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere modi id, in exercitationem, enim cumque suscipit, nemo
+      br
+      | alias consequuntur eos reiciendis! Illum provident architecto inventore dicta! Quod obcaecati quasi laborum!
+  .container
+    .row
+      each facility in facilities 
+        .col-lg-4.col-md-6.mb-5.px-4
+          .bg-white.rounded.shadow.p-4.border-top.border-4.border-dark.pop
+            .d-flex.align-items-center.mb-2
+              img(
+                width="40px" 
+                src=`${facility.icon}`
+                )
+              h5.m-0.ms-3 #{facility.name}
+            p !{facility.description}
