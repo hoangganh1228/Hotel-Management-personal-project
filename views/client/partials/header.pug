@@ -34,11 +34,7 @@ nav(class="navbar navbar-expand-lg navbar-light bg-white px-lg-3 py-lg-2 shadow-
               data-bs-toggle="dropdown" 
               type="button"
               )
-              img.me-1(
-                style="width: 25px; height: 25px;" 
-                src="/"
-                ) 
-              | #{user.fullName}
+              span #{user.fullName}
             ul.dropdown-menu.dropdown-menu-lg-end
               li
                 a.dropdown-item(href="profile.php") Profile
