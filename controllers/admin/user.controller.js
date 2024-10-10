@@ -13,8 +13,14 @@ module.exports.index = async (req, res) => {
     find.status = req.query.status
   }
   const objectSearch = searchHelper(req.query);
+  
   if(objectSearch.regex) {
-    find.title = objectSearch.regex
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (emailRegex.test(objectSearch.keyword)) {
+      find.email = objectSearch.regex;
+    } else {
+      find.phone = objectSearch.regex;
+    }
   }
 
   const users = await User.find(find);
