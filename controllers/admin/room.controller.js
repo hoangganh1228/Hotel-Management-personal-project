@@ -13,7 +13,7 @@ const createTreeHelper = require("../../helpers/createTree");
 // [GET] /admin/rooms
 module.exports.index = async (req, res) => {
   const filterStatus = filterStatusHelper(req.query);
-
+  
   const find = {
     deleted: false
   }
