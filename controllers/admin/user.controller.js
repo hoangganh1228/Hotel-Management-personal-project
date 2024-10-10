@@ -26,3 +26,15 @@ module.exports.index = async (req, res) => {
   });
 
 }
+
+module.exports.delete = async (req, res) => {
+  const id = req.params.id;
+  
+  await User.updateOne({
+    _id: id
+  }, {
+    deleted: true
+  })
+
+  res.redirect("back")
+}
