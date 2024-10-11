@@ -15,6 +15,7 @@ block main
           +filter-status    
         .col-6     
           +search(keyword)
+  
   .card.mb-3
     .card-header Danh sách
     .card-body
@@ -28,6 +29,7 @@ block main
             th Họ tên
             th Email
             th Số điện thoại
+            th Ngày tạo
             th Trạng thái
             th Hành động
         tbody
@@ -37,6 +39,9 @@ block main
               td #{item.fullName}
               td #{item.email}
               td #{item.phone}
+              td 
+                p 
+                  +formatDate(item.createdAt)
               td
                 if (item.status === "active")
                   a(

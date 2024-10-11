@@ -15,6 +15,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "active"
     },
+    createdAt: {
+      type: Date,
+      default: Date.now
+    },
     deleted: {
       type: Boolean,
       default: false,
