@@ -24,7 +24,7 @@ module.exports.create = async (req, res) => {
   })
 }
 
-// [GET] /vouchers/create
+// [POST] /vouchers/create
 module.exports.createPost = async (req, res) => {
   const objectVoucher =  {
     code: req.body.code,
@@ -32,11 +32,43 @@ module.exports.createPost = async (req, res) => {
     expirationDate: new Date(req.body.expirationDate),
     usageLimit: parseInt(req.body.usageLimit), 
     status: req.body.status,
-    deleted: false,   
   }
   
   const voucher = new Voucher(objectVoucher);
   voucher.save();
 
+  res.redirect(`${systemConfig.prefixAdmin}/vouchers`)
+}
+
+// [GET] /vouchers/edit/:id
+module.exports.edit = async (req, res) => {
+  const id = req.params.id;
+  
+  const voucher = await Voucher.findOne({
+    _id: id
+  });
+
+  res.render("admin/pages/vouchers/edit", {
+    pageTitle: "Chỉnh sửa voucher",
+    voucher: voucher
+  })
+}
+
+// [PATCH] /vouchers/edit/:id
+module.exports.editPatch = async (req, res) => {
+  const id = req.params.id;
+  const objectVoucher =  {
+    code: req.body.code,
+    discountValue: parseFloat(req.body.discountValue),  
+    expirationDate: new Date(req.body.expirationDate),
+    usageLimit: parseInt(req.body.usageLimit), 
+    status: req.body.status,
+  }
+
+  await Voucher.updateOne({
+    _id: id
+  }, objectVoucher);
+
+  
   res.redirect(`${systemConfig.prefixAdmin}/vouchers`)
 }
