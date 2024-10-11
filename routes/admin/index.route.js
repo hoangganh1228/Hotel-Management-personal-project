@@ -20,6 +20,8 @@ const myAccountRoutes  = require("./my-account.route");
 
 const userRoute  = require("./user.route");
 
+const voucherRoute  = require("./voucher.route");
+
 const authMiddleware = require("../../middlewares/admin/auth.middleware");
 
 module.exports = (app) => {
@@ -84,4 +86,9 @@ module.exports = (app) => {
     userRoute
   );
 
+  app.use(
+    PATH_ADMIN + "/voucher", 
+    authMiddleware.requireAuth, 
+    voucherRoute
+  );
 }
