@@ -41,6 +41,8 @@ block main
                 if (item.status === "active")
                   a(
                     href="javascript:;"
+                    button-change-status
+                    data-id=item.id
                     class="badge badge-success"
                     data-status="active"
                   ) Hoạt động
@@ -49,6 +51,8 @@ block main
                     href="javascript:;"
                     class="badge badge-danger"
                     data-status="inactive"
+                    button-change-status
+                    data-id=item.id
                   ) Dừng hoạt động
               td
                 button(
@@ -63,3 +67,5 @@ block main
     id="form-delete-item"
     data-path=`${prefixAdmin}/users/delete`
   )
+
+    script(src="/admin/js/users.js")

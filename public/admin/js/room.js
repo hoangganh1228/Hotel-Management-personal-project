@@ -21,7 +21,6 @@ if (buttonChangeStatus) {
         .then(res => res.json())
         .then(data => {
           if (data.code === 200) {
-            // Cập nhật giao diện khi trạng thái đã thay đổi
             button.classList.toggle("badge-success", data.status === "active");
             button.classList.toggle("badge-danger", data.status === "inactive");
             button.textContent = data.status === "active" ? "Hoạt động" : "Dừng hoạt động";

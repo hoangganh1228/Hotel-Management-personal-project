@@ -44,3 +44,22 @@ module.exports.delete = async (req, res) => {
 
   res.redirect("back")
 }
+
+module.exports.changeStatus = async (req, res) => {
+  const status = req.params.status;
+  const id = req.params.id;
+
+  await User.updateOne({
+    id: id
+  }, {
+    status: status
+  })
+
+  req.flash('success', `Cập nhật trạng thái thành công sản phẩm!`);
+
+  res.json({
+    code: 200,
+    message: "Thanh cong!",
+    status: status
+  })
+}
