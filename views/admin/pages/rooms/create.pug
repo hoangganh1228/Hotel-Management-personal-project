@@ -41,16 +41,7 @@ block main
           name="description"
           rows="5"
           )
-      div(class="form-group")
-        label(for="price") Giá
-        input(
-          type="number"
-          class="form-control"
-          id="price"
-          name="price"
-          value="0"
-          min="0"
-        )
+      
 
       div(class="form-group")
         label(for="price") Cơ sở vật chất:
@@ -76,6 +67,16 @@ block main
                   type="checkbox"
                   )
                 |  #{feature.title}
+      div(class="form-group")
+        label(for="price") Giá
+        input(
+          type="number"
+          class="form-control"
+          id="price"
+          name="price"
+          value="0"
+          min="0"
+        )
       div(class="form-group")
         .row
           .col-6 

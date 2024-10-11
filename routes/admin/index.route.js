@@ -87,7 +87,7 @@ module.exports = (app) => {
   );
 
   app.use(
-    PATH_ADMIN + "/voucher", 
+    PATH_ADMIN + "/vouchers", 
     authMiddleware.requireAuth, 
     voucherRoute
   );
