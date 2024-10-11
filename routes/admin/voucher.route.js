@@ -20,7 +20,11 @@ router.get("/edit/:id", controller.edit);
 router.patch(
   "/edit/:id", 
   validate.editPatch,
-  controller.editPatch);
+  controller.editPatch
+);
+
+router.get("/detail/:id", controller.detail);
+
 
 
 module.exports = router

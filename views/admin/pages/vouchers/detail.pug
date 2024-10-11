@@ -1,0 +1,31 @@
+extends ../../layouts/default.pug
+
+block main
+  if (voucher.code)
+    h1(class="mb-4") #{voucher.code}
+
+  if (voucher.discountValue)
+    div(class="mb-4") Giá trị giảm giá: <b>#{voucher.discountValue}%</b>
+
+  if (voucher.expirationDate)
+    div(class="mb-4") Ngày hết hạn: <b>#{`${new Date(voucher.expirationDate).toISOString().slice(0, 10)}`}</b>
+
+  if (voucher.usageLimit)
+    div(class="mb-4") Giới hạn số lần sử dụng: <b>#{voucher.usageLimit}</b>
+
+
+  if (voucher.status)
+    div(class="mb-4")
+      span Trạng thái:
+      if (voucher.status === "active")
+        span(class="badge badge-success") Hoạt động
+      else
+        span(class="badge badge-danger") Dừng hoạt động
+
+  
+  a(
+    href=`${prefixAdmin}/vouchers/edit/${voucher.id}`
+    class="btn btn-warning"
+  ) Chỉnh sửa
+
+  script(src="/admin/js/voucher.js")

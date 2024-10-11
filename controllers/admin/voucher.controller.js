@@ -72,3 +72,17 @@ module.exports.editPatch = async (req, res) => {
   
   res.redirect(`${systemConfig.prefixAdmin}/vouchers`)
 }
+
+// [GET] /vouchers/detail/:id
+module.exports.detail = async (req, res) => {
+  const id = req.params.id;
+
+  const voucher = await Voucher.findOne({
+    _id: id
+  })
+
+  res.render("admin/pages/vouchers/detail", {
+    pageTitle: "Chi tiết voucher",
+    voucher: voucher
+  })
+}
