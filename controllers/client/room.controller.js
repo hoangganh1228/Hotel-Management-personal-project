@@ -2,6 +2,7 @@ const Room = require("../../models/room.model")
 const RoomFacility = require("../../models/room-facility.model")
 const RoomFeatures = require("../../models/room-features.model")
 const RoomCategory = require("../../models/room-category.model");
+const User = require("../../models/user.model");
 
 const { featureFacilityHelper } = require("../../helpers/featureFacility")
 
@@ -91,14 +92,23 @@ module.exports.detail = async (req, res) => {
   
 }
 
+// [GET] rooms/book_now/:id
+module.exports.bookNow = async (req, res) => {
+  const id = req.params.id;
+  const tokenUser = req.cookies.tokenUser;
 
-// module.exports.filter = async (req, res) => {
 
+  const room = await Room.findOne({
+    _id: id
+  })
 
-//   console.log(rooms);
-  
+  const user = await User.findOne({
+    tokenUser: tokenUser
+  })
 
-//   // Giả sử bạn thực hiện một số xử lý logic để lấy kết quả lọc
-//   // const rooms = getFilteredRooms(facilitiesArray, featuresArray);
-//   res.send("OK")
-// };
+  res.render("client/pages/rooms/book_now", {
+    pageTitle: "Xác nhận đặt phòng",
+    room: room,
+    user: user
+  })
+}

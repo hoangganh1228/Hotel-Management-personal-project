@@ -34,7 +34,7 @@ block main
                   span.badge.bg-light.text-dark.text-wrap.mx-1 #{room.children} trẻ con
               .col-md-2.text-center.mt-lg-0.mt-md-0.mt-4
                 h6.mb-4 #{room.price}/ngày
-                a.btn.btn-md.w-100.text-white.custom-bg.shadow-none.mb-2(href="") Đặt ngay
+                a.btn.btn-md.w-100.text-white.custom-bg.shadow-none.mb-2(href=`rooms/book_now/${room.id}`) Đặt ngay
                 a.btn.btn-sm.w-100.mt-2.btn-outline-dark(href=`rooms/detail/${room.id}`) Chi tiết
   
   script(src="/js/room.js")

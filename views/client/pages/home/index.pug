@@ -85,7 +85,7 @@ block main
                   i.bi.bi-star-fill.text-warning
                   i.bi.bi-star-fill.text-warning
               .d-flex.justify-content-evenly.mb-2
-                a.btn.btn-sm.text-white.custom-bg.shadow-none(href="#") Đặt ngay
+                a.btn.btn-sm.text-white.custom-bg.shadow-none(href=`rooms/book_now/${room.id}`) Đặt ngay
                 a.btn.btn-sm.btn-outline-dark(href=`rooms/detail/${room.id}`) Chi tiết
       .col-lg-12.text-center.mt-5
         a.btn.btn-sm.btn-outline-dark.rounded-0.fw-bold.shadow-none(href="/rooms") Xem thêm phòng 
@@ -104,7 +104,7 @@ block main
           h5.mt-3 #{facility.title}
       
       .col-lg-12.text-center.mt-5
-        a.btn.btn-sm.btn-outline-dark.rounded-0.fw-bold.shadow-none(href="<?=_WEB_HOST?>/khach/facilities") Xem thêm chức năng
+        a.btn.btn-sm.btn-outline-dark.rounded-0.fw-bold.shadow-none(href="/facilities") Xem thêm chức năng
   
   //-  Gg map(Embed)
   h2.mt-5.pt-4.mb-4.text-center.fw-bold.h-font Liên hệ

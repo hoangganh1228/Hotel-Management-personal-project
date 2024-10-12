@@ -1,0 +1,109 @@
+extends ../../layouts/default.pug
+
+block main 
+  .container
+    .row
+      .col-12.my-5.mb-4.px-4
+        h2.fw-bold Xác nhận đặt phòng
+        div(style="font-size: 14px;")
+          a.text-secondary.text-decoration-none(href="/") HOME
+          span.text-secondary >
+          a.text-secondary.text-decoration-none(href="/rooms") ROOMS
+          span.text-secondary >
+          a.text-secondary.text-decoration-none(href="#") CONFIRM
+      .col-lg-5.col-md-12.px-4
+        .card.mb-4.border-0.shadow-sm.rounded-3
+          .card-body
+            form(
+              id="form-booking" 
+              method="POST" 
+              action="inc/Payment/payAtmMomo.php"
+              )
+              h6.mb-3 Chi tiết đặt phòng
+              .row
+                .col-md-6.mb-3
+                  label.form-label Tên phòng
+                  input.form-control.shadow-none(
+                    required="" 
+                    value=room.name
+                    type="text" 
+                    name="name"
+                    )
+                .col-md-6.mb-3
+                  label.form-label Số điện thoại
+                  input.form-control.shadow-none(
+                    required="" 
+                    value=user.phone
+                    type="number" 
+                    name="phone"
+                    )
+                .col-md-12.mb-3
+                  label.form-label Gmail
+                  input.form-control.shadow-none(
+                    required="" 
+                    value=user.email
+                    type="email" 
+                    name="email"
+                    )
+                .col-md-12.mb-3
+                .row.align-items-center
+                  label.form-label Voucher
+                  .col-9
+                    input.form-control.shadow-none(
+                      placeholder="Nhập mã voucher"
+                      type="text" 
+                      name="voucher_code"
+                    )
+                  .col-3
+                    button.btn.btn-primary.w-100(type="submit") Áp dụng 
+
+                .col-md-6.mb-4.mt-3
+                  label.form-label Check-in
+                  input.form-control.shadow-none(
+                    required="" 
+                    type="date" 
+                    onchange="check_availability()" 
+                    name="checkin"
+                    )
+                .col-md-6.mb-4.mt-3
+                  label.form-label Check-out
+                  input.form-control.shadow-none(
+                    required="" 
+                    type="date" 
+                    onchange="check_availability()" 
+                    name="checkout"
+                    )
+                .col-12
+                  .spinner-border.text-info.mb-3.d-none(
+                    role="status" 
+                    id="info_loader"
+                    )
+                    span.visually-hidden Đang tải...
+                  h6.mb-3.text-danger(id="pay_info") Cung cấp check-in & Cung cấp check-out !
+                  button.btn.w-100.text-white.custom-bg.shadow-none.mb-1(name="pay_now") Thanh toán ngay
+
+      .col-lg-7.col-md-12.px-4
+        .card.p-3.shadow-sm.rounded
+          .inner-images.mb-3 
+            div(class="swiper imagesMain")
+              div(class="swiper-wrapper")
+                each image in room.images
+                  div(class="swiper-slide")
+                    .inner-image
+                      img(src=image class="d-block w-100 rounded")
+              div(class="swiper-button-next")
+              div(class="swiper-button-prev")
+            div(class="swiper imagesThumb")
+              div(class="swiper-wrapper")
+                each image in room.images
+                  div(class="swiper-slide")
+                    .inner-image
+                      img(src=image class="d-block w-100 rounded")
+
+          h5 #{room.name}
+          h6 #{room.price} VND mỗi đêm 
+      .col-12.mt-4.px4
+        .mb-5
+          h5 Mô tả
+          p !{room.description}
+              
