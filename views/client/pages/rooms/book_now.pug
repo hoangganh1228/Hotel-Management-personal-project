@@ -45,24 +45,11 @@ block main
                     type="email" 
                     name="email"
                     )
-                .col-md-12.mb-3
-                .row.align-items-center
-                  label.form-label Voucher
-                  .col-9
-                    input.form-control.shadow-none(
-                      placeholder="Nhập mã voucher"
-                      type="text" 
-                      name="voucher_code"
-                    )
-                  .col-3
-                    button.btn.btn-primary.w-100(type="submit") Áp dụng 
-
                 .col-md-6.mb-4.mt-3
                   label.form-label Check-in
                   input.form-control.shadow-none(
                     required="" 
                     type="date" 
-                    onchange="check_availability()" 
                     name="checkin"
                     )
                 .col-md-6.mb-4.mt-3
@@ -70,17 +57,33 @@ block main
                   input.form-control.shadow-none(
                     required="" 
                     type="date" 
-                    onchange="check_availability()" 
                     name="checkout"
                     )
+                .col-md-12.mb-3
+                  .row.align-items-center
+                    label.form-label Voucher
+                    .col-9
+                      input.form-control.shadow-none(
+                        placeholder="Nhập mã voucher"
+                        type="text" 
+                        name="voucher_code"
+                      )
+                    .col-3
+                      button(
+                        class="btn btn-primary w-100"
+                        id="apply_voucher_btn"
+                        type="button"
+                      ) Áp dụng 
                 .col-12
                   .spinner-border.text-info.mb-3.d-none(
                     role="status" 
                     id="info_loader"
-                    )
+                  )
                     span.visually-hidden Đang tải...
                   h6.mb-3.text-danger(id="pay_info") Cung cấp check-in & Cung cấp check-out !
-                  button.btn.w-100.text-white.custom-bg.shadow-none.mb-1(name="pay_now") Thanh toán ngay
+                  h5.text-success.mt-3 Tổng số tiền: 
+                  span#total_price 0 VND
+                  button.btn.w-100.text-white.custom-bg.shadow-none.mb-1.mt-1(name="pay_now") Thanh toán ngay
 
       .col-lg-7.col-md-12.px-4
         .card.p-3.shadow-sm.rounded
@@ -106,4 +109,6 @@ block main
         .mb-5
           h5 Mô tả
           p !{room.description}
+
+  script(src="/js/book_now.js")
               

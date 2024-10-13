@@ -7,7 +7,9 @@ router.get("/", controller.index);
 
 router.get("/detail/:id", controller.detail);
 
-router.get("/book_now/:id", controller.bookNow)
+router.get("/book_now/:id", controller.bookNow);
+
+router.post('/calculate-price', controller.calculatePrice);
 
 
 

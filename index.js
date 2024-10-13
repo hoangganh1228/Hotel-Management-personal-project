@@ -20,6 +20,12 @@ const route = require("./routes/client/index.route")
 const app = express();
 database.connect();
 
+app.use(express.json());
+
+app.use(express.urlencoded({ extended: true }));
+
+
+
 const port = process.env.PORT;
 
 app.use(methodOverride('_method'))

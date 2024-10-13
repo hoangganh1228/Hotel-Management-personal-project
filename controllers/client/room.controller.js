@@ -3,6 +3,7 @@ const RoomFacility = require("../../models/room-facility.model")
 const RoomFeatures = require("../../models/room-features.model")
 const RoomCategory = require("../../models/room-category.model");
 const User = require("../../models/user.model");
+const Voucher = require("../../models/voucher.model");
 
 const { featureFacilityHelper } = require("../../helpers/featureFacility")
 
@@ -111,4 +112,79 @@ module.exports.bookNow = async (req, res) => {
     room: room,
     user: user
   })
+}
+
+// [POST] rooms/
+module.exports.calculatePrice = async (req, res) => {
+  // console.log(req.body);
+  const {id, days, voucherCode} = req.body;
+  // console.log(id);
+  
+  try {
+    const room = await Room.findOne({
+      _id: id
+    }).select("price");
+
+    let totalPrice = days * room.price;
+    
+    // console.log(voucherCode);
+    
+
+    if(voucherCode) {
+      const voucher = await Voucher.findOne({
+        code: voucherCode,
+        status: "active",
+        deleted: false
+      })
+
+      console.log(voucher);
+      
+
+      if(!voucher) {
+        res.json({
+          code: 400,
+          message: 'Mã voucher không hợp lệ hoặc đã hết lượt sử dụng'
+        })
+        return
+      } 
+
+      if(new Date(voucher.expirationDate) < new Date()) {
+        res.json({
+          code: 400,
+          message: 'Mã voucher đã hết lượt sử dụng'
+        })
+        return
+      }
+
+      if(voucher.usageLimit > 0) {
+        await Voucher.updateOne({
+          code: voucherCode
+        }, {
+          usageLimit: voucher.usageLimit - 1
+        })
+      } else {
+        res.json({
+          code: 400,
+          message: 'Mã voucher đã hết lượt sử dụng'
+        })
+        return
+      }
+
+      totalPrice -= (totalPrice * (voucher.discountValue / 100));
+    }
+
+    res.json({
+      code: 200,
+      totalPrice
+    })
+
+  } catch (error) {
+    console.error('Lỗi khi tính tổng số tiền:', error);
+    res.json({
+      code: 500,
+      message: 'Lỗi server'
+    })
+    return 
+  }
+  
 }
