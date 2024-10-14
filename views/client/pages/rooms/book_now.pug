@@ -29,21 +29,37 @@ block main
                     type="text" 
                     name="name"
                     )
-                .col-md-6.mb-3
-                  label.form-label Số điện thoại
-                  input.form-control.shadow-none(
-                    required="" 
-                    value=user.phone
-                    type="number" 
-                    name="phone"
-                    )
+                if(user) 
+                  .col-md-6.mb-3
+                    label.form-label Số điện thoại
+                    input.form-control.shadow-none(
+                      required="" 
+                      value=user.phone
+                      type="number" 
+                      name="phone"
+                      )
+                else 
+                  .col-md-6.mb-3
+                    label.form-label Số điện thoại
+                    input.form-control.shadow-none(
+                      required="" 
+                      type="number" 
+                      name="phone"
+                      )
                 .col-md-12.mb-3
                   label.form-label Gmail
-                  input.form-control.shadow-none(
-                    required="" 
-                    value=user.email
-                    type="email" 
-                    name="email"
+                  if(user)
+                    input.form-control.shadow-none(
+                      required="" 
+                      value=user.email
+                      type="email" 
+                      name="email"
+                      )
+                  else 
+                    input.form-control.shadow-none(
+                      required="" 
+                      type="email" 
+                      name="email"
                     )
                 .col-md-6.mb-4.mt-3
                   label.form-label Check-in

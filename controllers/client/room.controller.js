@@ -137,9 +137,6 @@ module.exports.calculatePrice = async (req, res) => {
         deleted: false
       })
 
-      console.log(voucher);
-      
-
       if(!voucher) {
         res.json({
           code: 400,
@@ -160,11 +157,11 @@ module.exports.calculatePrice = async (req, res) => {
         await Voucher.updateOne({
           code: voucherCode
         }, {
-          usageLimit: voucher.usageLimit - 1
+          $inc: { usageLimit: -1 }
         })
       } else {
         res.json({
-          code: 400,
+          code: 200,
           message: 'Mã voucher đã hết lượt sử dụng'
         })
         return

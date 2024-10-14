@@ -54,33 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   checkinInput.addEventListener("change", calculateTotalPrice);
-  checkinInput.addEventListener("change", calculateTotalPrice);
+  checkoutInput.addEventListener("change", calculateTotalPrice);
   applyVoucherButton.addEventListener('click', calculateTotalPrice);
-})
-
-const voucherApply = document.querySelector("#apply_voucher_btn")
-voucherApply.addEventListener("click", () => {
-  const voucherInput = document.querySelector("input[name='voucher_code']");
-  
-  const voucherCode = voucherInput.value;
-  if(!voucherCode) {
-    alert('Vui lòng nhập mã voucher');
-    return;
-  }
-  console.log(voucherCode);
-  
-  const link = `/rooms/apply-voucher`;
-  const options = {
-    method: "POST",
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ voucher_code: voucherCode })
-  }
-
-  fetch(link, options)
-    .then(res => res.json())
-    .then(data => {
-
-    })
 })
