@@ -17,6 +17,26 @@ module.exports.index = async (req, res) => {
 
 }
 
+// [PATCH] /vouchers/change-status/:id
+module.exports.changeStatus = async (req, res) => {
+  const id = req.params.id;
+  const status = req.params.status;
+
+  await Voucher.updateOne({
+    _id: id
+  }, {
+    status: status
+  })
+  req.flash('success', `Cập nhật trạng thái thành công sản phẩm!`);
+  
+  res.json({
+    code: 200,
+    message: "Thanh cong!",
+    status: status
+  })
+}
+
+
 // [GET] /vouchers/create
 module.exports.create = async (req, res) => {
   res.render("admin/pages/vouchers/create", {
