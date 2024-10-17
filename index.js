@@ -58,8 +58,6 @@ app.locals.moment = moment;
 route(app);
 routeAdmin(app);
 
-
-
 app.listen(port, () => {
   console.log(`App listening on port ${port}`);
 })
