@@ -50,7 +50,6 @@ app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce
 
 //End TinyMCE
 
-
 //App locals variables
 app.locals.prefixAdmin = systemConfig.prefixAdmin;
 app.locals.moment = moment;
