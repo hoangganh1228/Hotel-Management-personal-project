@@ -4,8 +4,11 @@ const RoomFeatures = require("../../models/room-features.model")
 const RoomCategory = require("../../models/room-category.model");
 const User = require("../../models/user.model");
 const Voucher = require("../../models/voucher.model");
+const BookingOrder = require("../../models/booking_order.model");
 
-const { featureFacilityHelper } = require("../../helpers/featureFacility")
+const { featureFacilityHelper } = require("../../helpers/featureFacility");
+const { default: axios } = require("axios");
+
 
 // [GET] rooms/
 module.exports.index = async (req, res) => {
@@ -184,4 +187,111 @@ module.exports.calculatePrice = async (req, res) => {
     return 
   }
   
+}
+
+// [POST] rooms/payment
+module.exports.payment = async (req, res) => {
+  const { user_id, room_id, checkin, checkout, total_price } = req.body;
+  console.log(req.body);
+  
+  var accessKey = 'F8BBA842ECF85';
+  var secretKey = 'K951B6PE1waDMi640xX08PD3vg6EkVlz';
+  var orderInfo = 'pay with MoMo';
+  var partnerCode = 'MOMO';
+  var redirectUrl = 'http://localhost:3000/rooms/confirm_booking';
+  var ipnUrl = 'https://webhook.site/b3088a6a-2d17-4f8d-a383-71389a6c600b';
+  var requestType = "payWithMethod";
+  var amount = total_price;
+  var orderId = partnerCode + new Date().getTime();
+  var requestId = orderId;
+  var extraData ='';
+  var orderGroupId ='';
+  var autoCapture =true;
+  var lang = 'vi';
+
+  //before sign HMAC SHA256 with format
+  //accessKey=$accessKey&amount=$amount&extraData=$extraData&ipnUrl=$ipnUrl&orderId=$orderId&orderInfo=$orderInfo&partnerCode=$partnerCode&redirectUrl=$redirectUrl&requestId=$requestId&requestType=$requestType
+  var rawSignature = "accessKey=" + accessKey + "&amount=" + amount + "&extraData=" + extraData + "&ipnUrl=" + ipnUrl + "&orderId=" + orderId + "&orderInfo=" + orderInfo + "&partnerCode=" + partnerCode + "&redirectUrl=" + redirectUrl + "&requestId=" + requestId + "&requestType=" + requestType;
+  //puts raw signature
+  console.log("--------------------RAW SIGNATURE----------------")
+  console.log(rawSignature)
+  //signature
+  const crypto = require('crypto');
+  var signature = crypto.createHmac('sha256', secretKey)
+    .update(rawSignature)
+    .digest('hex');
+  console.log("--------------------SIGNATURE----------------")
+  console.log(signature)
+
+  //json object send to MoMo endpoint
+  const requestBody = JSON.stringify({
+      partnerCode : partnerCode,
+      partnerName : "Test",
+      storeId : "MomoTestStore",
+      requestId : requestId,
+      amount : amount,
+      orderId : orderId,
+      orderInfo : orderInfo,
+      redirectUrl : redirectUrl,
+      ipnUrl : ipnUrl,
+      lang : lang,
+      requestType: requestType,
+      autoCapture: autoCapture,
+      extraData : extraData,
+      orderGroupId: orderGroupId,
+      signature : signature
+  });
+
+  //options for axios
+  const options = {
+    method: "POST",
+    url: "https://test-payment.momo.vn/v2/gateway/api/create",
+    headers: {
+      'Content-Type': 'application/json',
+      'Content-Length': Buffer.byteLength(requestBody)
+    },
+    data: requestBody
+  }
+  
+  let result;
+  try {
+    result = await axios(options);
+    if(result.data && result.data.resultCode === 0) {
+      // const objectBookingOrder = {
+      //   user_id: user_id,
+      //   room_id: room_id,
+      //   check_in: checkin,
+      //   check_out: checkout,
+      //   booking_status: 'booked',
+      //   order_id: orderId,
+      //   trans_amt: amount,
+      //   trans_status: 'Successful'
+      // }
+
+      // const bookingOrder = new BookingOrder(objectBookingOrder);
+      // bookingOrder.save();
+      
+
+      return res.redirect(result.data.payUrl);
+    } else {
+      return res.status(500).json({
+        statusCode: 500,
+        message: "Có lỗi xảy ra trong quá trình thanh toán"
+      });
+    }
+
+  } catch (error) {
+    return res.status(500).json({
+      statusCode: 500,
+      message: "Có lỗi xảy ra trong quá trình thanh toán"
+    });
+  }
+
+}
+
+// [POST] rooms/confirm_booking
+module.exports.confirmBooking = async (req, res) => {
+  console.log(req.body);
+  
+  res.send("OK")
 }

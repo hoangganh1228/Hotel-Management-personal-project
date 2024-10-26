@@ -17,7 +17,7 @@ block main
             form(
               id="form-booking" 
               method="POST" 
-              action="inc/Payment/payAtmMomo.php"
+              action="/rooms/payment"
               )
               h6.mb-3 Chi tiết đặt phòng
               .row
@@ -99,6 +99,9 @@ block main
                   h6.mb-3.text-danger(id="pay_info") Cung cấp check-in & Cung cấp check-out !
                   h5.text-success.mt-3 Tổng số tiền: 
                   span#total_price 0 VND
+                  input(type="hidden" name="total_price" id="total_price_input")
+                  input(type="hidden" name="room_id" id="room_id" value=room.id)
+                  input(type="hidden" name="user_id" id="user_id" value=user.id)
                   button.btn.w-100.text-white.custom-bg.shadow-none.mb-1.mt-1(name="pay_now") Thanh toán ngay
 
       .col-lg-7.col-md-12.px-4

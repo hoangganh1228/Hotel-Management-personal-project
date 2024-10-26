@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const voucherInput = document.querySelector("input[name='voucher_code']");
   const applyVoucherButton = document.querySelector("#apply_voucher_btn")
   const totalPriceElement = document.querySelector("#total_price");
+  const totalPriceInput = document.querySelector("#total_price_input");
 
   function calculateTotalPrice() {
     const url = window.location.href;
@@ -36,6 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
           if(data && data.code == 200) {
             totalPriceElement.innerText = `${data.totalPrice.toLocaleString()} VND`;
+            totalPriceInput.value = data.totalPrice;
           } else {
             alert(data.message || 'Có lỗi xảy ra');
             totalPriceElement.innerText = `0 VND`;

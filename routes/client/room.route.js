@@ -11,6 +11,10 @@ router.get("/book_now/:id", controller.bookNow);
 
 router.post('/calculate-price', controller.calculatePrice);
 
+router.post("/payment", controller.payment)
+
+router.post("/confirm_booking", controller.confirmBooking)
+
 
 
 module.exports = router
