@@ -192,7 +192,7 @@ module.exports.calculatePrice = async (req, res) => {
 // [POST] rooms/payment
 module.exports.payment = async (req, res) => {
   const { user_id, room_id, checkin, checkout, total_price } = req.body;
-  console.log(req.body);
+  // console.log(req.body);
   
   var accessKey = 'F8BBA842ECF85';
   var secretKey = 'K951B6PE1waDMi640xX08PD3vg6EkVlz';
@@ -202,7 +202,7 @@ module.exports.payment = async (req, res) => {
   var ipnUrl = 'https://webhook.site/b3088a6a-2d17-4f8d-a383-71389a6c600b';
   var requestType = "payWithMethod";
   var amount = total_price;
-  var orderId = partnerCode + new Date().getTime();
+  var orderId = "ORD" + new Date().getTime();
   var requestId = orderId;
   var extraData ='';
   var orderGroupId ='';
@@ -213,15 +213,15 @@ module.exports.payment = async (req, res) => {
   //accessKey=$accessKey&amount=$amount&extraData=$extraData&ipnUrl=$ipnUrl&orderId=$orderId&orderInfo=$orderInfo&partnerCode=$partnerCode&redirectUrl=$redirectUrl&requestId=$requestId&requestType=$requestType
   var rawSignature = "accessKey=" + accessKey + "&amount=" + amount + "&extraData=" + extraData + "&ipnUrl=" + ipnUrl + "&orderId=" + orderId + "&orderInfo=" + orderInfo + "&partnerCode=" + partnerCode + "&redirectUrl=" + redirectUrl + "&requestId=" + requestId + "&requestType=" + requestType;
   //puts raw signature
-  console.log("--------------------RAW SIGNATURE----------------")
-  console.log(rawSignature)
+  // console.log("--------------------RAW SIGNATURE----------------")
+  // console.log(rawSignature)
   //signature
   const crypto = require('crypto');
   var signature = crypto.createHmac('sha256', secretKey)
     .update(rawSignature)
     .digest('hex');
-  console.log("--------------------SIGNATURE----------------")
-  console.log(signature)
+  // console.log("--------------------SIGNATURE----------------")
+  // console.log(signature)
 
   //json object send to MoMo endpoint
   const requestBody = JSON.stringify({
@@ -257,41 +257,66 @@ module.exports.payment = async (req, res) => {
   try {
     result = await axios(options);
     if(result.data && result.data.resultCode === 0) {
-      // const objectBookingOrder = {
-      //   user_id: user_id,
-      //   room_id: room_id,
-      //   check_in: checkin,
-      //   check_out: checkout,
-      //   booking_status: 'booked',
-      //   order_id: orderId,
-      //   trans_amt: amount,
-      //   trans_status: 'Successful'
-      // }
+      const objectBookingOrder = {
+        user_id: user_id,
+        room_id: room_id,
+        check_in: checkin,
+        check_out: checkout,
+        trans_status: 'Pending',
+        order_id: orderId,
+      }
 
-      // const bookingOrder = new BookingOrder(objectBookingOrder);
-      // bookingOrder.save();
+      const bookingOrder = new BookingOrder(objectBookingOrder);
+      bookingOrder.save();
       
 
       return res.redirect(result.data.payUrl);
     } else {
-      return res.status(500).json({
-        statusCode: 500,
-        message: "Có lỗi xảy ra trong quá trình thanh toán"
-      });
+      req.flash("error", `Có lỗi xảy ra trong quá trình thanh toán`)
+      return res.redirect("/");
     }
 
   } catch (error) {
-    return res.status(500).json({
-      statusCode: 500,
-      message: "Có lỗi xảy ra trong quá trình thanh toán"
-    });
+    req.flash("error", `Có lỗi xảy ra trong quá trình thanh toán`)
+    return res.redirect("/");
   }
 
 }
 
 // [POST] rooms/confirm_booking
 module.exports.confirmBooking = async (req, res) => {
-  console.log(req.body);
-  
-  res.send("OK")
+  const { orderId, amount, resultCode, message } = req.query;
+  if(parseInt(resultCode) === 0 && message == 'Successful.') {
+    await BookingOrder.updateOne({
+      order_id: orderId
+    }, {
+      booking_status: 'booked',
+      trans_status: 'Successful',
+      trans_amt: amount,
+    })  
+
+  } else {
+    await BookingOrder.updateOne({
+      order_id: orderId
+    }, {
+      booking_status: 'payment_failed',
+      trans_status: 'Failed'
+    });
+  }
+
+  res.redirect(`/rooms/pay_status/${orderId}`);
+
+}
+
+module.exports.payStatus = async (req, res) => {
+  const order_id = req.params.order_id;
+
+  const order = await BookingOrder.findOne({
+    order_id: order_id
+  });
+
+  res.render("client/pages/rooms/pay_status", {
+    pageTitle: "Trạng thái thanh toán",
+    order: order
+  })
 }

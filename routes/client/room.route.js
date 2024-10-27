@@ -11,10 +11,11 @@ router.get("/book_now/:id", controller.bookNow);
 
 router.post('/calculate-price', controller.calculatePrice);
 
-router.post("/payment", controller.payment)
+router.post("/payment", controller.payment);
 
-router.post("/confirm_booking", controller.confirmBooking)
+router.get("/confirm_booking", controller.confirmBooking);
 
+router.get("/pay_status/:order_id", controller.payStatus);
 
 
 module.exports = router

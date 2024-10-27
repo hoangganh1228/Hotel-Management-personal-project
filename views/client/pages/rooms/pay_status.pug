@@ -1,0 +1,30 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+
+block main 
+  .container
+    .row
+      .col-12.my-5.mb-3.px-4
+        h2.fw-bold #{pageTitle}
+        if(order.trans_status == "Successful") 
+          .px-4(class="col=12")
+            p.fw-bold.alert.alert-success
+              i.bi.bi-check-circle-fill
+              | Thanh toán thành công! Đã đặt được phòng thành công.
+              br
+              a(href="bookings.php") Go to booking
+        else if(order.trans_status == "Failed")
+          .px-4(class="col=12")
+            p.fw-bold.alert.alert-danger
+              i.bi.bi-exclamation-triangle-fill
+              | Thanh toán thất bại! 
+              br
+              a(href="bookings.php") Go to booking
+        else 
+          .px-4(class="col=12")
+            p.fw-bold.alert.alert-warning
+              i.bi.bi-exclamation-triangle-fill
+              | Đang thực hiện! 
+              br
+              a(href="bookings.php") Go to booking
+                    
