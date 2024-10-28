@@ -273,12 +273,12 @@ module.exports.payment = async (req, res) => {
       return res.redirect(result.data.payUrl);
     } else {
       req.flash("error", `Có lỗi xảy ra trong quá trình thanh toán`)
-      return res.redirect("/");
+      return res.redirect("back");
     }
 
   } catch (error) {
     req.flash("error", `Có lỗi xảy ra trong quá trình thanh toán`)
-    return res.redirect("/");
+    return res.redirect("back");
   }
 
 }
