@@ -1,0 +1,27 @@
+extends ../../layouts/default.pug
+
+block main
+  .display-6.text-center.mb-2 #{pageTitle}
+  ul.nav.justify-content-center.text-bg-color.text-white
+    li.nav-item.btn.btn-primary
+      a.nav-link.text-white(href="") Chung
+    li.nav-item.btn.btn-secondary.mx-3
+      a.nav-link.text-white(href="") Tiền phòng
+
+  .row.mt-1.mx-auto
+    .col-lg-6.p-3.my-3.border
+      h3.text-center Chi tiết
+      form(
+        action="statistics/overview"
+        method="GET"
+      )
+        ul.pt-5
+          li.d-flex
+            label(for="start") Từ ngày:
+            input#start.form-control(type="date", name="start", value=startDate, style="width: auto; margin-left: 5%")
+          li.d-flex.mx-auto.mt-3
+            label(for="end") Đến ngày:
+            input#end.form-control(type="date", name="end", value=endDate, style="width: auto; margin-left: 5%")
+          li(type="none")
+            button.btn.btn-success.mt-2(type="submit") Lọc
+            button.btn.btn-danger.mt-2.mx-2(type="button" id="reset") Reset
