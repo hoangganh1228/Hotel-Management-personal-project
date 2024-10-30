@@ -191,7 +191,9 @@ module.exports.calculatePrice = async (req, res) => {
 
 // [POST] rooms/payment
 module.exports.payment = async (req, res) => {
-  const { user_id, room_id, checkin, checkout, total_price } = req.body;
+  const user_id = req.body.user_id || null;
+  const {room_id, checkin, checkout, total_price, email, phone } = req.body;
+  
   // console.log(req.body);
   
   var accessKey = 'F8BBA842ECF85';
@@ -258,12 +260,14 @@ module.exports.payment = async (req, res) => {
     result = await axios(options);
     if(result.data && result.data.resultCode === 0) {
       const objectBookingOrder = {
-        user_id: user_id,
-        room_id: room_id,
+        user_id,
+        room_id,
         check_in: checkin,
         check_out: checkout,
         trans_status: 'Pending',
         order_id: orderId,
+        email: email,
+        phone: phone
       }
 
       const bookingOrder = new BookingOrder(objectBookingOrder);

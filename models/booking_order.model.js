@@ -4,7 +4,7 @@ const bookingOrderSchema = new mongoose.Schema({
   user_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "users",
-    required: true
+    required: false,
   },
   room_id: {
     type: mongoose.Schema.Types.ObjectId,
@@ -38,6 +38,12 @@ const bookingOrderSchema = new mongoose.Schema({
   order_id: {
     type: String,
     required: true
+  },
+  phone: {
+    type: String
+  },
+  email: {
+    type: String
   }
 }, { timestamps: true });
 

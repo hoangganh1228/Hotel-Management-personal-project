@@ -66,13 +66,24 @@ module.exports.revenueOverview = async (req, res) => {
   ])
 
   
-  const usersId = customerRevenue.map((item) => item._id);
+  const usersId = customerRevenue
+    .filter((item) => item._id)
+    .map((item) => item._id);
+
   const users = await User.find({
     _id: { $in: usersId }
   }).select("fullName email")
   
 
   const revenueEachUser = customerRevenue.map((revenue) => {
+    if(!revenue._id) {
+      return {
+        customerName: "Khách chưa đăng nhập",
+        customerEmail: "undefined",
+        revenue: revenue.revenue,
+      };
+    }
+
     const user = users.find((user) => user._id.toString() == revenue._id.toString());
     return {
       customerName: user ? user.fullName : "Khách hàng không tồn tại",
