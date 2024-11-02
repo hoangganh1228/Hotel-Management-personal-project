@@ -20,7 +20,8 @@ module.exports.index = async (req, res) => {
   const adult = parseInt(req.query.adult);
   const children = parseInt(req.query.children);
 
-  
+  const checkin = req.query.checkin ? new Date(req.query.checkin) : null;
+  const checkout = req.query.checkout ? new Date(req.query.checkout) : null;
 
   if(adult || children) {
     find.$or = [];
@@ -52,6 +53,23 @@ module.exports.index = async (req, res) => {
     find.room_features_id = { $in: featuresArray }
   }
 
+  if(checkin && checkout) {
+    const bookedRooms = await BookingOrder.find({
+      booking_status: "booked",
+      $or: [
+        { check_in: { $lt: checkout, $gte: checkin } },
+        { check_out: { $gt: checkin, $lte: checkout } },
+        { check_in: { $lte: checkin }, check_out: { $gte: checkout } }
+      ]
+    }).select("room_id")
+    
+    const bookedRoomIds = bookedRooms.map((order => order.room_id));
+    
+    find._id = { $nin: bookedRoomIds };
+    
+  }
+
+  
 
   const sort = {
     position: -1

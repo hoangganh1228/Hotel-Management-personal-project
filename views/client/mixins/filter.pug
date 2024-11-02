@@ -18,15 +18,17 @@ mixin filter(facilities, features, facilitiesArray, featuresArray)
               h5.d-flex.align-items-center.justify-content-between.mb-3(style="font-size: 18px;")
               label.form-label Ngày đặt phòng
               input(
+                id="checkin"
                 class="form-control shadow-none mb-3"
                 name="checkin"
-                onchange="chk_avail_filter()" 
+                onchange="filterRooms()" 
                 type="date"
               )
               label.form-label Ngày trả phòng
               input(
                 class="form-control shadow-none"
-                onchange="chk_avail_filter()" 
+                id="checkout"
+                onchange="filterRooms()" 
                 name="checkout"
                 type="date"
               )
