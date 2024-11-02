@@ -212,6 +212,23 @@ module.exports.payment = async (req, res) => {
   const user_id = req.body.user_id || null;
   const {room_id, checkin, checkout, total_price, email, phone } = req.body;
   
+  if(checkin && checkout) {
+    const bookedRooms = await BookingOrder.find({
+      booking_status: "booked",
+      $or: [
+        { check_in: { $lt: checkout, $gte: checkin } },
+        { check_out: { $gt: checkin, $lte: checkout } },
+        { check_in: { $lte: checkin }, check_out: { $gte: checkout } }
+      ]
+    })
+
+    
+    if(bookedRooms.length > 0) {
+      
+      req.flash("error", `Phòng trong khoảng thời gian này đã được đặt! Vui lòng chọn lại ngày`)
+      return res.redirect("back");
+    }
+  }
   // console.log(req.body);
   
   var accessKey = 'F8BBA842ECF85';
