@@ -27,23 +27,27 @@ block main
       .col-lg-12.bg-white.shadow.p-4.rounded
         h5.mb-4 Check Booking Availability
         +alert-error(5000)
-        form
+        form(
+          id="form-filter-room" 
+          action=`/rooms` 
+          method="GET"
+        )
           .row.align-items-end
             .col-lg-3.mb-3
               label.form-label(style="font-weight: 500;") Check-in
-              input.form-control.shadow-none(type="date")
+              input.form-control.shadow-none(type="date" name="checkin")
             .col-lg-3.mb-3
               label.form-label(style="font-weight: 500;") Check-out
-              input.form-control.shadow-none(type="date")
+              input.form-control.shadow-none(type="date" name="checkout")
             .col-lg-3.mb-3
               label.form-label(style="font-weight: 500;") Adult
-              select.form-select.shadow-none
+              select.form-select.shadow-none(name="adult")
                 option(value="1") One
                 option(value="2") Two
                 option(value="3") Three
             .col-lg-2.mb-3
               label.form-label(style="font-weight: 500;") Children
-              select.form-select.shadow-none
+              select.form-select.shadow-none(name="children")
                 option(value="1") One
                 option(value="2") Two
                 option(value="3") Three
