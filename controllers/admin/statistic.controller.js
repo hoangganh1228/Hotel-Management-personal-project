@@ -19,10 +19,11 @@ module.exports.index = async (req, res) => {
   const formattedEndDate = endDate.toISOString().split("T")[0];
   
   
+  
   const roomRevenue = await BookingOrder.aggregate([
     {
       $match: {
-        check_in: { $gte: startDate, $lte: endDate },
+        createdAt: { $gte: startDate, $lte: endDate },
         booking_status: "booked",
         trans_status: "Successful",
         trans_amt: { $gt: 0 }
@@ -50,7 +51,7 @@ module.exports.index = async (req, res) => {
   const customerRevenue = await BookingOrder.aggregate([
     {
       $match: {
-        check_in: { $gte: startDate, $lte: endDate },
+        createdAt: { $gte: startDate, $lte: endDate },
         booking_status: "booked",
         trans_status: "Successful",
         trans_amt: { $gt: 0 }
