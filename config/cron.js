@@ -13,6 +13,6 @@ cron.schedule('0 0 * * *', async () => {
 
     // console.log(`Đã reset ${expiredBookings.nModified} bản ghi trong bảng BookingOrder.`);
   } catch (error) {
-    // console.error("Có lỗi xảy ra khi chạy cron job:", error);
+    console.error("Có lỗi xảy ra khi chạy cron job:", error);
   }
 });

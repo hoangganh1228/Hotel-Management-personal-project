@@ -1,0 +1,78 @@
+extends ../../layouts/default.pug
+
+block main 
+  .my-5.px-4
+  h2.fw-bold.h-font.text-center #{pageTitle}
+  .h-line.bg-dark
+  p.text-center.mt-3
+    | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere modi id, in exercitationem, enim cumque suscipit, nemo
+    br
+    | alias consequuntur eos reiciendis! Illum provident architecto inventore dicta! Quod obcaecati quasi laborum!
+
+  .container
+    .row
+      .col-lg-6.col-md-6.mb-5.px-4
+        .bg-white.rounded.shadow.p-4
+          iframe.w-100.rounded.mb-4(
+            loading="lazy" 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3725.195675873867!2d105.79625170941975!3d20.98479198057284!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135acc6bdc7f95f:0x58ffc66343a45247!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBDw7RuZyBuZ2jhu4cgR2lhbyB0aMO0bmcgVuG6rW4gdOG6o2k!5e0!3m2!1svi!2s" 
+            height="320"
+            )
+          h5 Address
+          a.d-inline-block.text-decoration-none.text-dark.mb-2(
+            target="_blank" 
+            href="https://maps.app.goo.gl/HACP2jWFnQc6JGTcaA"
+            )
+            i.bi.bi-geo-alt-fill  Trường Đại học Công nghệ Giao thông Vận taải
+          h5 Call us
+          a.d-inline-block.mb-2.text-decoration-none.text-dark(href="#")
+            i.bi.bi-telephone-fill
+            | +84123456789
+          h5.mt-4 Email
+          a.d-inline-block.text-decoration-none.text-dark(href="ask.tjwebdev@gmail.com")
+            i.bi.bi-envelope-fill  ask.tjwebdev@gmail.com
+          <h5 class="mt-4 ">Follow us</h5>
+          a.d-inline-block.text-dark.fs-5.me-2(href="#")
+            i.bi.bi-twitter.me-1
+          a.d-inline-block.text-dark.fs-5.me-2(href="#")
+            i.bi.bi-facebook.me-1
+          a.d-inline-block.text-dark.fs-5(href="#")
+            i.bi.bi-instagram.me-1
+      
+      .col-lg-6.col-md-6.px-4
+        .bg-white.rounded.shadow.p-4
+          form(method="POST")
+            h5 Send a message
+            .mt-3
+              label.form-label(style="font-weight: 500;") Name
+              input.form-control.shadow-none(
+                required="" 
+                name="name" 
+                type="text"
+                )
+            .mt-3
+              label.form-label(style="font-weight: 500;") Email
+              input.form-control.shadow-none(
+                required="" 
+                name="email" 
+                type="email"
+                )
+            .mt-3
+              label.form-label(style="font-weight: 500;") Subject
+              input.form-control.shadow-none(
+                required="" 
+                name="subject" 
+                type="subject"
+                )
+            .mt-3
+              label.form-label(style="font-weight: 500;") Message
+              textarea.form-control.shadow-none(
+                style="resize: none;" 
+                rows="5" 
+                required="" 
+                name="message"
+                )
+            button.btn.text-white.custom-bg.mt-3(
+              name="send" 
+              type="submit"
+              ) SEND
