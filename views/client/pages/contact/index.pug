@@ -43,22 +43,21 @@ block main
         .bg-white.rounded.shadow.p-4
           form(
             method="POST"
-            
-            )
+          )
             h5 Send a message
             .mt-3
               label.form-label(style="font-weight: 500;") Tên
               if(user)
                 input.form-control.shadow-none(
                   required="" 
-                  name="name" 
+                  name="fullName" 
                   type="text"
                   value=user.fullName
                   )
               else 
                 input.form-control.shadow-none(
                   required="" 
-                  name="name" 
+                  name="fullName" 
                   type="text"
                   )
             .mt-3
@@ -92,6 +91,5 @@ block main
                 name="message"
                 )
             button.btn.text-white.custom-bg.mt-3(
-              name="send" 
               type="submit"
               ) GỬI

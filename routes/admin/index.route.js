@@ -24,6 +24,8 @@ const voucherRoute  = require("./voucher.route");
 
 const statisticRoute  = require("./statistic.route");
 
+const contactRoute = require("./contact.route")
+
 const authMiddleware = require("../../middlewares/admin/auth.middleware");
 
 module.exports = (app) => {
@@ -92,6 +94,12 @@ module.exports = (app) => {
     PATH_ADMIN + "/vouchers", 
     authMiddleware.requireAuth, 
     voucherRoute
+  );
+
+  app.use(
+    PATH_ADMIN + "/contact", 
+    authMiddleware.requireAuth, 
+    contactRoute
   );
 
   app.use(
