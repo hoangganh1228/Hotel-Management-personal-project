@@ -41,31 +41,50 @@ block main
       
       .col-lg-6.col-md-6.px-4
         .bg-white.rounded.shadow.p-4
-          form(method="POST")
+          form(
+            method="POST"
+            
+            )
             h5 Send a message
             .mt-3
-              label.form-label(style="font-weight: 500;") Name
-              input.form-control.shadow-none(
-                required="" 
-                name="name" 
-                type="text"
-                )
+              label.form-label(style="font-weight: 500;") Tên
+              if(user)
+                input.form-control.shadow-none(
+                  required="" 
+                  name="name" 
+                  type="text"
+                  value=user.fullName
+                  )
+              else 
+                input.form-control.shadow-none(
+                  required="" 
+                  name="name" 
+                  type="text"
+                  )
             .mt-3
               label.form-label(style="font-weight: 500;") Email
-              input.form-control.shadow-none(
-                required="" 
-                name="email" 
-                type="email"
+              if(user)
+                input.form-control.shadow-none(
+                  required="" 
+                  name="email" 
+                  type="email"
+                  value=user.email
+                  )
+              else 
+                input.form-control.shadow-none(
+                  required="" 
+                  name="email" 
+                  type="email"
                 )
             .mt-3
-              label.form-label(style="font-weight: 500;") Subject
+              label.form-label(style="font-weight: 500;") Chủ đề
               input.form-control.shadow-none(
                 required="" 
                 name="subject" 
                 type="subject"
                 )
             .mt-3
-              label.form-label(style="font-weight: 500;") Message
+              label.form-label(style="font-weight: 500;") Nội dung
               textarea.form-control.shadow-none(
                 style="resize: none;" 
                 rows="5" 
@@ -75,4 +94,4 @@ block main
             button.btn.text-white.custom-bg.mt-3(
               name="send" 
               type="submit"
-              ) SEND
+              ) GỬI
