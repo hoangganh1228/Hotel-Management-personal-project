@@ -93,6 +93,15 @@ block main
         value=(settingGeneral ? settingGeneral.iframe : "")
       )
     div(class="form-group")
+      label(for="gmap") Map
+      input(
+        type="text"
+        class="form-control"
+        id="gmap"
+        name="gmap"
+        value=(settingGeneral ? settingGeneral.gmap : "")
+      )
+    div(class="form-group")
       button(
         type="submit"
         class="btn btn-primary"

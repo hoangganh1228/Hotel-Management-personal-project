@@ -15,28 +15,28 @@ block main
         .bg-white.rounded.shadow.p-4
           iframe.w-100.rounded.mb-4(
             loading="lazy" 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3725.195675873867!2d105.79625170941975!3d20.98479198057284!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135acc6bdc7f95f:0x58ffc66343a45247!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBDw7RuZyBuZ2jhu4cgR2lhbyB0aMO0bmcgVuG6rW4gdOG6o2k!5e0!3m2!1svi!2s" 
+            src=`${settingGeneral.iframe}` 
             height="320"
             )
           h5 Address
           a.d-inline-block.text-decoration-none.text-dark.mb-2(
             target="_blank" 
-            href="https://maps.app.goo.gl/HACP2jWFnQc6JGTcaA"
+            href=`${settingGeneral.gmap}`
             )
             i.bi.bi-geo-alt-fill  Trường Đại học Công nghệ Giao thông Vận taải
-          h5 Call us
+          h5 Số điện thoại
           a.d-inline-block.mb-2.text-decoration-none.text-dark(href="#")
             i.bi.bi-telephone-fill
-            | +84123456789
+            |  #{settingGeneral.phone}
           h5.mt-4 Email
           a.d-inline-block.text-decoration-none.text-dark(href="ask.tjwebdev@gmail.com")
-            i.bi.bi-envelope-fill  ask.tjwebdev@gmail.com
-          <h5 class="mt-4 ">Follow us</h5>
-          a.d-inline-block.text-dark.fs-5.me-2(href="#")
+            i.bi.bi-envelope-fill  #{settingGeneral.email}
+          <h5 class="mt-4 ">Theo dõi chúng tôi</h5>
+          a.d-inline-block.text-dark.fs-5.me-2(href=`${settingGeneral.twitter}`)
             i.bi.bi-twitter.me-1
-          a.d-inline-block.text-dark.fs-5.me-2(href="#")
+          a.d-inline-block.text-dark.fs-5.me-2(href=`${settingGeneral.facebook}`)
             i.bi.bi-facebook.me-1
-          a.d-inline-block.text-dark.fs-5(href="#")
+          a.d-inline-block.text-dark.fs-5(href=`${settingGeneral.instagram}`)
             i.bi.bi-instagram.me-1
       
       .col-lg-6.col-md-6.px-4

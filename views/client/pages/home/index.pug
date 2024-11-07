@@ -121,31 +121,28 @@ block main
           referrerpolicy="no-referrer-when-downgrade" 
           loading="lazy" 
           height="360" 
-          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14898.565702963178!2d105.7831221!3d21.007006!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135acacbb621a31%3A0x6b9d241f84cd960!2sJW%20Marriott%20Hotel%20Hanoi!5e0!3m2!1svi!2s!4v1714406252436!5m2!1svi!2s"
+          src=`${settingGeneral.iframe}`
           )
       .col-lg-4.col-md-4
         .bg-white.p-4.rounded.mb-4
           h5 Liên hệ với chúng tôi
           a.d-inline-block.mb-2.text-decoration-none.text-dark(href="tel:+842438335588")
-            i.bi.bi-telephone-fill
-            | +842438335588
-          br
-          a.mb-2.text-decoration-none.text-dark(href="tel:+842438335588")
-            i.bi.bi-telephone-fill
-            | +842438335588
+            i.bi.bi-telephone-fill  +#{settingGeneral.phone}
+            
+
         .bg-white.p-4.rounded.mb-4
           h5 Theo dõi chúng tôi
-          a.d-inline-block.mb-3(href="#")
+          a.d-inline-block.mb-3(href=`${settingGeneral.twitter}`)
             span.badge.bg-light.text-dark.fs-6.p-2
               i.bi.bi-twitter.me-1
               | Twitter
           br
-          a.d-inline-block.mb-3(href="#")
+          a.d-inline-block.mb-3(href=`${settingGeneral.facebook}`)
             span.badge.bg-light.text-dark.fs-6.p-2
               i.bi.bi-facebook.me-1
               | Facebook
           br
-          a.d-inline-block(href="#")
+          a.d-inline-block(href=`${settingGeneral.instagram}`)
             span.badge.bg-light.text-dark.fs-6.p-2
               i.bi.bi-instagram.me-1
               | Instagram

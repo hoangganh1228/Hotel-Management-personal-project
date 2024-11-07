@@ -12,6 +12,7 @@ const settingGeneralSchema = new mongoose.Schema(
     instagram: String,
     twitter: String,
     iframe: String,
+    gmap: String,
     phone: String,
   },
   {
