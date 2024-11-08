@@ -24,6 +24,7 @@ module.exports.generalPatch = async (req, res) => {
     twitter: req.body.twitter,
     iframe: req.body.iframe,
     phone: req.body.phone,
+    introduction: req.body.introduction
   }
 
   if(settingGeneral) {

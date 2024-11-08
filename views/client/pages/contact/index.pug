@@ -18,12 +18,12 @@ block main
             src=`${settingGeneral.iframe}` 
             height="320"
             )
-          h5 Address
+          h5 Địa chỉ
           a.d-inline-block.text-decoration-none.text-dark.mb-2(
             target="_blank" 
             href=`${settingGeneral.gmap}`
             )
-            i.bi.bi-geo-alt-fill  Trường Đại học Công nghệ Giao thông Vận taải
+            i.bi.bi-geo-alt-fill  #{settingGeneral.address}
           h5 Số điện thoại
           a.d-inline-block.mb-2.text-decoration-none.text-dark(href="#")
             i.bi.bi-telephone-fill
@@ -44,7 +44,7 @@ block main
           form(
             method="POST"
           )
-            h5 Send a message
+            h5 Gửi tin nhắn cho chúng tôi
             .mt-3
               label.form-label(style="font-weight: 500;") Tên
               if(user)

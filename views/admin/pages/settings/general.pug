@@ -102,6 +102,14 @@ block main
         value=(settingGeneral ? settingGeneral.gmap : "")
       )
     div(class="form-group")
+        label(for="intro") Giới thiệu
+        textarea(
+          class="form-control textarea-mce"
+          id="desc"
+          name="introduction"
+          rows="5"
+        ) #{settingGeneral.introduction}
+    div(class="form-group")
       button(
         type="submit"
         class="btn btn-primary"

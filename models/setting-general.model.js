@@ -13,7 +13,9 @@ const settingGeneralSchema = new mongoose.Schema(
     twitter: String,
     iframe: String,
     gmap: String,
+    venue: String,
     phone: String,
+    introduction: String
   },
   {
     timestamps: true,
