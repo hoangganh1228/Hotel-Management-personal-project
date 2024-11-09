@@ -38,4 +38,7 @@ router.post(
   controller.resetPasswordPost
 );
 
+router.get("/bookings", controller.booking);
+
+
 module.exports = router;

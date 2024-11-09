@@ -1,0 +1,52 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+include ../../mixins/moment.pug
+
+
+block main
+  .container
+    .row
+      .col-12.my-5.mb-4.px-4
+        h2.fw-bold #{pageTitle}
+        div(style="font-size: 14px;")
+          a.text-secondary.text-decoration-none(href="/") Trang chủ 
+          span.text-secondary >
+          a.text-secondary.text-decoration-none(href="#")  Phòng đã đặt
+      each booking in bookings
+        .col-md-4.px-4.mb-4
+          .bg-white.p-3.rounded.shadow
+            h5.fw-bold #{booking.room_id.name}
+            p Giá mỗi đêm
+            p
+              b Check in:
+              | 
+              +formatDate(booking.check_in)
+              br
+              b Check out:
+              | 
+              +formatDate(booking.check_out)
+
+            p
+              b Tổng tiền:
+              |  #{booking.trans_amt}
+              br
+              b Mã order:
+              |  #{booking.order_id}
+              br
+              b Ngày đặt: 
+              |  
+              +formatDate(booking.createdAt)
+            if(booking.booking_status == "booked")
+              p
+                span.badge.bg-success Dã đặt
+            else if(booking.booking_status == "payment_failed")
+              p
+                span.badge.bg-danger Dã hủy 
+            else 
+              p
+                span.badge.bg-warning  Đang thanh toán 
+
+            button.btn.btn-dark.btn-sm.shadow-none(type="button") Rate & Review
+              
+
+  

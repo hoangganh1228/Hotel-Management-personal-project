@@ -1,6 +1,7 @@
 const md5 = require("md5");
 const User = require("../../models/user.model");
 const ForgotPassword = require("../../models/forgot-password.model");
+const BookingOrder = require("../../models/booking_order.model")
 
 const generateHelper = require("../../helpers/generate");
 const sendMailHelper = require("../../helpers/sendMail");
@@ -180,3 +181,24 @@ module.exports.resetPasswordPost = async (req, res) => {
 
   res.redirect("/");
 };
+
+// [GET] /user/booking
+module.exports.booking = async (req, res) => {
+  const tokenUser = req.cookies.tokenUser;
+
+  const user = await User.findOne({
+    tokenUser: tokenUser
+  })
+
+  const bookings = await BookingOrder.find({user_id: user.id})
+    .populate({
+      path: 'room_id',
+      select: 'name'
+    })
+    
+
+  res.render("client/pages/user/booking", {
+    pageTitle: "Phòng bạn đã dặt",
+    bookings: bookings
+  })
+}
