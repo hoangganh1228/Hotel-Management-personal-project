@@ -14,7 +14,7 @@ const { default: axios } = require("axios");
 module.exports.index = async (req, res) => {
   const find = {
     deleted: false,
-    status: 'active'
+    status: 'active',
   }
 
   const adult = parseInt(req.query.adult);
@@ -56,6 +56,7 @@ module.exports.index = async (req, res) => {
   if(checkin && checkout) {
     const bookedRooms = await BookingOrder.find({
       booking_status: "booked",
+      room_status: "booked",
       $or: [
         { check_in: { $lt: checkout, $gte: checkin } },
         { check_out: { $gt: checkin, $lte: checkout } },
@@ -215,6 +216,7 @@ module.exports.payment = async (req, res) => {
   if(checkin && checkout) {
     const bookedRooms = await BookingOrder.find({
       booking_status: "booked",
+      room_status: "booked",
       $or: [
         { check_in: { $lt: checkout, $gte: checkin } },
         { check_out: { $gt: checkin, $lte: checkout } },

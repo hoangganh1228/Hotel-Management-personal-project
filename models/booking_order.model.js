@@ -44,6 +44,12 @@ const bookingOrderSchema = new mongoose.Schema({
   },
   email: {
     type: String
+  },
+  room_status: {
+    type: String,
+    enum: ['booked', 'empty'],
+    default: 'empty'
+
   }
 }, { timestamps: true });
 

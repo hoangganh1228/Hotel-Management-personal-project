@@ -6,12 +6,18 @@ cron.schedule('0 0 * * *', async () => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
-    const expiredBookings = await BookingOrder.updateMany(
-      { check_out: { $lte: today } },
-      { $set: { check_in: null, check_out: null } }
+    const bookedRooms = await BookingOrder.updateMany(
+      { check_in: { $lte: today }, check_out: { $gte: today } },
+      { $set: { room_status: 'booked' } }
     );
 
-    // console.log(`Đã reset ${expiredBookings.nModified} bản ghi trong bảng BookingOrder.`);
+    const emptyRooms = await BookingOrder.updateMany(
+      { $or: [{ check_in: { $gt: today } }, { check_out: { $lt: today } }] },
+      { $set: { room_status: 'empty' } }
+
+  )
+
+  console.log(`Đã cập nhật ${bookedRooms.nModified} phòng thành "booked" và ${emptyRooms.nModified} phòng thành "empty".`);
   } catch (error) {
     console.error("Có lỗi xảy ra khi chạy cron job:", error);
   }
