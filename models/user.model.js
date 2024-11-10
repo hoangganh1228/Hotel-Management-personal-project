@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema(
       default: generate.generateRandomString(20)
     },
     phone: String,
-    avatar: String,
+    address: String,
     status: {
       type: String,
       default: "active"

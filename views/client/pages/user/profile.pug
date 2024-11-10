@@ -1,0 +1,58 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+
+block main 
+  .container
+    +alert-success(5000)
+    +alert-error(5000)
+    .row
+      .col-12.my-5.mb-4.px-4
+        h2.fw-bold #{pageTitle}
+        div(style="font-size: 14px;")
+          a.text-secondary.text-decoration-none(href="/") Trang chủ 
+          span.text-secondary >
+          a.text-secondary.text-decoration-none(href="#")  Hồ sơ
+      .col-12.mb-5.mb-4.px-4
+        .bg-white.p-3.p-md-4.rounded.shadow-sm
+          form(
+            action=`/user/profile?_method=PATCH`
+            method="POST"
+          )
+            h5.mb-3.fw-bold Thông tin cá nhân
+            .row
+              .col-md-4.mb-3
+                label.form-label Họ tên
+                input.form-control.shadow-none(
+                  required="" 
+                  name="fullName" 
+                  type="text"
+                  value=(user.fullName ? user.fullName : "") 
+                  )
+              .col-md-4.mb-3
+                label.form-label Số điện thoại
+                input.form-control.shadow-none(
+                  required="" 
+                  name="phone" 
+                  type="number"
+                  value=(user.phone ? user.phone : "") 
+                  )
+              .col-md-8.mb-4
+                label.form-label Gmail
+                textarea.form-control.shadow-none(
+                  rows="1" 
+                  name="email"
+                  readonly
+                ) #{user.email} 
+              .col-md-8.mb-4
+                label.form-label Địa chỉ
+                textarea.form-control.shadow-none(
+                  rows="1" 
+                  name="address"
+                  ) #{user.address} 
+              input(
+                type="hidden" 
+                name="tokenUser"
+                value=user.tokenUser
+              )
+            button.btn.text-white.custom-bg.shadow-none(type="submit") Lưu
+

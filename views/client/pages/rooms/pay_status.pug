@@ -12,19 +12,19 @@ block main
               i.bi.bi-check-circle-fill
               | Thanh toán thành công! Đã đặt được phòng thành công.
               br
-              a(href="bookings.php") Go to booking
+              a(href="bookings.php") Đến trang phòng đã đặt
         else if(order.trans_status == "Failed")
           .px-4(class="col=12")
             p.fw-bold.alert.alert-danger
               i.bi.bi-exclamation-triangle-fill
               | Thanh toán thất bại! 
               br
-              a(href="bookings.php") Go to booking
+              a(href="bookings.php") Đến trang phòng đã đặt
         else 
           .px-4(class="col=12")
             p.fw-bold.alert.alert-warning
               i.bi.bi-exclamation-triangle-fill
               | Đang thực hiện! 
               br
-              a(href="bookings.php") Go to booking
+              a(href="/user/booking") Đến trang phòng đã đặt
                     

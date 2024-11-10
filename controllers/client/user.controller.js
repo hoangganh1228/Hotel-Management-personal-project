@@ -202,3 +202,35 @@ module.exports.booking = async (req, res) => {
     bookings: bookings
   })
 }
+
+// [GET] /user/profile
+module.exports.profile = async (req, res) => {
+  const tokenUser = req.cookies.tokenUser;
+
+  const user = await User.findOne({
+    tokenUser: tokenUser
+  })
+
+
+  res.render("client/pages/user/profile", {
+    pageTitle: "Hồ sơ người dùng",
+    user: user 
+  })
+}
+
+// [GET] /user/profile
+module.exports.profilePatch = async (req, res) => {
+  try {
+    const objectProfile = {
+      fullName: req.body.fullName,
+      phone: req.body.phone,
+      address: req.body.address
+    };
+    await User.updateOne({ tokenUser: req.body.tokenUser }, objectProfile);
+    req.flash("success", "Lưu thông tin cá nhân thành công");
+  } catch (error) {
+    req.flash("error", "Lưu thông tin cá nhân thất bại");
+  }
+
+  res.redirect("back");
+}
