@@ -1,10 +1,10 @@
 const Room = require("../../models/room.model")
 const RoomFacility = require("../../models/room-facility.model")
 const RoomFeatures = require("../../models/room-features.model")
-const RoomCategory = require("../../models/room-category.model");
 const User = require("../../models/user.model");
 const Voucher = require("../../models/voucher.model");
 const BookingOrder = require("../../models/booking_order.model");
+const ReviewRating = require("../../models/review-rating.model");
 
 const { featureFacilityHelper } = require("../../helpers/featureFacility");
 const { default: axios } = require("axios");
@@ -105,12 +105,28 @@ module.exports.detail = async (req, res) => {
   
   // console.log(room)
 
+  const reviews = await ReviewRating.find({room_id: id})
+    .populate({
+      path: 'room_id',
+      select: 'id name'
+    })
+    .populate({
+      path: 'user_id',
+      select: 'id fullName'
+    })
+    .populate({
+      path: 'booking_id',
+      select: 'id'
+    })
+
+  
   await featureFacilityHelper(room)
 
   const images = [];
   res.render("client/pages/rooms/detail", {
     pageTitle: "Chi tiết phòng",
-    room: room
+    room: room,
+    reviews: reviews
   })
   
 }
@@ -129,10 +145,25 @@ module.exports.bookNow = async (req, res) => {
     tokenUser: tokenUser
   })
 
+  const reviews = await ReviewRating.find({room_id: id})
+    .populate({
+      path: 'room_id',
+      select: 'id name'
+    })
+    .populate({
+      path: 'user_id',
+      select: 'id fullName'
+    })
+    .populate({
+      path: 'booking_id',
+      select: 'id'
+    })
+
   res.render("client/pages/rooms/book_now", {
     pageTitle: "Xác nhận đặt phòng",
     room: room,
-    user: user
+    user: user,
+    reviews: reviews
   })
 }
 

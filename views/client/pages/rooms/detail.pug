@@ -59,5 +59,16 @@ block main
         .mb-5
           h5 Description
           p !{room.description}
-
+      div
+        h5.mb-4 Nhận xét và đánh giá
+        each review in reviews
+          if review.review
+            div(class="mb-5")
+              .rating
+                -for(let i=0; i < review.rating; i++)
+                  i.bi.bi-star-fill.text-warning
+              .d-flex.align-items-center.mb-1.mt-3
+                h6.m-0 #{review.user_id.fullName}
+              p #{review.review}
+              
   script(src="/js/room.js")
