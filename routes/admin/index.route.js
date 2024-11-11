@@ -28,6 +28,8 @@ const contactRoute = require("./contact.route");
 
 const bookingRoute = require("./booking.route");
 
+const carouselRoute = require("./carousel.route");
+
 const settingRoute = require("../../routes/admin/setting.route");
 
 const authMiddleware = require("../../middlewares/admin/auth.middleware");
@@ -105,6 +107,13 @@ module.exports = (app) => {
     authMiddleware.requireAuth, 
     contactRoute
   );
+
+  app.use(
+    PATH_ADMIN + "/carousel", 
+    authMiddleware.requireAuth, 
+    carouselRoute
+  );
+
 
   app.use(
     PATH_ADMIN + "/bookings", 

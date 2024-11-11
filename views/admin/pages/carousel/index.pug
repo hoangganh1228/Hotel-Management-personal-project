@@ -1,0 +1,58 @@
+extends ../../layouts/default.pug
+include ../../mixins/filter-status.pug
+include ../../mixins/search.pug
+include ../../mixins/alert.pug
+include ../../mixins/pagination.pug
+include ../../mixins/moment.pug
+
+block main
+  .row
+    .col-lg-12.p-4
+      h3.mb-4 CAROUSEL
+      // Carousel sections
+      .card.border-0.shadow.mb-4
+        .card-body
+          .d-flex.align-items-center.justify-content-between.mb-3
+            h5.card-title.m-0 Images
+            button.btn.btn-dark.shadow-none.btn-sm(
+              data-bs-target="#carousel-s" 
+              data-bs-toggle="modal" 
+              type="button"
+              )
+              i.bi.bi-plus-square
+              | Add
+          #carousel-data.row
+      #carousel-s.modal.fade(
+        aria-hidden="true" 
+        aria-labelledby="staticBackdropLabel" 
+        tabindex="-1" 
+        data-bs-keyboard="true" 
+        data-bs-backdrop="static"
+        )
+        .modal-dialog
+          form(id="carousel_s_form")
+            .modal-content
+              .modal-header
+                h5.modal-title Add Image
+                button.btn-close(
+                  aria-label="Close" 
+                  data-bs-dismiss="modal" 
+                  type="button"
+                  )
+              .modal-body
+                .mb-3
+                  label.form-label.fw-bold Picture
+                  input.form-control.shadow-none(
+                    required="" 
+                    accept=".jpg, .png, .webp, .jpeg" 
+                    id="carousel_picture_inp" 
+                    name="carousel_picture" 
+                    type="file"
+                    )
+              .modal-footer
+                button.btn.text-secondary.shadow-none(
+                  data-bs-dismiss="modal" 
+                  onclick="carousel_picture.value=''" 
+                  type="button"
+                  ) CANCEL
+                button.btn.custom-bg.text-white.shadow-none(type="submit") SUBMIT
