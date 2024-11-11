@@ -1,0 +1,78 @@
+extends ../../layouts/default.pug
+include ../../mixins/filter-status.pug
+include ../../mixins/search.pug
+include ../../mixins/alert.pug
+include ../../mixins/pagination.pug
+include ../../mixins/moment.pug
+
+block main
+  h1(class="mb-4") #{pageTitle}
+  +alert-success(5000)
+  +alert-error(5000)
+  .card.mb-3
+    .card-header Bộ lọc và Tìm kiếm
+  
+  .card.mb-3
+    .card-header Danh sách
+    .card-body
+      .row
+      table(
+        class="table table-hover table-sm"
+      )
+        thead
+          tr
+            th STT
+            th Chi tiết người dùng
+            th Chi tiết phòng
+            th Chi tiết hóa đơn
+            th Hành động
+        tbody
+          each item, index in bookings 
+            tr
+              td 
+                | #{index + 1}
+              td
+                span.badge.bg-primary Id đơn: #{item.order_id}
+                br
+                b Họ tên:
+                |  #{item.user_id.fullName}
+                br
+                b SĐT:
+                |  #{item.user_id.phone}
+              td
+                b Phòng:
+                |  #{item.room_id.name}
+                br
+                b Giá:
+                |  #{item.room_id.name}VND
+              td
+                b Chek-in: 
+                +formatDate(item.check_in)
+                br
+                b Chek-out: 
+                +formatDate(item.check_out)
+                br
+                b Thanh toán: 
+                |  #{item.trans_amt} VND
+                br
+                b Ngày: 
+                +formatDate(item.createdAt)
+              td
+                button(
+                  class="mt-2 btn btn-outline-danger btn-sm fw-bold shadow-none"
+                  button-delete
+                  data-id=item.id
+                ) 
+                  i.bi.bi-trash 
+                  | Hủy đặt phòng 
+
+  form(
+    action=""
+    method="POST"
+    id="form-delete-item"
+    data-path=`${prefixAdmin}/bookings/delete`
+  )
+
+    script(src="/admin/js/script.js")
+
+  

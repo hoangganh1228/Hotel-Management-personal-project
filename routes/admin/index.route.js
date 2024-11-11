@@ -26,6 +26,8 @@ const statisticRoute  = require("./statistic.route");
 
 const contactRoute = require("./contact.route");
 
+const bookingRoute = require("./booking.route");
+
 const settingRoute = require("../../routes/admin/setting.route");
 
 const authMiddleware = require("../../middlewares/admin/auth.middleware");
@@ -102,6 +104,12 @@ module.exports = (app) => {
     PATH_ADMIN + "/contact", 
     authMiddleware.requireAuth, 
     contactRoute
+  );
+
+  app.use(
+    PATH_ADMIN + "/bookings", 
+    authMiddleware.requireAuth, 
+    bookingRoute
   );
 
   app.use(
