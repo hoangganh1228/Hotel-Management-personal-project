@@ -40,6 +40,8 @@ router.post(
 
 router.get("/bookings", controller.booking);
 
+router.post("/submit-review", controller.submitReview); 
+
 router.get("/profile", controller.profile);
 
 router.patch("/profile", controller.profilePatch);

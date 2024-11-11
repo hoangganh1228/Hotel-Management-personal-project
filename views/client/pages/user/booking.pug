@@ -5,6 +5,8 @@ include ../../mixins/moment.pug
 
 block main
   .container
+    +alert-success(5000)
+    +alert-error(5000)
     .row
       .col-12.my-5.mb-4.px-4
         h2.fw-bold #{pageTitle}
@@ -46,7 +48,67 @@ block main
               p
                 span.badge.bg-warning  Đang thanh toán 
 
-            button.btn.btn-dark.btn-sm.shadow-none(type="button") Rate & Review
-              
+            button.btn.btn-dark.btn-sm.shadow-none(
+              data-bs-target=`#reviewModal` 
+              data-bs-toggle="modal" 
+              type="button"
+            ) Đánh giá và nhận xét
 
-  
+            #reviewModal.modal.fade(
+              aria-hidden="true" 
+              aria-labelledby="staticBackdropLabel" 
+              tabindex="-1" 
+              data-bs-keyboard="false" 
+              data-bs-backdrop="static"
+            )
+              .modal-dialog
+                .modal-content
+                  form#review-form(
+                    method="POST" 
+                    action="/user/submit-review"
+                  )
+                    .modal-header
+                      h5.modal-title.d-flex.align-items-center
+                        i.bi.bi-chat-square-heart-fill.fs-3.me-2
+                        | Đánh giá và nhận xét
+                      button.btn-close.shadow-none(
+                        aria-label="Close" 
+                        data-bs-dismiss="modal" 
+                        type="reset"
+                        )
+                    .modal-body
+                      .mb-3
+                        label.form-label Đánh giá
+                        select.form-select.shadow-none(name="rating")
+                          option(value="5") Tuyệt vời
+                          option(value="4") Hài lòng
+                          option(value="3") Tốt 
+                          option(value="2") Tệ
+                          option(value="1") Cực tệ
+                      .mb-4
+                        label.form-label Nhận xét
+                        textarea.form-control.shadow-none(
+                          rows="3" 
+                          name="review" 
+                          type="text"
+                          )
+                      input(
+                        name="booking_id" 
+                        type="hidden"
+                        value=booking.id
+                      )
+                      input(
+                        name="room_id" 
+                        type="hidden"
+                        value=booking.room_id._id
+                      )
+                      input(
+                        name="usser_id" 
+                        type="hidden"
+                        value=booking.user_id._id
+                      )
+                      .text-end
+                        button.btn.custom-bg.text-white.shadow-none(type="submit") Gửi
+                  
+
+    

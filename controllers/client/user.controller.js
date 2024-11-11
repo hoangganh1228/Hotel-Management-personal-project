@@ -2,6 +2,7 @@ const md5 = require("md5");
 const User = require("../../models/user.model");
 const ForgotPassword = require("../../models/forgot-password.model");
 const BookingOrder = require("../../models/booking_order.model")
+const ReviewRating = require("../../models/review-rating.model")
 
 const generateHelper = require("../../helpers/generate");
 const sendMailHelper = require("../../helpers/sendMail");
@@ -193,7 +194,11 @@ module.exports.booking = async (req, res) => {
   const bookings = await BookingOrder.find({user_id: user.id})
     .populate({
       path: 'room_id',
-      select: 'name'
+      select: '_id name'
+    })
+    .populate({
+      path: 'user_id',
+      select: '_id fullName'
     })
     
 
@@ -201,6 +206,28 @@ module.exports.booking = async (req, res) => {
     pageTitle: "Phòng bạn đã dặt",
     bookings: bookings
   })
+}
+
+// [GET] /user/submit-review
+module.exports.submitReview = async (req, res) => {
+  try {
+    const { rating, review, booking_id, room_id, user_id } = req.body;
+    
+    const objectRating = new ReviewRating({
+      user_id: user_id,
+      booking_id: booking_id,
+      room_id: room_id,
+      rating: rating,
+      review: review
+    })
+  
+    await objectRating.save();
+  
+    req.flash("success", "Đánh giá và nhận xét thành công!")
+    res.redirect('back');
+  } catch (error) {
+    req.flash("error", "Đánh giá và nhận xét thất bại!")
+  }
 }
 
 // [GET] /user/profile
