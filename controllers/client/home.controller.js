@@ -1,9 +1,10 @@
 const Room = require("../../models/room.model");
 const RoomCategory = require("../../models/room-category.model");
-const RoomFacility = require("../../models/room-facility.model")
-const RoomFeatures = require("../../models/room-features.model")
-const Carusel = require("../../models/carousel.model");
+const RoomFacility = require("../../models/room-facility.model");
+const RoomFeatures = require("../../models/room-features.model");
+const ReviewRating = require("../../models/review-rating.model");
 const Carousel = require("../../models/carousel.model");
+
 
 // [GET] /
 module.exports.index = async (req, res) => {
@@ -20,6 +21,22 @@ module.exports.index = async (req, res) => {
   const features = await RoomFeatures.find();
 
   const carousels = await Carousel.find({})
+
+  const reviews = await ReviewRating.find({})
+    .limit(8)
+    .populate({
+      path: 'room_id',
+      select: 'id name'
+    })
+    .populate({
+      path: 'user_id',
+      select: 'id fullName'
+    })
+    .populate({
+      path: 'booking_id',
+      select: 'id'
+    })
+
 
 
   for(const room of rooms) {
@@ -56,6 +73,7 @@ module.exports.index = async (req, res) => {
     pageTitle: "Trang chủ",
     rooms: rooms,
     facilities: facilities,
-    carousels: carousels
+    carousels: carousels,
+    reviews: reviews
   })
 }
