@@ -28,7 +28,7 @@ module.exports.uploadPost = async(req, res) => {
 }
 
 module.exports.delete = async (req, res) => {
-  const { imageUrl } = req.query;
+  const { imageUrl } = req.body;
 
   try {
     await Carousel.updateOne(
@@ -36,9 +36,9 @@ module.exports.delete = async (req, res) => {
       { $pull: { images: imageUrl } }
     );
 
-    res.json({ success: true });
+    req.flash("success", "Xóa ảnh thành công!");
   } catch (error) {
-    console.error("Lỗi khi xóa ảnh:", error);
-    res.status(500).json({ success: false, error: "Lỗi khi xóa ảnh" });
+    req.flash("error", "Xóa ảnh thất bại!");
   }
+  res.redirect("back");
 }

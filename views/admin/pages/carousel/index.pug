@@ -31,8 +31,8 @@ block main
                     img.card-img(src=`${image}`)
                     .card-img-overlay.text-end
                       button.btn.btn-danger.btn-sm.shadow-none(
-                        onclick=`rem_image("${image}")`  
-                        type="button"
+                        button-delete  
+                        data-url=image
                         )
                         i.bi.bi-trash 
                         | Delete
@@ -77,4 +77,11 @@ block main
                   ) CANCEL
                 button.btn.custom-bg.text-white.shadow-none(type="submit") SUBMIT
 
+  form(
+    action=""
+    method="POST"
+    id="form-delete-image"
+    data-path=`${prefixAdmin}/carousel/delete`
+  )
+  
   script(src="/admin/js/carousel.js")
