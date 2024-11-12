@@ -6,6 +6,8 @@ include ../../mixins/pagination.pug
 include ../../mixins/moment.pug
 
 block main
+  +alert-success(5000)
+  +alert-error(5000)
   .row
     .col-lg-12.p-4
       h3.mb-4 CAROUSEL
@@ -19,9 +21,21 @@ block main
               data-bs-toggle="modal" 
               type="button"
               )
-              i.bi.bi-plus-square
+              i.bi.bi-plus-square 
               | Add
           #carousel-data.row
+            each carousel in carousels 
+              each image in carousel.images
+                .col-md-4.mb-3
+                  .card.bg-dark.text-white
+                    img.card-img(src=`${image}`)
+                    .card-img-overlay.text-end
+                      button.btn.btn-danger.btn-sm.shadow-none(
+                        onclick=`rem_image("${image}")`  
+                        type="button"
+                        )
+                        i.bi.bi-trash 
+                        | Delete
       #carousel-s.modal.fade(
         aria-hidden="true" 
         aria-labelledby="staticBackdropLabel" 
@@ -30,7 +44,12 @@ block main
         data-bs-backdrop="static"
         )
         .modal-dialog
-          form(id="carousel_s_form")
+          form(
+            id="form-carousel"
+            action=`${prefixAdmin}/carousel/upload`
+            method="POST"
+            enctype="multipart/form-data"
+          )
             .modal-content
               .modal-header
                 h5.modal-title Add Image
@@ -45,10 +64,11 @@ block main
                   input.form-control.shadow-none(
                     required="" 
                     accept=".jpg, .png, .webp, .jpeg" 
-                    id="carousel_picture_inp" 
-                    name="carousel_picture" 
+                    id="images" 
+                    name="images" 
                     type="file"
-                    )
+                    multiple 
+                  )
               .modal-footer
                 button.btn.text-secondary.shadow-none(
                   data-bs-dismiss="modal" 
@@ -56,3 +76,5 @@ block main
                   type="button"
                   ) CANCEL
                 button.btn.custom-bg.text-white.shadow-none(type="submit") SUBMIT
+
+  script(src="/admin/js/carousel.js")
