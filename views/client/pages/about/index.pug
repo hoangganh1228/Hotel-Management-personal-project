@@ -1,0 +1,49 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+
+block main 
+  .my-5.px-4
+    h2.fw-bold.h-font.text-center #{pageTitle}
+    .h-line.bg-dark
+    p.text-center.mt-3
+      | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere modi id, in exercitationem, enim cumque suscipit, nemo
+      br
+      | alias consequuntur eos reiciendis! Illum provident architecto inventore dicta! Quod obcaecati quasi laborum!
+  .container
+    .row.justify-content-between.align-items-center
+      .col-lg-6.col-md-5.mb-4.order-lg-1.order-md-1.order-2
+        h3 Lorem ipsum dolor sit amet.
+        p
+          | Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero fugit ipsa id voluptatibus odit, voluptas, tempora unde nostrum nemo ex velit illum vel voluptatem culpa neque eum eaque vero obcaecati?
+      .col-lg-5.col-md-5.mb-4.order-lg-2.order-md-2.order-1
+        img.w-100(src="./images/about/about.jpg")
+  .container.mt-5
+    .row
+      .col-lg-3.col-md-6.mb-4.px-4
+        .bg-white.rounded.shadow.p-4.border-top.border-4.text-center.box
+          img(
+            width="70px" 
+            src="./images/about//hotel.svg"
+            )
+          h4.mt-3 100+ ROOMS
+      .col-lg-3.col-md-6.mb-4.px-4
+        .bg-white.rounded.shadow.p-4.border-top.border-4.text-center.box
+          img(
+            width="70px" 
+            src="./images/about/customers.svg"
+            )
+          h4.mt-3 200+ CUSTOMERS
+      .col-lg-3.col-md-6.mb-4.px-4
+        .bg-white.rounded.shadow.p-4.border-top.border-4.text-center.box
+          img(
+            width="70px" 
+            src="./images/about/rating.svg"
+            )
+          h4.mt-3 100+ REVIEWS
+      .col-lg-3.col-md-6.mb-4.px-4
+        .bg-white.rounded.shadow.p-4.border-top.border-4.text-center.box
+          img(
+            width="70px" 
+            src="./images/about/staff.svg"
+            )
+          h4.mt-3 100+ STAFFS

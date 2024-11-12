@@ -2,7 +2,8 @@ const homeRoute = require("./home.route");
 const roomRoute = require("./room.route")
 const facilityRoute = require("./facilities.route")
 const userRoutes = require("./user.route");
-const contactRoute = require("./contact.route")
+const contactRoute = require("./contact.route");
+const aboutRoute = require("./about.route");
 const userMiddleware = require("../../middlewares/client/user.middleware");
 const settingMiddleware = require("../../middlewares/client/setting.middleware");
 
@@ -20,6 +21,7 @@ module.exports = (app) => {
  
   app.use("/contact", contactRoute);
 
+  app.use("/about", aboutRoute);
 
 
 }
