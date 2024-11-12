@@ -2,8 +2,8 @@ const Room = require("../../models/room.model");
 const RoomCategory = require("../../models/room-category.model");
 const RoomFacility = require("../../models/room-facility.model")
 const RoomFeatures = require("../../models/room-features.model")
-const Account = require("../../models/account.model");
-
+const Carusel = require("../../models/carousel.model");
+const Carousel = require("../../models/carousel.model");
 
 // [GET] /
 module.exports.index = async (req, res) => {
@@ -18,6 +18,9 @@ module.exports.index = async (req, res) => {
   const facilities = await RoomFacility.find(find).limit(6);
 
   const features = await RoomFeatures.find();
+
+  const carousels = await Carousel.find({})
+
 
   for(const room of rooms) {
     room.facilities = [];
@@ -53,5 +56,6 @@ module.exports.index = async (req, res) => {
     pageTitle: "Trang chủ",
     rooms: rooms,
     facilities: facilities,
+    carousels: carousels
   })
 }

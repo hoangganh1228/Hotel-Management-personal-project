@@ -10,19 +10,19 @@ block main
   +alert-error(5000)
   .row
     .col-lg-12.p-4
-      h3.mb-4 CAROUSEL
+      h3.mb-4 #{pageTitle}
       // Carousel sections
       .card.border-0.shadow.mb-4
         .card-body
           .d-flex.align-items-center.justify-content-between.mb-3
-            h5.card-title.m-0 Images
+            h5.card-title.m-0 Ảnh
             button.btn.btn-dark.shadow-none.btn-sm(
               data-bs-target="#carousel-s" 
               data-bs-toggle="modal" 
               type="button"
               )
               i.bi.bi-plus-square 
-              | Add
+              | Thêm ảnh
           #carousel-data.row
             each carousel in carousels 
               each image in carousel.images
@@ -35,7 +35,7 @@ block main
                         data-url=image
                         )
                         i.bi.bi-trash 
-                        | Delete
+                        | Xóa
       #carousel-s.modal.fade(
         aria-hidden="true" 
         aria-labelledby="staticBackdropLabel" 
@@ -52,7 +52,7 @@ block main
           )
             .modal-content
               .modal-header
-                h5.modal-title Add Image
+                h5.modal-title Thêm ảnh
                 button.btn-close(
                   aria-label="Close" 
                   data-bs-dismiss="modal" 
@@ -60,7 +60,7 @@ block main
                   )
               .modal-body
                 .mb-3
-                  label.form-label.fw-bold Picture
+                  label.form-label.fw-bold Ảnh
                   input.form-control.shadow-none(
                     required="" 
                     accept=".jpg, .png, .webp, .jpeg" 
@@ -74,8 +74,8 @@ block main
                   data-bs-dismiss="modal" 
                   onclick="carousel_picture.value=''" 
                   type="button"
-                  ) CANCEL
-                button.btn.custom-bg.text-white.shadow-none(type="submit") SUBMIT
+                  ) Hủy
+                button.btn.custom-bg.text-white.shadow-none(type="submit") Gửi
 
   form(
     action=""

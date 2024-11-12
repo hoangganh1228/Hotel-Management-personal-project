@@ -7,20 +7,11 @@ block main
   .container-fluid.px-lg-4.mt-4
     .swiper.swiper-container
       .swiper-wrapper
-        .swiper-slide
-          img.w-100.d-block(src="images/carousel/1.png")
-        .swiper-slide
-          img.w-100.d-block(src="images/carousel/1.png")
-        .swiper-slide
-          img.w-100.d-block(src="images/carousel/2.png")
-        .swiper-slide
-          img.w-100.d-block(src="images/carousel/3.png")
-        .swiper-slide
-          img.w-100.d-block(src="images/carousel/4.png")
-        .swiper-slide
-          img.w-100.d-block(src="images/carousel/5.png")
-        .swiper-slide
-          img.w-100.d-block(src="images/carousel/6.png") 
+        each carousel in carousels
+          each image in carousel.images
+            .swiper-slide
+              img.w-100.d-block(src=`${image}`)
+          
   //- check availability form
   .container.availability-form
     .row
