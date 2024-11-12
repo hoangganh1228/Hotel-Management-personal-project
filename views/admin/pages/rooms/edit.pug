@@ -130,10 +130,11 @@ block main
         input(
           type="file" 
           class="form-control-file"
-          id="thumbnail"
-          name="thumbnail"
+          id="images"
+          name="images"
           accept="image/*"
           upload-image-input
+          multiple
         )
         div(upload-image-preview-container)
           each image in room.images
@@ -144,8 +145,10 @@ block main
               )
               button(
                 class="remove-image"
+                remove-image
                 type="button"
                 data-image-url=image
+                data-room-id=room.id
               ) x 
 
       div(class="form-group")
@@ -185,4 +188,11 @@ block main
           class="btn btn-primary"
         ) Cập nhật
 
-    script(src="/admin/js/room.js")
+  form(
+    action=""
+    method="POST"
+    id="form-delete-image"
+    data-path=`${prefixAdmin}/rooms/delete-image`
+  )
+
+  script(src="/admin/js/room.js")

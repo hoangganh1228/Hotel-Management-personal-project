@@ -123,42 +123,6 @@ if(formChangeMulti) {
 }
 // End Form Change Multi
 
-// Delete Button
-const buttonDelete = document.querySelectorAll("[button-delete]");
-if(buttonDelete) {
-  buttonDelete.forEach(button => {
-    button.addEventListener("click", () => {
-      const isConfirm = confirm("Bạn có chắc muốn xóa sản phẩm này?");
-      if(isConfirm) {
-        const id = button.getAttribute("data-id");
-        const link = `rooms/delete/${id}`;
-        const options = {
-          method : "DELETE"
-        }
-
-        fetch(link, options) 
-          .then(res => res.json())
-          .then(data => {
-            if(data && data.code === 200) {
-              // alert('Xóa sản phẩm thành công!');
-              const row = button.closest('tr');
-              if(row) {
-                row.remove();
-              } else {
-                // alert('Xóa sản phẩm thất bại!');
-              }
-            }
-          })
-          .catch(error => {
-            console.error('Error:', error);
-            // alert('Có lỗi xảy ra khi xóa sản phẩm!');
-          });
-      }
-
-    })
-  })
-}
-// End Delete Button
 
 
 
@@ -214,16 +178,39 @@ if (uploadImage) {
     }
   });
 
-  const removeButton =  document.querySelectorAll(".remove-image");
-  removeButton.forEach(button => {
-    button.addEventListener("click", (e) => {
-      const imageUrl = e.target.getAttribute("data-image-url");
-      console.log(imageUrl);
-      console.log(files);
-      
-      e.target.parentElement.remove();
+  const removeButton =  document.querySelectorAll("[remove-image]");
+  
+  if(removeButton.length > 0) {
+    const formDelete = document.querySelector("#form-delete-image");
+    const path = formDelete.getAttribute("data-path");
+
+    removeButton.forEach(button => {
+      button.addEventListener("click", () => {
+        const imageUrl = button.getAttribute("data-image-url");
+        const roomId = button.getAttribute("data-room-id");
+        
+        const action = `${path}?_method=DELETE`;
+        formDelete.action = action;
+        
+        const inputImageUrl = document.createElement("input");
+        inputImageUrl.type = "hidden";
+        inputImageUrl.name = "imageUrl";
+        inputImageUrl.value = imageUrl;
+
+        formDelete.appendChild(inputImageUrl);
+
+        const inputRoomId = document.createElement("input");
+        inputRoomId.type = "hidden";
+        inputRoomId.name = "roomId";
+        inputRoomId.value = roomId;
+
+        formDelete.appendChild(inputRoomId);
+
+        formDelete.submit();
+      })
     })
-  })
+
+  }
 
 }
 

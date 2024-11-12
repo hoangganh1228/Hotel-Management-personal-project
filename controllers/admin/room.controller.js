@@ -278,6 +278,24 @@ module.exports.edit = async (req, res) => {
 
 }
 
+module.exports.deleteImage = async (req, res) => {
+  
+  const { imageUrl, roomId } = req.body;
+
+  try {
+    await Room.updateOne({
+      _id: roomId
+    }, {
+      $pull: { images: imageUrl }
+    });
+
+    req.flash("success", "Xóa ảnh thành công!");
+  } catch (error) {
+    req.flash("error", "Xóa ảnh thất bại!");
+  }
+  res.redirect("back");
+}
+
 // [PATCH] /admin/rooms/editPatch/:id
 module.exports.editPatch = async (req, res) => {
   // console.log(req.body);

@@ -39,5 +39,6 @@ router.patch(
 
 router.get("/detail/:id", controller.detail);
 
+router.delete("/delete-image", controller.deleteImage);
 
 module.exports = router

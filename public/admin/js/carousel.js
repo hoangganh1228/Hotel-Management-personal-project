@@ -1,4 +1,3 @@
-// Xóa ảnh khi nhấn nút Xóa
 const buttonDelete = document.querySelectorAll("[button-delete]");
 
 if (buttonDelete.length > 0) {
@@ -27,6 +26,7 @@ if (buttonDelete.length > 0) {
     });
   });
 }
+
 // Show Alert
 
 const showAlert = document.querySelector("[show-alert]");
