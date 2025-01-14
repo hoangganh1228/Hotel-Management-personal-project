@@ -115,7 +115,7 @@ module.exports.changeStatus = async (req, res) => {
 module.exports.changeMulti = async (req, res) => {
   const type = req.body.type;
   const ids = req.body.ids.split(", ");
-
+  
   const updatedBy = {
     account_id: res.locals.user.id,
     updatedAt: new Date()
@@ -180,11 +180,9 @@ module.exports.deleteItem = async (req, res) => {
     }
   })
 
-  res.json({
-    code: 200,
-    message: "Thanh cong!",
+  req.flash('success', `Đã xóa thành công sản phẩm!`);
+  res.redirect("back")
 
-  })
 
 }
 
