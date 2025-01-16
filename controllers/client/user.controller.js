@@ -191,6 +191,10 @@ module.exports.booking = async (req, res) => {
     tokenUser: tokenUser
   })
 
+  if(!user) {
+    return res.redirect("/user/login")
+  }
+
   const bookings = await BookingOrder.find({user_id: user.id})
     .populate({
       path: 'room_id',
