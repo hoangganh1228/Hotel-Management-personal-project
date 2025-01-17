@@ -268,7 +268,7 @@ module.exports.payment = async (req, res) => {
   var secretKey = 'K951B6PE1waDMi640xX08PD3vg6EkVlz';
   var orderInfo = 'pay with MoMo';
   var partnerCode = 'MOMO';
-  var redirectUrl = 'http://localhost:3000/rooms/confirm_booking';
+  var redirectUrl = `${process.env.APP_URL}/rooms/confirm_booking`;
   var ipnUrl = 'https://webhook.site/b3088a6a-2d17-4f8d-a383-71389a6c600b';
   var requestType = "payWithMethod";
   var amount = total_price;
